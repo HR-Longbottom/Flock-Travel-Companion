@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon server/index.js",
-    "build-dev": "webpack - w --mode development",
+    "build-dev": "webpack -w --mode development",
     "build-prod": "webpack --mode production",
     "test": "jest"
   },
