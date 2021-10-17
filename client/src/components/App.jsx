@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-
+import LoginMain from './Login/LoginMain.jsx'
 
 class App extends React.Component {
   constructor(props) {
@@ -12,7 +12,7 @@ class App extends React.Component {
       <Router>
         <Switch>
           <Route exact path='/'>
-            <div></div> {/* <Login/> */}
+            <LoginMain />
           </Route>
           <Route path='/messages'>
           <div></div> {/* <Messages/> */}

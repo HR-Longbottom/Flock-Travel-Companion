@@ -1,13 +1,21 @@
 const mongoose = require("mongoose");
 
-const flightSchema = mongoose.schema({});
+const flightSchema = mongoose.schema({
+  departureTime: Number,
+  callsign: String,
+  arrivalTime: Number,
+  departureAirport: String,
+  arrivalAirport: String
+});
 
-const userSchema = mongoose.schema({});
+const userSchema = mongoose.schema({
+  firstName: String,
+  lastName: String,
+});
 
-const chatSchema = mongoose.schema({});
 
 const Flights = mongoose.model("Flights", flightSchema);
 const Users = mongoose.model("Users", userSchema);
-const Chats = mongoose.model("Chats", chatSchema);
+
 
 module.exports = { Flights, Users, Chats };
