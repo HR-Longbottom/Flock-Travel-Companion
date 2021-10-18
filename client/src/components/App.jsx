@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-
+import Home from './Home/Home.jsx'
 
 class App extends React.Component {
   constructor(props) {
@@ -12,13 +12,13 @@ class App extends React.Component {
       <Router>
         <Switch>
           <Route exact path='/'>
-            <div></div> {/* <Login/> */}
+            <div>test</div> {/* <Login/> */}
           </Route>
           <Route path='/messages'>
           <div></div> {/* <Messages/> */}
           </Route>
           <Route exact path='/home'>
-          <div></div> {/* <Home/> */}
+          <Home/>
           </Route>
           <Route path='/plans'>
           <div></div> {/* <GroupPage /> */}
