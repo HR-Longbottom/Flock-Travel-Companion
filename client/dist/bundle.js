@@ -834,6 +834,16 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 /***/ }),
 
+/***/ "./client/src/components/Home/GroupFlights.jsx":
+/*!*****************************************************!*\
+  !*** ./client/src/components/Home/GroupFlights.jsx ***!
+  \*****************************************************/
+/***/ (() => {
+
+eval("\n\n//# sourceURL=webpack://flock.io/./client/src/components/Home/GroupFlights.jsx?");
+
+/***/ }),
+
 /***/ "./client/src/components/Home/Head.jsx":
 /*!*********************************************!*\
   !*** ./client/src/components/Home/Head.jsx ***!
@@ -841,7 +851,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap */ \"./node_modules/react-bootstrap/esm/Jumbotron.js\");\n/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-bootstrap */ \"./node_modules/react-bootstrap/esm/Container.js\");\n/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! styled-components */ \"./node_modules/styled-components/dist/styled-components.browser.esm.js\");\n/* harmony import */ var _assets_FlockIO_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../assets/FlockIO.png */ \"./client/assets/FlockIO.png\");\nvar _templateObject;\n\nfunction _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }\n\n\n\n\n\nvar Styles = styled_components__WEBPACK_IMPORTED_MODULE_2__[\"default\"].div(_templateObject || (_templateObject = _taggedTemplateLiteral([\"\\n  .head {\\n    color: black;\\n    height: 180px;\\n    position: relative;\\n    margin-bottom: 0;\\n  }\\n\\n  .head-text {\\n    position: absolute;\\n    left: 50%;\\n  }\\n\\n  .logo {\\n    position: absolute;\\n    top: 0;\\n    height: 200px;\\n    width: 200px;\\n  }\\n\\n  .headWrap {\\n    opacity: 0.5;\\n    position: absolute;\\n    top: -50px;\\n    left: 0;\\n    bottom: 0;\\n    right: 0;\\n  }\"])));\n\nvar Head = function Head() {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(Styles, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__[\"default\"], {\n    className: \"head\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", {\n    className: \"headWrap\"\n  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"img\", {\n    className: \"logo\",\n    src: _assets_FlockIO_png__WEBPACK_IMPORTED_MODULE_1__[\"default\"]\n  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__[\"default\"], {\n    className: \"head-text\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"h1\", null, \"Welcome\"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"p\", null, \"Where the Flock plan their trips\"))));\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Head);\n\n//# sourceURL=webpack://flock.io/./client/src/components/Home/Head.jsx?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap */ \"./node_modules/react-bootstrap/esm/Jumbotron.js\");\n/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-bootstrap */ \"./node_modules/react-bootstrap/esm/Container.js\");\n/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! styled-components */ \"./node_modules/styled-components/dist/styled-components.browser.esm.js\");\n/* harmony import */ var _assets_FlockIO_png__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../assets/FlockIO.png */ \"./client/assets/FlockIO.png\");\nvar _templateObject;\n\nfunction _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }\n\n\n\n\n\nvar Styles = styled_components__WEBPACK_IMPORTED_MODULE_2__[\"default\"].div(_templateObject || (_templateObject = _taggedTemplateLiteral([\"\\n  .head {\\n    color: black;\\n    height: 180px;\\n    position: relative;\\n    margin-bottom: 0;\\n  }\\n\\n  .head-text {\\n    position: relative;\\n    text-align: center;\\n  }\\n\\n  .logo {\\n    position: absolute;\\n    top: 0;\\n    height: 200px;\\n    width: 200px;\\n  }\\n\\n  .headWrap {\\n    opacity: 0.5;\\n    position: absolute;\\n    top: -50px;\\n    left: 0;\\n    bottom: 0;\\n    right: 0;\\n  }\"])));\n\nvar Head = function Head() {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(Styles, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__[\"default\"], {\n    className: \"head\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", {\n    className: \"headWrap\"\n  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"img\", {\n    className: \"logo\",\n    src: _assets_FlockIO_png__WEBPACK_IMPORTED_MODULE_1__[\"default\"]\n  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__[\"default\"], {\n    className: \"head-text\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"h1\", null, \"Welcome\"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"p\", null, \"Where the Flock plan their trips\"))));\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Head);\n\n//# sourceURL=webpack://flock.io/./client/src/components/Home/Head.jsx?");
 
 /***/ }),
 
@@ -852,7 +862,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _Sidebar_Sidebar__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Sidebar/Sidebar */ \"./client/src/components/Sidebar/Sidebar.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ \"./node_modules/react-router-dom/esm/react-router-dom.js\");\n/* harmony import */ var _Head_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Head.jsx */ \"./client/src/components/Home/Head.jsx\");\n/* harmony import */ var _MyFlights__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./MyFlights */ \"./client/src/components/Home/MyFlights.jsx\");\n\n\n\n\n\n\nvar Home = function Home() {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {\n    exact: true,\n    to: \"/home\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(\"div\", {\n    className: \"Home\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_Head_jsx__WEBPACK_IMPORTED_MODULE_2__[\"default\"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_Sidebar_Sidebar__WEBPACK_IMPORTED_MODULE_0__[\"default\"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_MyFlights__WEBPACK_IMPORTED_MODULE_3__[\"default\"], null)));\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Home);\n\n//# sourceURL=webpack://flock.io/./client/src/components/Home/Home.jsx?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _Sidebar_Sidebar__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Sidebar/Sidebar */ \"./client/src/components/Sidebar/Sidebar.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ \"./node_modules/react-router-dom/esm/react-router-dom.js\");\n/* harmony import */ var _Head_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Head.jsx */ \"./client/src/components/Home/Head.jsx\");\n/* harmony import */ var _MyFlights__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./MyFlights */ \"./client/src/components/Home/MyFlights.jsx\");\n/* harmony import */ var _GroupFlights__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./GroupFlights */ \"./client/src/components/Home/GroupFlights.jsx\");\n/* harmony import */ var _GroupFlights__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_GroupFlights__WEBPACK_IMPORTED_MODULE_4__);\n\n\n\n\n\n\n\nvar Home = function Home() {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {\n    exact: true,\n    to: \"/home\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(\"div\", {\n    className: \"Home\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_Head_jsx__WEBPACK_IMPORTED_MODULE_2__[\"default\"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_Sidebar_Sidebar__WEBPACK_IMPORTED_MODULE_0__[\"default\"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_MyFlights__WEBPACK_IMPORTED_MODULE_3__[\"default\"], null)));\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Home);\n\n//# sourceURL=webpack://flock.io/./client/src/components/Home/Home.jsx?");
 
 /***/ }),
 
@@ -863,7 +873,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var cdbreact__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! cdbreact */ \"./node_modules/cdbreact/dist/index.modern.js\");\n/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap */ \"./node_modules/react-bootstrap/esm/Container.js\");\n\n\n\n\nvar MyFlights = function MyFlights() {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__[\"default\"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(cdbreact__WEBPACK_IMPORTED_MODULE_1__.CDBContainer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(cdbreact__WEBPACK_IMPORTED_MODULE_1__.CDBCarousel, {\n    activeItem: 1,\n    length: 3,\n    showControls: true,\n    showIndicators: true,\n    className: \"z-depth-1\",\n    slide: true\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(cdbreact__WEBPACK_IMPORTED_MODULE_1__.CDBCarouselInner, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(cdbreact__WEBPACK_IMPORTED_MODULE_1__.CDBCarouselItem, {\n    itemId: \"1\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(cdbreact__WEBPACK_IMPORTED_MODULE_1__.CDBView, null, \"VIEW3\")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(cdbreact__WEBPACK_IMPORTED_MODULE_1__.CDBCarouselItem, {\n    itemId: \"2\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(cdbreact__WEBPACK_IMPORTED_MODULE_1__.CDBView, null, \"VIEW4\")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(cdbreact__WEBPACK_IMPORTED_MODULE_1__.CDBCarouselItem, {\n    itemId: \"3\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(cdbreact__WEBPACK_IMPORTED_MODULE_1__.CDBView, null, \"VIEW5\"))))));\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (MyFlights);\n\n//# sourceURL=webpack://flock.io/./client/src/components/Home/MyFlights.jsx?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var cdbreact__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! cdbreact */ \"./node_modules/cdbreact/dist/index.modern.js\");\n/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap */ \"./node_modules/react-bootstrap/esm/Container.js\");\n/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! styled-components */ \"./node_modules/styled-components/dist/styled-components.browser.esm.js\");\nvar _templateObject;\n\nfunction _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }\n\n\n\n\n\nvar Styles = styled_components__WEBPACK_IMPORTED_MODULE_2__[\"default\"].div(_templateObject || (_templateObject = _taggedTemplateLiteral([\"\\n  .myFlightsContainer {\\n    position: relative;\\n\\n    float: none;\\n    margin: 0 auto;\\n    text-align: center;\\n    height: 300px;\\n    background-color: lightblue;\\n  }\\n  .mainFlightsContainer {\\n    position: relative;\\n    top: -800px;\\n    height: 300px;\\n    float: none;\\n    margin: 0 auto;\\n    text-align: center;\\n    background-color: whitesmoke;\\n  }\\n  .img-fluid {\\n    max-height: 100px;\\n    max-width: 100px;\\n    object-fit: cover;\\n  }\\n  .card {\\n    height: 250px;\\n  }\\n  .col-md-4 mb-3 {\\n    min-width: 25%;\\n  }\\n  .carousel-indicators li {\\n    background-color: blue;\\n  }\\n  .myFlightsHeader {\\n    position: relative;\\n    width: 100%;\\n  }\\n  .card-body {\\n    position: absolute;\\n    bottom: 10px;\\n    left: 20%;\\n  }\\n\"])));\n\nvar MyFlights = function MyFlights() {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(Styles, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__[\"default\"], {\n    className: \"mainFlightsContainer\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", {\n    className: \"row\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", {\n    className: \"col-12\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"h3\", {\n    className: \"myFlightsHeader\"\n  }, \"Your Upcoming Flights\")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(cdbreact__WEBPACK_IMPORTED_MODULE_1__.CDBContainer, {\n    className: \"myFlightsContainer col-12\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(cdbreact__WEBPACK_IMPORTED_MODULE_1__.CDBCarousel, {\n    activeItem: 1,\n    length: 3,\n    showControls: true,\n    showIndicators: true,\n    className: \"z-depth-1\",\n    slide: true,\n    multiItem: true\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(cdbreact__WEBPACK_IMPORTED_MODULE_1__.CDBCarouselInner, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(cdbreact__WEBPACK_IMPORTED_MODULE_1__.CDBCarouselItem, {\n    active: true,\n    itemId: \"1\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(cdbreact__WEBPACK_IMPORTED_MODULE_1__.CDBView, {\n    className: \"row\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", {\n    className: \"col-md-4 mb-3\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", {\n    className: \"card\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"img\", {\n    className: \"img-fluid\",\n    alt: \"100%x280\",\n    src: \"https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.pngkey.com%2Fpng%2Fdetail%2F209-2095976_jetblue-customer-service-number-jet-blue-logo-png.png&f=1&nofb=1\"\n  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", {\n    className: \"card-body\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"h4\", {\n    className: \"card-title\"\n  }, \"Airline\"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"p\", {\n    className: \"card-text\"\n  }, \"Details about your flight\")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", {\n    className: \"col-md-4 mb-3\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", {\n    className: \"card\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"img\", {\n    className: \"img-fluid\",\n    alt: \"100%x280\",\n    src: \"https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2F1000logos.net%2Fwp-content%2Fuploads%2F2017%2F06%2FLogo-United-Airlines.png&f=1&nofb=1\"\n  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", {\n    className: \"card-body\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"h4\", {\n    className: \"card-title\"\n  }, \"Airline\"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"p\", {\n    className: \"card-text\"\n  }, \"Details about your flight\")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", {\n    className: \"col-md-4 mb-3\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", {\n    className: \"card\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"img\", {\n    className: \"img-fluid\",\n    alt: \"100%x280\",\n    src: \"https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia.glassdoor.com%2Fsqll%2F5144%2Ffrontier-airlines-squarelogo-1572626786969.png&f=1&nofb=1\"\n  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", {\n    className: \"card-body\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"h4\", {\n    className: \"card-title\"\n  }, \"Airline\"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"p\", {\n    className: \"card-text\"\n  }, \"Details about your flight\")))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(cdbreact__WEBPACK_IMPORTED_MODULE_1__.CDBCarouselItem, {\n    itemId: \"2\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(cdbreact__WEBPACK_IMPORTED_MODULE_1__.CDBView, {\n    className: \"row\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", {\n    className: \"col-md-4 mb-3\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", {\n    className: \"card\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"img\", {\n    className: \"img-fluid\",\n    alt: \"100%x280\",\n    src: \"https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2F1000logos.net%2Fwp-content%2Fuploads%2F2017%2F06%2FLogo-United-Airlines.png&f=1&nofb=1\"\n  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", {\n    className: \"card-body\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"h4\", {\n    className: \"card-title\"\n  }, \"Airline\"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"p\", {\n    className: \"card-text\"\n  }, \"Details about your flight\")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", {\n    className: \"col-md-4 mb-3\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", {\n    className: \"card\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"img\", {\n    className: \"img-fluid\",\n    alt: \"100%x280\",\n    src: \"https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.pngkey.com%2Fpng%2Fdetail%2F209-2095976_jetblue-customer-service-number-jet-blue-logo-png.png&f=1&nofb=1\"\n  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", {\n    className: \"card-body\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"h4\", {\n    className: \"card-title\"\n  }, \"Airline\"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"p\", {\n    className: \"card-text\"\n  }, \"Details about your flight\")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", {\n    className: \"col-md-4 mb-3\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", {\n    className: \"card\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"img\", {\n    className: \"img-fluid\",\n    alt: \"100%x280\",\n    src: \"https://gray-wbay-prod.cdn.arcpublishing.com/resizer/xrAAJzYoIx8tBfymcRErU6zCO5k=/1200x675/smart/filters:quality(85)/cloudfront-us-east-1.images.arcpublishing.com/gray/HC2ZSIX4PJH7RA6LWQEPSCY4BM.png\"\n  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", {\n    className: \"card-body\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"h4\", {\n    className: \"card-title\"\n  }, \"Airline\"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"p\", {\n    className: \"card-text\"\n  }, \"Details about your flight\")))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(cdbreact__WEBPACK_IMPORTED_MODULE_1__.CDBCarouselItem, {\n    itemId: \"3\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(cdbreact__WEBPACK_IMPORTED_MODULE_1__.CDBView, {\n    className: \"row\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", {\n    className: \"col-md-4 mb-3\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", {\n    className: \"card\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"img\", {\n    className: \"img-fluid\",\n    alt: \"100%x280\",\n    src: \"https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.pngkey.com%2Fpng%2Fdetail%2F209-2095976_jetblue-customer-service-number-jet-blue-logo-png.png&f=1&nofb=1\"\n  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", {\n    className: \"card-body\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"h4\", {\n    className: \"card-title\"\n  }, \"Airline\"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"p\", {\n    className: \"card-text\"\n  }, \"Details about your flight\")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", {\n    className: \"col-md-4 mb-3\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", {\n    className: \"card\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"img\", {\n    className: \"img-fluid\",\n    alt: \"100%x280\",\n    src: \"https://assets.simpleviewinc.com/simpleview/image/fetch/c_limit,q_80,w_1200/https://assets.simpleviewinc.com/simpleview/image/upload/crm/rhodeisland/Southwest-Logo-2-copy0-a85cdfda5056a36_a85ce0f5-5056-a36a-09f07837ff9a8a0f.jpg\"\n  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", {\n    className: \"card-body\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"h4\", {\n    className: \"card-title\"\n  }, \"Airline\"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"p\", {\n    className: \"card-text\"\n  }, \"Details about your flight\")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", {\n    className: \"col-md-4 mb-3\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", {\n    className: \"card\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"img\", {\n    className: \"img-fluid\",\n    alt: \"100%x280\",\n    src: \"https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia.glassdoor.com%2Fsqll%2F5144%2Ffrontier-airlines-squarelogo-1572626786969.png&f=1&nofb=1\"\n  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", {\n    className: \"card-body\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"h4\", {\n    className: \"card-title\"\n  }, \"Airline\"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"p\", {\n    className: \"card-text\"\n  }, \"Details about your flight\"))))))))))));\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (MyFlights);\n\n//# sourceURL=webpack://flock.io/./client/src/components/Home/MyFlights.jsx?");
 
 /***/ }),
 
@@ -2247,7 +2257,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /************************************************************************/
 /******/ 	// The module cache
 /******/ 	var __webpack_module_cache__ = {};
-/******/
+/******/ 	
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
 /******/ 		// Check if module is in cache
@@ -2261,17 +2271,17 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 			// no module.loaded needed
 /******/ 			exports: {}
 /******/ 		};
-/******/
+/******/ 	
 /******/ 		// Execute the module function
 /******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
-/******/
+/******/ 	
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-/******/
+/******/ 	
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = __webpack_modules__;
-/******/
+/******/ 	
 /************************************************************************/
 /******/ 	/* webpack/runtime/compat get default export */
 /******/ 	(() => {
@@ -2284,7 +2294,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 			return getter;
 /******/ 		};
 /******/ 	})();
-/******/
+/******/ 	
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
@@ -2296,7 +2306,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 			}
 /******/ 		};
 /******/ 	})();
-/******/
+/******/ 	
 /******/ 	/* webpack/runtime/global */
 /******/ 	(() => {
 /******/ 		__webpack_require__.g = (function() {
@@ -2308,12 +2318,12 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 			}
 /******/ 		})();
 /******/ 	})();
-/******/
+/******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
 /******/ 	})();
-/******/
+/******/ 	
 /******/ 	/* webpack/runtime/make namespace object */
 /******/ 	(() => {
 /******/ 		// define __esModule on exports
@@ -2324,7 +2334,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
 /******/ 	})();
-/******/
+/******/ 	
 /******/ 	/* webpack/runtime/publicPath */
 /******/ 	(() => {
 /******/ 		var scriptUrl;
@@ -2344,39 +2354,39 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 		scriptUrl = scriptUrl.replace(/#.*$/, "").replace(/\?.*$/, "").replace(/\/[^\/]+$/, "/");
 /******/ 		__webpack_require__.p = scriptUrl;
 /******/ 	})();
-/******/
+/******/ 	
 /******/ 	/* webpack/runtime/jsonp chunk loading */
 /******/ 	(() => {
 /******/ 		__webpack_require__.b = document.baseURI || self.location.href;
-/******/
+/******/ 		
 /******/ 		// object to store loaded and loading chunks
 /******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
 /******/ 		var installedChunks = {
 /******/ 			"main": 0
 /******/ 		};
-/******/
+/******/ 		
 /******/ 		// no chunk on demand loading
-/******/
+/******/ 		
 /******/ 		// no prefetching
-/******/
+/******/ 		
 /******/ 		// no preloaded
-/******/
+/******/ 		
 /******/ 		// no HMR
-/******/
+/******/ 		
 /******/ 		// no HMR manifest
-/******/
+/******/ 		
 /******/ 		// no on chunks loaded
-/******/
+/******/ 		
 /******/ 		// no jsonp function
 /******/ 	})();
-/******/
+/******/ 	
 /************************************************************************/
-/******/
+/******/ 	
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
 /******/ 	var __webpack_exports__ = __webpack_require__("./client/src/index.js");
-/******/
+/******/ 	
 /******/ })()
 ;

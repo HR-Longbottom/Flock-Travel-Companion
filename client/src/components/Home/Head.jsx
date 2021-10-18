@@ -11,8 +11,8 @@ const Styles = styled.div`
   }
 
   .head-text {
-    position: absolute;
-    left: 50%;
+    position: relative;
+    text-align: center;
   }
 
   .logo {
