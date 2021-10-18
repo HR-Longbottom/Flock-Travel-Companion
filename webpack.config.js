@@ -8,6 +8,7 @@ const SRC_DIR = path.join(__dirname, '/client/src');
 const DIST_DIR = path.join(__dirname, '/client/dist');
 
 module.exports = {
+  target: 'node',
   entry: path.join(SRC_DIR, 'index.js'),
   output: {
     path: DIST_DIR,
