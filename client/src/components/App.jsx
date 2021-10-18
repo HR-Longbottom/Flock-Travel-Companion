@@ -4,6 +4,7 @@ import LoginMain from "./Login/LoginMain.jsx";
 import ChatMain from "./Chat/ChatMain.jsx";
 import firebase from "../../../firebase-config.js";
 import { onAuthStateChanged, getAuth } from "firebase/auth";
+import Home from "./Home/Home.jsx";
 
 class App extends React.Component {
   constructor(props) {
@@ -13,33 +14,33 @@ class App extends React.Component {
     };
   }
 
-  componentDidMount() {
-    const auth = getAuth();
-    auth.languageCode = "it";
-    auth.onAuthStateChanged((authState) => {
-      authState = auth;
-      if (authState) {
-        console.log(authState.currentUser);
-        this.setState({ isLoggedIn: true });
-      } else {
-        console.log(authState.currentUser);
-        this.setState({ isLoggedIn: false });
-      }
-    });
-  }
+  // componentDidMount() {
+  //   const auth = getAuth();
+  //   auth.languageCode = "it";
+  //   auth.onAuthStateChanged((authState) => {
+  //     authState = auth;
+  //     if (authState) {
+  //       console.log(authState.currentUser);
+  //       this.setState({ isLoggedIn: true });
+  //     } else {
+  //       console.log(authState.currentUser);
+  //       this.setState({ isLoggedIn: false });
+  //     }
+  //   });
+  // }
 
   render() {
     return (
       <Router>
         <Switch>
           <Route exact path="/">
-            <LoginMain />
+            {/* <LoginMain /> */}
           </Route>
           <Route exact path="/messages">
-            <ChatMain />
+            {/* <ChatMain /> */}
           </Route>
           <Route exact path="/home">
-            <div></div>
+            <Home/>
           </Route>
           <Route path="/plans">
             <div></div> {/* <GroupPage /> */}
