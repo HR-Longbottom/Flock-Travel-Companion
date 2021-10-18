@@ -1,7 +1,7 @@
 node_modules
 tls
+ssl
 .env
-client/dist/*
-!client/dist/index.html
-!client/dist/main.css
-!client/dist/bundle.js
+Dockerfile
+bundle.js
+.gz
