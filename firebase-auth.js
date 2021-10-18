@@ -1,7 +1,11 @@
 import { initializeApp } from "firebase/app";
+import { GoogleAuthProvider } from "firebase/auth";
 import { getAnalytics } from "firebase/analytics";
 
-const firebaseConfig = ({
+const dotenv = require("dotenv");
+dotenv.config();
+
+const firebaseApp = initializeApp({
   apiKey: process.env.FB_APP_API_KEY,
   authDomain: process.env.FB_APP_AUTHDOMAIN,
   projectId: process.env.FB_APP_PROJECT_ID,
@@ -11,8 +15,8 @@ const firebaseConfig = ({
   measurementId: process.env.FB_APP_MEASUREMENT_ID,
 });
 
-const app = initializeApp(firebaseConfig);
+const provider = new GoogleAuthProvider();
 
-const analytics = getAnalytics(app);
+provider.addScope("https://www.googleapis.com/auth/contacts.readonly");
 
-export default firebaseConfig;
+const analytics = getAnalytics(firebaseApp);

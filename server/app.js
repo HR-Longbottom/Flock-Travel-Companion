@@ -11,11 +11,7 @@ app.use(expressStaticGzip(path.join(__dirname, "../client/dist")));
 app.use(express.static(path.join(__dirname, "../client/dist")));
 
 app.get('/*', function(req, res) {
-  res.sendFile(path.join(__dirname, '../client/dist/index.html'), function(err) {
-    if (err) {
-      res.status(500).send(err)
-    }
-  })
-})
+  res.sendFile(path.join(__dirname, '../client/dist/index.html'))
+});
 
 module.exports = app;
