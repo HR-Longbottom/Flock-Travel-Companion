@@ -1,10 +1,11 @@
 import React from "react";
 import "./LoginMain.css";
+
 import { googleProvider } from "./authMethod.js";
 import socialMediaAuth from "./firebase-SignIn.js";
 import signOutClick from "./firebase-SignOut.js";
-import { withRouter } from "react-router-dom";
 import { getAuth } from "firebase/auth";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 

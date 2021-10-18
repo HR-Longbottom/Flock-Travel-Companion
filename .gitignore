@@ -1,3 +1,7 @@
 node_modules
 tls
+ssl
 .env
+Dockerfile
+bundle.js
+.gz

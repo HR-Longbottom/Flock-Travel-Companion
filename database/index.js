@@ -16,4 +16,4 @@ const userSchema = mongoose.schema({
 const Flights = mongoose.model("Flights", flightSchema);
 const Users = mongoose.model("Users", userSchema);
 
-module.exports = { Flights, Users, Chats };
+module.exports = { Flights, Users };

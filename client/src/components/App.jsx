@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import LoginMain from "./Login/LoginMain.jsx";
+import ChatMain from "./Chat/ChatMain.jsx";
 import firebase from "../../../firebase-config.js";
 import { onAuthStateChanged, getAuth } from "firebase/auth";
 
@@ -14,8 +15,8 @@ class App extends React.Component {
 
   componentDidMount() {
     const auth = getAuth();
+    auth.languageCode = "it";
     auth.onAuthStateChanged((authState) => {
-      auth.languageCode = "it";
       authState = auth;
       if (authState) {
         console.log(authState.currentUser);
@@ -34,8 +35,8 @@ class App extends React.Component {
           <Route exact path="/">
             <LoginMain />
           </Route>
-          <Route path="/messages">
-            <div></div> {/* <Messages/> */}
+          <Route exact path="/messages">
+            <ChatMain />
           </Route>
           <Route exact path="/home">
             <div></div>
