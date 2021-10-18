@@ -6,7 +6,6 @@ import styled from "styled-components";
 const Styles = styled.div`
   .myFlightsContainer {
     position: relative;
-
     float: none;
     margin: 0 auto;
     text-align: center;
