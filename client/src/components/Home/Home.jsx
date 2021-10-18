@@ -2,6 +2,7 @@ import Sidebar from '../Sidebar/Sidebar';
 import React from 'react';
 import {Link} from 'react-router-dom';
 import Head from './Head.jsx';
+import MyFlights from './MyFlights';
 
 
 const Home = () => {
@@ -10,10 +11,11 @@ const Home = () => {
       <div className="Home">
         <Head/>
         <Sidebar />
+        <MyFlights />
       </div>
     </Link>
 
   );
 }
-//
+
 export default Home;
