@@ -1,17 +1,20 @@
 import Sidebar from '../Sidebar/Sidebar';
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
 import {Link} from 'react-router-dom';
+import Head from './Head.jsx';
 
-function Home() {
+
+const Home = () => {
   return (
     <Link exact to='/home'>
-      <div className="App">
+      <div className="Home">
+        <Head/>
         <Sidebar />
+
       </div>
     </Link>
 
   );
 }
-
+//
 export default Home;
