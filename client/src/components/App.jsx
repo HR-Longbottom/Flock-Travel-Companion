@@ -101,7 +101,7 @@ class App extends React.Component {
           </Route>
         </Switch>
       </Router>
-    );
+    )
   }
 }
 
