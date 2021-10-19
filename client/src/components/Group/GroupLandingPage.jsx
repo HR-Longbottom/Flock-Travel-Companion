@@ -42,6 +42,15 @@ function GroupLandingPage(props) {
       arrivalTime: "12:30pm",
       date: "10/18/2021",
     },
+    {
+      person: "James",
+      flight: "UYGDGUUDG213",
+      departureAirport: "IAH",
+      arrivalAirport: "JFK",
+      departureTime: "10:30am",
+      arrivalTime: "12:30pm",
+      date: "10/18/2021",
+    }
   ]);
 
   return (
