@@ -1,0 +1,161 @@
+#app {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  margin: 0;
+  padding: 0;
+  background-color: rgba(0, 0, 0, 0.100);
+}
+.wrapper {
+  display: flex;
+  border: 1px solid rgba(0, 0, 0, 0.9);
+  width: 90%;
+  height: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 5px;
+  margin-top: 40px;
+  background-image: linear-gradient(
+      344deg,
+      rgb(197, 160, 165) 0%,
+      rgb(197, 160, 165) 20%,
+      rgb(206, 134, 161) 20%,
+      rgb(206, 134, 161) 38%,
+      rgb(215, 108, 156) 38%,
+      rgb(215, 108, 156) 68%,
+      rgb(225, 82, 152) 68%,
+      rgb(225, 82, 152) 78%,
+      rgb(234, 55, 148) 78%,
+      rgb(234, 55, 148) 80%,
+      rgb(243, 29, 143) 80%,
+      rgb(243, 29, 143) 96%,
+      rgb(252, 3, 139) 96%,
+      rgb(252, 3, 139) 100%
+    ),
+    linear-gradient(
+      208deg,
+      rgb(197, 160, 165) 0%,
+      rgb(197, 160, 165) 20%,
+      rgb(206, 134, 161) 20%,
+      rgb(206, 134, 161) 38%,
+      rgb(215, 108, 156) 38%,
+      rgb(215, 108, 156) 68%,
+      rgb(225, 82, 152) 68%,
+      rgb(225, 82, 152) 78%,
+      rgb(234, 55, 148) 78%,
+      rgb(234, 55, 148) 80%,
+      rgb(243, 29, 143) 80%,
+      rgb(243, 29, 143) 96%,
+      rgb(252, 3, 139) 96%,
+      rgb(252, 3, 139) 100%
+    ),
+    linear-gradient(
+      189deg,
+      rgb(197, 160, 165) 0%,
+      rgb(197, 160, 165) 20%,
+      rgb(206, 134, 161) 20%,
+      rgb(206, 134, 161) 38%,
+      rgb(215, 108, 156) 38%,
+      rgb(215, 108, 156) 68%,
+      rgb(225, 82, 152) 68%,
+      rgb(225, 82, 152) 78%,
+      rgb(234, 55, 148) 78%,
+      rgb(234, 55, 148) 80%,
+      rgb(243, 29, 143) 80%,
+      rgb(243, 29, 143) 96%,
+      rgb(252, 3, 139) 96%,
+      rgb(252, 3, 139) 100%
+    ),
+    linear-gradient(
+      230deg,
+      rgb(197, 160, 165) 0%,
+      rgb(197, 160, 165) 20%,
+      rgb(206, 134, 161) 20%,
+      rgb(206, 134, 161) 38%,
+      rgb(215, 108, 156) 38%,
+      rgb(215, 108, 156) 68%,
+      rgb(225, 82, 152) 68%,
+      rgb(225, 82, 152) 78%,
+      rgb(234, 55, 148) 78%,
+      rgb(234, 55, 148) 80%,
+      rgb(243, 29, 143) 80%,
+      rgb(243, 29, 143) 96%,
+      rgb(252, 3, 139) 96%,
+      rgb(252, 3, 139) 100%
+    ),
+    linear-gradient(
+      69deg,
+      rgb(197, 160, 165) 0%,
+      rgb(197, 160, 165) 20%,
+      rgb(206, 134, 161) 20%,
+      rgb(206, 134, 161) 38%,
+      rgb(215, 108, 156) 38%,
+      rgb(215, 108, 156) 68%,
+      rgb(225, 82, 152) 68%,
+      rgb(225, 82, 152) 78%,
+      rgb(234, 55, 148) 78%,
+      rgb(234, 55, 148) 80%,
+      rgb(243, 29, 143) 80%,
+      rgb(243, 29, 143) 96%,
+      rgb(252, 3, 139) 96%,
+      rgb(252, 3, 139) 100%
+    ),
+    linear-gradient(90deg, rgb(77, 249, 52), rgb(153, 163, 31));
+  background-blend-mode: overlay, overlay, overlay, overlay, overlay, normal;
+  background-size: 200% 200%;
+  animation: gradient 100s ease infinite;
+  box-shadow: 0 0 60px 10px rgba(0, 0, 0, 0.9);
+  min-height: 700;
+  min-width: 970;
+}
+
+@media all and (min-width: 500px) {
+  .signIn {
+    display: flex;
+    border-radius: 5px;
+    padding: 60px 0;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 125px;
+    margin-bottom: 125px;
+    justify-content: center;
+    background-color: transparent;
+  }
+}
+
+.signInBtn {
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.9);
+  margin-top: 20%;
+  width: 65%;
+  height: 30%;
+  background-color: #f8f8ff5b;
+}
+
+.signOutBtn {
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.9);
+  margin-top: 20%;
+  margin-left: 10px;
+  width: 65%;
+  height: 30%;
+  background-color: #f8f8ff5b;
+}
+
+#google {
+  font-size: 35px;
+  margin-right: 5px;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

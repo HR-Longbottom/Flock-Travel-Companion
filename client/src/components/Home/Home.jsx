@@ -5,7 +5,7 @@ import Head from './Head.jsx';
 import MyFlights from './MyFlights';
 
 
-const Home = () => {
+function Home() {
   return (
     <Link exact to='/home'>
       <div className="Home">
@@ -14,7 +14,6 @@ const Home = () => {
         <MyFlights />
       </div>
     </Link>
-
   );
 }
 export default Home;

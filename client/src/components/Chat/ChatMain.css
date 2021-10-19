@@ -1,0 +1,141 @@
+body {
+  background-color: #15202b;
+}
+
+.chatWrapper {
+  height: 90%;
+  width: 55.7%;
+  margin-right: auto;
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+  border: 2.5px solid #192734;
+  border-radius: 5px;
+  overflow: hidden;
+  padding: 0;
+}
+
+.chatHeader {
+  display: flex;
+  flex-direction: column;
+  margin: 0 30px;
+  padding: 0;
+  height: 75px;
+  color: #ffffffe9;
+  font-size: 30px;
+  line-height: 2.25;
+  border-bottom: 1px solid #ffffffe9;
+}
+
+main {
+  padding: 10px;
+  height: 80vh;
+  margin: 0 0 0;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+}
+
+form {
+  height: 10vh;
+  background-color: #22303c;
+  width: 100%;
+  display: flex;
+  font-size: 1.5rem;
+  border: 5px;
+}
+
+form button {
+  width: 20%;
+  background-color: #8899a6;
+}
+
+main::-webkit-scrollbar {
+  background: #22303c;
+  border-radius: 5px;
+}
+
+main::-webkit-scrollbar-track {
+  background: #22303c;
+}
+
+main::-webkit-scrollbar-thumb {
+  background: #ffffffa1;
+  border-radius: 5px;
+}
+main::-webkit-scrollbar-thumb:hover {
+  background: #ffffffe9;
+}
+
+input {
+  line-height: 1.5;
+  width: 100%;
+  font-size: 1.25rem;
+  background: #ffffffe9;
+  color: #282c34;
+  outline: none;
+  border: none;
+  padding: 0 30px;
+}
+
+button {
+  background-color: #282c34;
+  border: none;
+  color: #ffffff;
+  padding: 15px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  font-size: 1.25rem;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.sign-in {
+  color: #282c34;
+  background: white;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+ul,
+li {
+  text-align: left;
+  list-style: none;
+}
+
+p {
+  max-width: 500px;
+  margin-bottom: 12px;
+  line-height: 24px;
+  padding: 10px 20px;
+  border-radius: 25px;
+  position: relative;
+  color: #ffffff;
+  text-align: center;
+}
+
+.message {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.sent {
+  flex-direction: row-reverse;
+}
+
+.sent p {
+  color: white;
+  background: #0b93f6;
+  align-self: flex-end;
+}
+.received p {
+  background: #e5e5ea;
+  color: black;
+}

@@ -1,4 +1,8 @@
+<<<<<<< HEAD:firebase-messaging-sw.js
 import { initializeApp } from "firebase/app";
+=======
+import firebase from "../../../../firebase-config.js";
+>>>>>>> mastertest:client/src/components/Chat/firebase-messaging-sw.js
 import { getMessaging, onMessage, getToken } from "firebase/messaging";
 import { getAnalytics } from "firebase/analytics";
 
