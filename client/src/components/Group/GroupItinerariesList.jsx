@@ -4,8 +4,12 @@ import GroupItinerary from "./GroupItinerary";
 function GroupItinerariesList(props) {
 
   return (
-    <div className='groupItineraresList'>
+    <div className='groupItinerariesList'>
+      <h4>Group Members' Itineraries</h4>
+      <div className='group-itineraries-collection'>
 
+      {props.groupItineraries.map(itinerary => {return <GroupItinerary itinerary={itinerary} />})}
+      </div>
     </div>
   )
 }
