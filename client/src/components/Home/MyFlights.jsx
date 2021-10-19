@@ -10,16 +10,21 @@ const Styles = styled.div`
     margin: 0 auto;
     text-align: center;
     height: 300px;
-    background-color: lightblue;
+    background-image: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpapercave.com%2Fwp%2Fwp4232990.jpg&f=1&nofb=1');
+    background-position: center;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
   }
   .mainFlightsContainer {
     position: relative;
-    top: -800px;
+
     height: 300px;
     float: none;
     margin: 0 auto;
     text-align: center;
-    background-color: whitesmoke;
+    background-color: #0097A7;
+    color: #fff;
   }
   .img-fluid {
     max-height: 100px;
@@ -30,7 +35,9 @@ const Styles = styled.div`
     height: 250px;
   }
   .col-md-4 mb-3 {
-    min-width: 25%;
+    max-width: 25%;
+    flex: 0 0 33.3%;
+    margin-right: 7.5%;
   }
   .carousel-indicators li {
     background-color: blue;
@@ -43,6 +50,7 @@ const Styles = styled.div`
     position: absolute;
     bottom: 10px;
     left: 20%;
+    color: black;
   }
 `;
 
