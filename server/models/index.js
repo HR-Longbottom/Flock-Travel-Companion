@@ -131,12 +131,10 @@ module.exports = {
     );
   },
   checkUser: (params, callback) => {
-    console.log(params)
     dbMain.Users.find({ uid: params }, (err, res) => {
       if (err) {
         callback(err);
       } else {
-       // console.log("user data", res);
         callback(null, res);
       }
     });
