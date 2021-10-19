@@ -98,17 +98,15 @@ module.exports = {
   */
 
   createUser: (req, res) => {
-    //console.log('48 -----> ', req.body)
     model.createUser(req.body, (err, data) => {
       if (err) {
         res.send(err);
       } else {
-        res.send("successfully added user info", data);
+        res.status(200).send("successfully added user info");
       }
     });
   },
   checkUser: (req, res) => {
-    //console.log( ' 111 ', req.query.uid)
     model.checkUser(req.query.uid, (err, data) => {
       if (err) {
         res.send(err);
