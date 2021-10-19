@@ -29,7 +29,8 @@ class App extends React.Component {
       authState = auth;
       if (authState.currentUser !== null) {
         this.setState({ isLoggedIn: true }, () => {
-          this.checkUser(authState.currentUser.uid);
+          this.checkUser(authState.currentUser);
+
           console.log("Logged In:", authState.currentUser);
         });
       } else {
@@ -47,11 +48,17 @@ class App extends React.Component {
       .catch((err) => console.log("app 32", err));
   }
 
-  checkUser(userUID) {
+  checkUser(user) {
     axios
-      .get("/checkUser", {params: {uid: userUID}} )
+      .get("/checkUser", {params: {uid: user.uid}} )
       .then((response) => {
-        console.log(response.data, "user exists")
+        console.log(response.data, "user data")
+        if (response.data.length === 0) {
+          this.postUser(user)
+          console.log('welcome, First Time User!')
+        } else {
+          console.log('Welcome Back!')
+        }
       })
       .catch((err) => console.log(false, err));
   }

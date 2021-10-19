@@ -43,7 +43,7 @@ function App() {
       })
       .then((data) => {
         getChats();
-        console.log(messages);
+        console.log('Messages: ', messages);
       })
       .catch((err) => {
         throw err;
