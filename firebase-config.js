@@ -2,10 +2,8 @@ import { initializeApp } from "firebase/app";
 import { GoogleAuthProvider } from "firebase/auth";
 import { getAnalytics } from "firebase/analytics";
 
-const dotenv = require("dotenv");
-dotenv.config();
-
-const firebaseApp = initializeApp({
+// firebase config file
+const firebaseConfig = ({
   apiKey: process.env.FB_APP_API_KEY,
   authDomain: process.env.FB_APP_AUTHDOMAIN,
   projectId: process.env.FB_APP_PROJECT_ID,
