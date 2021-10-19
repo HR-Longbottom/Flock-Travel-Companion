@@ -1,4 +1,4 @@
-import app from "./firebase.js";
+import firebase from "../../../../firebase-config.js";
 import { getMessaging, onMessage, getToken } from "firebase/messaging";
 
 getToken(messaging, { vapidKey: process.env.CHAT_SERVER_KEY })

@@ -1,7 +1,14 @@
-import React from "react";
-import {Jumbotron, Container} from 'react-bootstrap';
+import React, { useState } from "react";
+import { Jumbotron, Container } from "react-bootstrap";
+import { useHistory, Redirect, withRouter } from "react-router-dom";
+
+import signOut from "../Login/firebase-SignOut.js";
+import { getAuth } from "firebase/auth";
+
 import styled from "styled-components";
-import FlockIO from '../../../assets/FlockIO.png'
+import "./Home.css";
+import FlockIO from "../../../assets/FlockIO.png";
+
 const Styles = styled.div`
   .head {
     color: black;
@@ -29,21 +36,34 @@ const Styles = styled.div`
     left: 0;
     bottom: 0;
     right: 0;
-  }`;
+  }
+`;
 
-  const Head = () => {
-    return (
-    <Styles>
-     <Jumbotron className='head'>
-      <div className='headWrap'></div>
-      <img className='logo' src={FlockIO}/>
-       <Container className="head-text">
-         <h1>Welcome</h1>
-         <p>Where the Flock plan their trips</p>
-       </Container>
+const Head = () => {
+  const history = useHistory();
+  console.log('HEAD-LINE44: ', history)
+  const handleOnSubmit = () => {
+    signOut();
+    history.push("/");
+  };
 
-     </Jumbotron>
-     </Styles>
-  )}
+  return (
+    <>
+      <Styles>
+        <Jumbotron className="head">
+          <div className="headWrap"></div>
+          <img className="logo" src={FlockIO} />
+          <Container className="head-text">
+            <h1>Welcome</h1>
+            <p>Where the Flock plan their trips</p>
+            <button className="signOutBtn" onClick={() => signOut()}>
+              Sign Out
+            </button>
+          </Container>
+        </Jumbotron>
+      </Styles>
+    </>
+  );
+};
 
-  export default Head;
+export default Head;

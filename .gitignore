@@ -5,3 +5,5 @@ ssl
 Dockerfile
 bundle.js
 .gz
+cert.pem
+key.pem
