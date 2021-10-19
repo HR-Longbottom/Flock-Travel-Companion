@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-import React from 'react';
-import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import GroupLandingPage from './Group/GroupLandingPage.jsx';
-
-=======
 import React from "react";
 import {
   BrowserRouter as Router,
@@ -17,7 +11,6 @@ import Home from "./Home/Home.jsx";
 import firebase from "../../../firebase-config.js";
 import { onAuthStateChanged, getAuth } from "firebase/auth";
 import axios from "axios";
->>>>>>> 7988a0d2616640da5424982351c033a21adf82d3
 
 class App extends React.Component {
   constructor(props) {
