@@ -1,17 +1,17 @@
 const axios = require('axios')
-
+import config from './config';
 const results = [];
 
 const getAirports = (city) => {
 
   // Open Cage API
-  const apiKEY = "115ef021ec104f5ea2b5e03c3f5cba0a";
+  const apiKEY = config.apikey;
   const place = city;
 
   // Amadeus API
   const option={
     headers:{
-      'Authorization':"Bearer 3rGdtywc3QcvfQaLPa64D2awunXS",
+      'Authorization': config.authorization,
       'Content-Type': 'application/json'
     }
   }
