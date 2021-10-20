@@ -42,7 +42,6 @@ module.exports = {
   },
 
   updateUserLoc: (req, res) => {
-    console.log('REQ BODY ---> ', req.body)
     model.updateUserLoc(req.body, (err, response) => {
       if (err) {
         res.send(err);

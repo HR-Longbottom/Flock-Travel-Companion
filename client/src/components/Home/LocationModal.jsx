@@ -37,7 +37,6 @@ function LocationModal(props) {
   const [airport, setAirport] = useState(null);
 
   const handleClose = () => {
-    console.log('handle close', airport)
     handleSubmit(airport)
     setShow(false);
   } // post the location selected to the db
@@ -49,7 +48,7 @@ function LocationModal(props) {
         setAirport(ap);
       }
     })
-  }
+  };
 
   const searchCity = () => {
     getAirportsByCitySearch(cityName)
@@ -66,7 +65,6 @@ function LocationModal(props) {
   }
   //{name: airportM.name, cityCode: airportM.address.cityCode, cityName: airportM.address.cityName, iataCode: airportM.iataCode}
 
-  console.log('Nearby Airports:', airport);
   return (
     <div className="container">
       <Button variant="primary" onClick={handleShow}>
