@@ -59,7 +59,7 @@ const Styles = styled.div`
   }
 `;
 
-const Head = () => {
+const Head = (props) => {
   const history = useHistory();
   console.log('HEAD-LINE44: ', history)
   const handleOnSubmit = () => {
@@ -80,7 +80,7 @@ const Head = () => {
             <button className="signOutBtn" onClick={() => signOut()}>
               Sign Out
             </button>
-            <LocationModal/>
+            <LocationModal currentUser={props.currentUser}/>
           </Container>
         </Jumbotron>
       </Styles>

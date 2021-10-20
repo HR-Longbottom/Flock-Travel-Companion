@@ -41,6 +41,17 @@ module.exports = {
     });
   },
 
+  updateUserLoc: (req, res) => {
+    console.log('REQ BODY ---> ', req.body)
+    model.updateUserLoc(req.body, (err, response) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.status(200).send("successfully updated user location");
+      }
+    });
+  },
+
   /*
   =================================================
   Group Page
@@ -115,15 +126,7 @@ module.exports = {
     });
   },
 
-  updateUserLoc: (req, res) => {
-    model.updateUserLoc(req.body, (err, res) => {
-      if (err) {
-        res.send(err);
-      } else {
-        res.send("successfully updated user email");
-      }
-    });
-  },
+
 
   /*
   =================================================

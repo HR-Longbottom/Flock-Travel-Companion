@@ -44,8 +44,13 @@ module.exports = {
   },
 
 
-  updateUserLoc: (params) => {
-    // dbMain.Users.findAndModify({query: {uid: params.uid}, update: {}})
+  updateUserLoc: (params, callback) => {
+    dbMain.Users.updateOne({uid: params.uid}, {location: params.location}, (err, res) => {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, res);
+      }})
   },
 
   readPersonalFlights: (params, callback) => {
