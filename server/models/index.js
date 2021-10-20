@@ -23,15 +23,29 @@ module.exports = {
   Home Page
   =================================================
   */
-
   createGroup: (params, callback) => {
-    dbMain.Groups.create(params, (err, data) => {
+    dbMain.Groups.create({name: params.groupName, members: [params.uid], admin: params.uid}, (err, res) => {
       if (err) {
         callback(err);
       } else {
-        callback(null, data);
+        callback(null, res);
+      }
+    })
+  },
+
+  findGroup: (params, callback) => {
+    dbMain.Groups.find({ admin: params }, (err, res) => {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, res);
       }
     });
+  },
+
+
+  updateUserLoc: (params) => {
+    // dbMain.Users.findAndModify({query: {uid: params.uid}, update: {}})
   },
 
   readPersonalFlights: (params, callback) => {
@@ -140,9 +154,7 @@ module.exports = {
     });
   },
 
-  updateUserLoc: (params) => {
-    //...
-  },
+
 
   /*
   =================================================
