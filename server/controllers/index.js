@@ -3,11 +3,13 @@ var model = require("../models");
 module.exports = {
   getFlightOffers: (req, res) => {
     model
-      .getFlightOffers(req.body)
+      .getFlightOffers(req.query)
       .then((data) => {
+        console.log('successful')
         res.json(data.data);
       })
       .catch((err) => {
+        console.log('this is error', err)
         res.send(err);
       });
   },
