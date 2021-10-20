@@ -8,12 +8,12 @@ module.exports = {
     if (params.returnDate) {
       return axios.get(
         `https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=${params.originLocationCode}&destinationLocationCode=${params.destinationLocationCode}&departureDate=${params.departureDate}&returnDate=${params.returnDate}&adults=1&max=100&currencyCode=USD`,
-        {headers: {'Authorization': 'Bearer t9pS4aWyx303A5GG6fEb80n563Ig'}}
+        headers
       );
     } else {
       return axios.get(
         `https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=${params.originLocationCode}&destinationLocationCode=${params.destinationLocationCode}&departureDate=${params.departureDate}&adults=1&max=100&currencyCode=USD`,
-        {headers: {'Authorization': 'Bearer t9pS4aWyx303A5GG6fEb80n563Ig'}}
+        headers
       );
     }
   },
