@@ -56,9 +56,12 @@ function GroupLandingPage(props) {
   return (
     <div className="d-flex flex-column groupPage">
       <div className="header d-flex flex-row">
+        <div className='adminButtons'>
         <button type="button" className="btn btn-primary deleteGroup">
           Delete Group
         </button>
+        <button type="button" className="btn btn-primary">Add Member</button>
+        </div>
         <h4>Group Page</h4>
       </div>
       <div className='page-body d-flex flex-row'>

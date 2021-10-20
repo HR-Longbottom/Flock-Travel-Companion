@@ -50,6 +50,16 @@ module.exports = {
   =================================================
   */
 
+  inviteGroupMember: (req, res) => {
+    model.inviteGroupMember(req.body, (err, data) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.send('Successfully added members');
+      }
+    })
+  },
+
   readGroupDetails: (req, res) => {
     model.readGroupDetails(req.body, (err, data) => {
       if (err) {

@@ -8,12 +8,12 @@ module.exports = {
     if (params.returnDate) {
       return axios.get(
         `https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=${params.originLocationCode}&destinationLocationCode=${params.destinationLocationCode}&departureDate=${params.departureDate}&returnDate=${params.returnDate}&adults=1&max=100&currencyCode=USD`,
-        headers
+        {headers: {'Authorization': 'Bearer EMtrPb1vzgt2iovZAqhtQ5wvzi9I'}}
       );
     } else {
       return axios.get(
         `https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=${params.originLocationCode}&destinationLocationCode=${params.destinationLocationCode}&departureDate=${params.departureDate}&adults=1&max=100&currencyCode=USD`,
-        headers
+        {headers: {'Authorization': 'Bearer EMtrPb1vzgt2iovZAqhtQ5wvzi9I'}}
       );
     }
   },
@@ -44,6 +44,25 @@ module.exports = {
   =================================================
   */
 
+  inviteGroupMember: (params, callback) => {
+    dbMain.Users.find({email: params.email} , (err, data) => {
+      if (err) {
+        callback(err);
+      } else {
+        console.log(data);
+        callback(null,data);
+        // dbMain.Groups.update({ name: params.name },
+        //   { $push: { members: data.id } } , (err, data) => {
+        //     if (err) {
+        //       callback(err);
+        //     } else {
+        //       callback(null, data);
+        //     }
+        //   })
+      }
+    })
+  }
+  ,
   // get details of group based on group name
   readGroupDetails: (params, callback) => {
     dbMain.Groups.find({ name: params.name }, (err, data) => {

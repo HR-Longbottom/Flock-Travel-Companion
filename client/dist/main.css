@@ -178,3 +178,39 @@ li {
 .bulletli {
 list-style: circle;
 }
+
+.modal-dialog {
+  width: 75%;
+  max-width: 100%;
+}
+
+.flightResult {
+  margin-bottom: 1%;
+  align-items:center;
+  background-color: aliceblue;
+  font-family: 'HM Sans Regular';
+}
+
+.flightInfo {
+  width:100%;
+}
+.modal-body{
+  max-height: 400px;
+  overflow: auto;
+}
+
+.addFlight {
+  height: auto;
+}
+.columnTitle{
+  text-decoration: underline;
+}
+
+.outboundDeparture, .returnDeparture, .connectionArrival, .connectionDeparture {
+  margin-right: 5%;
+}
+
+
+.flightDirection {
+  font-weight:bold;
+}

@@ -18,6 +18,7 @@ function PersonalItinerary(props) {
   );
   const [bulletin, setBulletin] = useState([]);
   const [groupFlights, setGroupFlights] = useState([]);
+  const [flightResultsMeta, setFlightResultsMeta] = useState({});
 
   function onBulletinAdd() {
 
@@ -38,7 +39,8 @@ function PersonalItinerary(props) {
       axios.get("/flightoffers", {params: params})
       .then(data => {
         console.log(data)
-        setFlightResults(data.data.data)
+        setFlightResults(data.data.data);
+        setFlightResultsMeta(data.data.dictionaries);
         setModalShow(true);
       });
 
@@ -83,7 +85,8 @@ function PersonalItinerary(props) {
               </div>
               <div className="modal-body">
                 <div className="flightResults">
-                  {/* {flightResults.map(flightResult => {return <FlightResult flight={flightResult} setModalShow={setModalShow} />})} */}
+                {/* <FlightResult flight={flightResults[14]} meta={flightResultsMeta} setModalShow={setModalShow} /> */}
+                  {flightResults.map(flightResult => {return <FlightResult flight={flightResult} meta={flightResultsMeta} setModalShow={setModalShow} />})}
                 </div>
               </div>
               <div className="modal-footer">
