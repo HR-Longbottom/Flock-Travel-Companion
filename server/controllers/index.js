@@ -21,14 +21,11 @@ module.exports = {
   */
 
   createGroup: (req, res) => {
-    var name = req.body.name;
-    var members = req.body.members;
-    var bulletin = req.body.bulletin;
     model.createGroup(req.body, (err, data) => {
       if (err) {
         res.send(err);
       } else {
-        res.send("successfully added group info");
+        res.send("successfully created group");
       }
     });
   },

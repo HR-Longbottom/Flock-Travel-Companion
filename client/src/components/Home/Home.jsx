@@ -32,7 +32,7 @@ background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%
   margin: 0 auto;
   text-align: center;
 }`
-const Home = () => {
+const Home = (props) => {
   return (
     <Styles>
     <Link exact to='/home'> </Link>
@@ -43,7 +43,7 @@ const Home = () => {
         <MyFlights />
         </div>
         <div className='groupFlights' >
-        <GroupFlights />
+        <GroupFlights currentUser={props.currentUser}/>
         </div>
       </div>
 

@@ -2,6 +2,8 @@ import React from "react";
 import { CDBCarousel, CDBCarouselItem, CDBCarouselInner, CDBView, CDBContainer } from "cdbreact";
 import { Container } from "react-bootstrap";
 import styled from "styled-components";
+import AddAGroup from "./AddAGroup.jsx";
+import { propTypes } from "react-bootstrap/esm/Image";
 
 const Styles = styled.div`
   .myGroupsContainer {
@@ -40,7 +42,7 @@ const Styles = styled.div`
   .carousel-indicators li {
     background-color: blue;
   }
-  .myFlightsHeader {
+  .myGroupsHeader {
     position: relative;
     width: 100%;
   }
@@ -52,13 +54,14 @@ const Styles = styled.div`
   }
 `;
 
-const MyFlights = () => {
+const MyGroups = (props) => {
   return (
     <Styles>
     <Container className='mainMyGroupsContainer'>
       <div className="row">
         <div className="col-12">
-          <h3 className="myFlightsHeader">Your Groups</h3>
+          <h3 className="myGroupsHeader">Your Groups</h3>
+          <AddAGroup currentUser={props.currentUser}/>
         </div>
         <CDBContainer className="myGroupsContainer col-12">
           <CDBCarousel
@@ -92,7 +95,6 @@ const MyFlights = () => {
                       <div className="card-body">
                         <h4 className="card-title">Group Name</h4>
                         <p className="card-text">Details about your flight</p>
-
                       </div>
                     </div>
                   </div>
@@ -190,4 +192,4 @@ const MyFlights = () => {
   )
 }
 
-export default MyFlights;
+export default MyGroups;
