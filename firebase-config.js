@@ -1,7 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 
-// firebase config file
 const firebaseConfig = ({
   apiKey: process.env.FB_APP_API_KEY,
   authDomain: process.env.FB_APP_AUTHDOMAIN,

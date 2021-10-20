@@ -1,19 +1,53 @@
 import Sidebar from '../Sidebar/Sidebar';
-import React from 'react';
+import React, { useState } from "react"
 import {Link} from 'react-router-dom';
 import Head from './Head.jsx';
 import MyFlights from './MyFlights';
+import GroupFlights from './GroupFlights';
+import styled from 'styled-components';
 
 
-function Home() {
+const Styles = styled.div`
+
+.Home {
+  background: rgb(34,193,195);
+background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%);
+  height: 100%;
+}
+.myFlights {
+  position: relative;
+  top: -800px;
+  height: 100%;
+
+  float: none;
+  margin: 0 auto;
+  text-align: center;
+
+}
+.groupFlights {
+  position: relative;
+  top: -700px;
+  height: 300px;
+  float: none;
+  margin: 0 auto;
+  text-align: center;
+}`
+const Home = () => {
   return (
-    <Link exact to='/home'>
-      <div className="Home">
+    <Styles>
+    <Link exact to='/home'> </Link>
+      <div className="Home" >
         <Head/>
         <Sidebar />
+        <div className='myFlights'>
         <MyFlights />
+        </div>
+        <div className='groupFlights' >
+        <GroupFlights />
+        </div>
       </div>
-    </Link>
+
+    </Styles>
   );
 }
 export default Home;

@@ -1,8 +1,17 @@
 import React from 'react';
 import { CDBSidebar, CDBSidebarContent, CDBSidebarFooter,CDBSidebarHeader, CDBSidebarMenu,CDBSidebarMenuItem} from 'cdbreact';
 import { NavLink } from 'react-router-dom';
+import axios from 'axios';
+
+// const getLatLong = () => {
+//   return axios.get(
+//     `https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=AIzaSyBdBNlZh_YUpLSIPV-AmVjZX0zkUmxfgeg`)
+// };
+
+// console.log(getLatLong());
 
 const Sidebar = () => {
+
   return (
     <div
       style={{ display: 'flex', height: '100vh', overflow: 'scroll initial' }}
