@@ -11,6 +11,9 @@ import Home from "./Home/Home.jsx";
 import firebase from "../../../firebase-config.js";
 import { onAuthStateChanged, getAuth } from "firebase/auth";
 import axios from "axios";
+import GroupLandingPage from './Group/GroupLandingPage';
+
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -95,7 +98,7 @@ class App extends React.Component {
             <ChatMain />
           </Route>
           <Route exact path="/plans">
-            <div>Group Page</div>
+            <GroupLandingPage />
           </Route>
         </Switch>
       </Router>
