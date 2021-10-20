@@ -11,7 +11,6 @@ import Home from "./Home/Home.jsx";
 import firebase from "../../../firebase-config.js";
 import { onAuthStateChanged, getAuth } from "firebase/auth";
 import axios from "axios";
-
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -30,7 +29,6 @@ class App extends React.Component {
       if (authState.currentUser !== null) {
         this.setState({ isLoggedIn: true }, () => {
           this.checkUser(authState.currentUser);
-
           console.log("Logged In:", authState.currentUser);
         });
       } else {
@@ -45,19 +43,19 @@ class App extends React.Component {
     axios
       .post("/createUser", user)
       .then((response) => console.log("success"))
-      .catch((err) => console.log("app 32", err));
+      .catch((err) => console.log("failed", err));
   }
 
   checkUser(user) {
     axios
-      .get("/checkUser", {params: {uid: user.uid}} )
+      .get("/checkUser", { params: { uid: user.uid } })
       .then((response) => {
-        console.log(response.data, "user data")
+        console.log(response.data, "user data");
         if (response.data.length === 0) {
-          this.postUser(user)
-          console.log('welcome, First Time User!')
+          this.postUser(user);
+          console.log("welcome, First Time User!");
         } else {
-          console.log('Welcome Back!')
+          console.log("Welcome Back!");
         }
       })
       .catch((err) => console.log(false, err));
@@ -101,7 +99,7 @@ class App extends React.Component {
           </Route>
         </Switch>
       </Router>
-    )
+    );
   }
 }
 
