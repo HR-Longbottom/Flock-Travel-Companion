@@ -107,7 +107,7 @@ function PersonalItinerary(props) {
             {props.itineraries.length === 0 ?
             <div>Please Select a Flight</div>
             :
-            props.itineraries.map(flight => <PersonalItineraryFlight flight={flight} />)}
+            props.itineraries.map((flight, idx) => <PersonalItineraryFlight flight={flight} key={idx}/>)}
           </div>
           <div className="personal-it-right">
             <div className="nav flex-column">
