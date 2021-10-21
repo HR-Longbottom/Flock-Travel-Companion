@@ -5,6 +5,7 @@ import styled from "styled-components";
 import AddAGroup from "./AddAGroup.jsx";
 import { propTypes } from "react-bootstrap/esm/Image";
 import axios from "axios";
+import {NavLink} from 'react-router-dom';
 
 const Styles = styled.div`
 
@@ -94,7 +95,12 @@ const MyGroups = (props) => {
           </div>
           <Container className="myGroupsContainer col-12">
             <Carousel breakPoints={breakPoints}>
-              {groups.map(item => <div className="card" key={item._id}><img className='image' src='https://source.unsplash.com/190x150/?vacation'/>{item.name}</div>)}
+              {groups.map(item =>
+                <NavLink exact to={`/plans?uid=${item.admin}&groupName=${item.name}`} activeClassName="activeClicked">
+                <div className="card" key={item._id}>
+                <img className='image' src='https://source.unsplash.com/190x150/?vacation'/>{item.name}
+                </div>
+                </NavLink>)}
             </Carousel>
           </Container>
         </div>
