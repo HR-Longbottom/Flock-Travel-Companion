@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { Jumbotron, Container } from "react-bootstrap";
-import { useHistory, Redirect, withRouter } from "react-router-dom";
 
 import signOut from "../Login/firebase-SignOut.js";
-import { getAuth } from "firebase/auth";
 
 import styled from "styled-components";
 import "./Home.css";
@@ -40,13 +38,6 @@ const Styles = styled.div`
 `;
 
 const Head = () => {
-  const history = useHistory();
-  console.log('HEAD-LINE44: ', history)
-  const handleOnSubmit = () => {
-    signOut();
-    history.push("/");
-  };
-
   return (
     <>
       <Styles>

@@ -43,6 +43,16 @@ module.exports = {
   Group Page
   =================================================
   */
+  // list of all groups
+  viewAllGroups: (callback) => {
+    dbMain.Groups.find({}, (err, data) => {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, data);
+      }
+    });
+  },
 
   // get details of group based on group name
   readGroupDetails: (params, callback) => {

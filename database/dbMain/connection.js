@@ -4,18 +4,17 @@ dotenv.config();
 
 const uri = process.env.MAIN_URI;
 
-mongoose
-  .connect(uri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => {
-    console.log("Successfully connected to main DB");
-  })
-  .catch((err) => {
-    console.log("Failed to connect to main DB: ", err);
-  });
+const dbMain = mongoose.createConnection(uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
-const dbMain = mongoose.connection;
+dbMain.on("error", () => {
+  console.log("Failed to connect to main DB");
+});
+
+dbMain.once("open", () => {
+  console.log("Successfully connected to main DB");
+});
 
 module.exports = dbMain;
