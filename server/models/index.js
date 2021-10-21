@@ -1,6 +1,7 @@
 var axios = require("axios");
 const dbChat = require("./../../database/dbChat/messaging.js");
 const dbMain = require("./../../database/dbMain/index.js");
+const headers = require('./../../config.js').headers;
 
 module.exports = {
   // contact the api to get flight offers with parameters of origin location code, destination location code, departure date, and optional return date
@@ -8,12 +9,12 @@ module.exports = {
     if (params.returnDate) {
       return axios.get(
         `https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=${params.originLocationCode}&destinationLocationCode=${params.destinationLocationCode}&departureDate=${params.departureDate}&returnDate=${params.returnDate}&adults=1&max=100&currencyCode=USD`,
-        {headers:{'Authorization':'Bearer juO3qEheG2wQ4UX4LiVAyAz6k4lR'}}
+        headers
       );
     } else {
       return axios.get(
         `https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=${params.originLocationCode}&destinationLocationCode=${params.destinationLocationCode}&departureDate=${params.departureDate}&adults=1&max=100&currencyCode=USD`,
-        {headers:{'Authorization':'Bearer juO3qEheG2wQ4UX4LiVAyAz6k4lR'}}
+        headers
       );
     }
   },
