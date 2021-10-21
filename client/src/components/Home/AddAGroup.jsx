@@ -8,9 +8,12 @@ const AddAGroup = (props) => {
   const [name, setName] = useState('');
   const [redirect, setRedirect] = useState(false);
   const handleClose = () => {
-    handleSubmit(name);
     setShow(false);
   }
+  const handleSave = () => {
+    handleSubmit(name);
+  }
+
   const handleShow = () => setShow(true);
 
   const handleChange = (e) => setName(e.target.value)
@@ -29,7 +32,7 @@ const AddAGroup = (props) => {
         Add A Group
       </Button>
 
-      <Modal size="lg" centered show={show} onHide={handleClose}>
+      <Modal size="lg" centered show={show} onHide={handleClose} backdrop="static">
         <Modal.Header closeButton>
           <Modal.Title>Input what you're going to call your new group!</Modal.Title>
         </Modal.Header>
@@ -43,7 +46,10 @@ const AddAGroup = (props) => {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="primary" onClick={handleClose} style={{backgroundColor: 'rgb(54 192 208)'}}>
-            Save It!
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleSave} style={{backgroundColor: 'rgb(54 192 208)'}}>
+          Save It!
           </Button>
           {redirect === true ? <Redirect to={`/plans?${props.currentUser.uid}&${name}`}/> : <></>}
         </Modal.Footer>

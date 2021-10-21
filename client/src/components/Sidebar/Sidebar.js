@@ -1,7 +1,9 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { CDBSidebar, CDBSidebarContent, CDBSidebarFooter,CDBSidebarHeader, CDBSidebarMenu,CDBSidebarMenuItem} from 'cdbreact';
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
+import { faUnderline } from '@fortawesome/free-solid-svg-icons';
+import styled from 'styled-components';
 
 // const getLatLong = () => {
 //   return axios.get(
@@ -9,12 +11,31 @@ import axios from 'axios';
 // };
 
 // console.log(getLatLong());
+const Styles= styled.div`
+
+
+`
 
 const Sidebar = () => {
+  const [groups, setGroups] = useState([]);
 
+  useEffect(() => {
+    findGroups().then(groups => setGroups(groups));
+  }, []);
+
+  const findGroups = () => {
+    return axios
+      .get('/findGroups')
+      .then(response => {
+        return response.data
+      })
+      .catch(err => { console.log(err) })
+  }
+  console.log(groups)
   return (
+    <Styles>
     <div
-      style={{ display: 'flex', height: '100vh', overflow: 'scroll initial' }}
+      style={{ display: 'flex', height: '100vh'}}
     >
       <CDBSidebar textColor="#fff" backgroundColor="#0097A7">
         <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
@@ -33,17 +54,23 @@ const Sidebar = () => {
             <NavLink exact to="/home" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="columns"> Dashboard</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/plans" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="user" style={{ padding: '5px' }}> Groups
-              </CDBSidebarMenuItem>
-            </NavLink>
+
             <NavLink exact to="/messages" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="fas fa-comments">
                Chat Room
               </CDBSidebarMenuItem>
+              </NavLink>
+              <CDBSidebarMenuItem icon="user" style={{padding: '5px', textDecoration: 'underline' }}>
+                Groups
+                </CDBSidebarMenuItem>
+                <div className="groupMembers">
+              {groups.map(group => (
+              <NavLink exact to={`/plans?${group.admin}&${group.name}`} activeClassName="activeClicked">
+                <CDBSidebarMenuItem  icon='ellipsis-h' style={{fontSize: '15px', padding: '5px' }}> {group.name}
+              </CDBSidebarMenuItem>
             </NavLink>
-
-
+              ))}
+              </div>
           </CDBSidebarMenu>
         </CDBSidebarContent>
 
@@ -58,6 +85,7 @@ const Sidebar = () => {
         </CDBSidebarFooter>
       </CDBSidebar>
     </div>
+    </Styles>
   );
 };
 

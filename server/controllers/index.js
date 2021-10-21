@@ -40,6 +40,17 @@ module.exports = {
       }
     });
   },
+  findGroups: (req, res) => {
+    model.findGroups(req.body, (error, data) => {
+      if (error) {
+        res.send(error);
+      } else {
+        console.log('Find Groups REQ', data)
+        res.send(data)
+       }
+    });
+  },
+
 
   updateUserLoc: (req, res) => {
     model.updateUserLoc(req.body, (err, response) => {
@@ -83,7 +94,7 @@ module.exports = {
       if (err) {
         res.send(err);
       } else {
-        res.send("flight successfuly added to itinerary!");
+        res.send("flight successfully added to itinerary!");
       }
     });
   },

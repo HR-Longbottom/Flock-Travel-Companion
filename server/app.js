@@ -22,6 +22,7 @@ app.get("/readPersonalFlights", controller.readPersonalFlights);
 app.get("/readGroupFlights", controller.readGroupFlights);
 app.post("/createGroup", controller.createGroup);
 app.put('/updateUserLoc', controller.updateUserLoc);
+app.get('/findGroups', controller.findGroups);
 
 app.get("/checkUser", controller.checkUser);
 

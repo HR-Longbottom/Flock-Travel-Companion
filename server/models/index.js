@@ -33,11 +33,13 @@ module.exports = {
     })
   },
 
-  findGroup: (params, callback) => {
-    dbMain.Groups.find({ admin: params }, (err, res) => {
+  findGroups: (params, callback) => {
+    console.log('yelllooooo')
+    dbMain.Groups.find((err, res) => {
       if (err) {
         callback(err);
       } else {
+        console.log('MODELLLLLLS', res)
         callback(null, res);
       }
     });
