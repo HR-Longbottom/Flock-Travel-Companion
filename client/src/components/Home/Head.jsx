@@ -48,7 +48,7 @@ const Styles = styled.div`
     border-radius: 5px;
     position: relative;
     top: -310px;
-    left: 51%;
+    left: 54%;
     border: 1px solid rgb(0 0 0 / 90%);
     /* margin-top: 20%; */
     margin-left: 10px;
@@ -60,7 +60,7 @@ const Styles = styled.div`
   .updateAirportBtn {
     position: relative;
     top: -290px;
-    left: 34%;
+    left: 42%;
   }
 `;
 

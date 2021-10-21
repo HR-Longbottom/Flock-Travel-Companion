@@ -16,7 +16,7 @@ const Styles= styled.div`
 
 `
 
-const Sidebar = () => {
+const Sidebar = (props) => {
   const [groups, setGroups] = useState([]);
 
   useEffect(() => {
@@ -25,17 +25,17 @@ const Sidebar = () => {
 
   const findGroups = () => {
     return axios
-      .get('/findGroups')
+      .get('/findGroups', {params: {uid: props.currentUser.uid}})
       .then(response => {
         return response.data
       })
       .catch(err => { console.log(err) })
   }
-
+console.log('GROUPS', groups)
   return (
     <Styles>
     <div
-      style={{ display: 'flex', height: '100vh'}}
+      style={{ display: 'flex', height: '900px'}}
     >
       <CDBSidebar textColor="#fff" backgroundColor="#0097A7">
         <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>

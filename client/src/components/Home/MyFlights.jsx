@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from "react";
-import { CDBCarousel, CDBCarouselItem, CDBCarouselInner, CDBView, CDBContainer } from "cdbreact";
 import { Container } from "react-bootstrap";
 import styled from "styled-components";
 import axios from "axios";
+import Carousel from 'react-elastic-carousel';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 const Styles = styled.div`
   .myFlightsContainer {
     position: relative;
@@ -18,7 +20,7 @@ const Styles = styled.div`
   }
   .mainFlightsContainer {
     position: relative;
-
+    border-radius: 25px;
     height: 300px;
     float: none;
     margin: 0 auto;
@@ -26,33 +28,39 @@ const Styles = styled.div`
     background-color: #0097A7;
     color: #fff;
   }
-  .img-fluid {
-    max-height: 100px;
-    max-width: 100px;
-    object-fit: cover;
-  }
+
   .card {
     height: 250px;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 25%;
+    margin-top: 10%;
+    width: 190px;
+    border-radius: 25px;
+    background: rgb(41,210,212);
+background: linear-gradient(0deg, rgba(41,210,212,1) 20%, rgba(101,227,200,1) 76%);
+    font-family: 'Yeseva One', cursive;
   }
-  .col-md-4 mb-3 {
-    max-width: 25%;
-    flex: 0 0 33.3%;
-    margin-right: 7.5%;
-  }
-  .carousel-indicators li {
-    background-color: blue;
-  }
+
   .myFlightsHeader {
     position: relative;
     width: 100%;
   }
-  .card-body {
-    position: absolute;
-    bottom: 10px;
-    left: 20%;
-    color: black;
+  .airportsText {
+    padding-left: 5px;
+    padding-right: 5px;
+    justify-content: space-between;
+    word-spacing: 10px;
   }
 `;
+const breakPoints = [
+  { width: 1, itemsToShow: 1 },
+  { width: 550, itemsToShow: 2, itemsToScroll: 2 },
+  { width: 768, itemsToShow: 3 },
+  { width: 1200, itemsToShow: 4 }
+];
 
 const MyFlights = (props) => {
   const [flights, setFlights] = useState([]);
@@ -65,146 +73,38 @@ const MyFlights = (props) => {
     return axios
       .get('/readPersonalFlights', {params: {uid: props.currentUser.uid}})
       .then(response => {
-        console.log(response.data)
+       return response.data
       })
       .catch(err => { console.log(err) })
-  }
+    }
+    console.log('Users Flights: ', flights)
 
   return (
     <Styles>
-    <Container className='mainFlightsContainer'>
+    < Container className='mainFlightsContainer'>
       <div className="row">
         <div className="col-12">
           <h3 className="myFlightsHeader">Your Upcoming Flights</h3>
         </div>
-        <CDBContainer className="myFlightsContainer col-12">
-          <CDBCarousel
-            activeItem={1}
-            length={3}
-            showControls={true}
-            showIndicators={true}
-            className="z-depth-1"
-            slide
-            multiItem
-          >
+          <Container className="myFlightsContainer col-12">
+            <Carousel breakPoints={breakPoints}>
+              {flights.map(item => <div className="card" key={item._id}>
+                <h3 className='carrierText'> {item.carrier} </h3>
+                <h4 className='groupNameText'>{item.groupName} </h4>
+                <p className='airportsText'>{item.departureAirport} <i className="fas fa-arrow-circle-right"></i> {item.arrivalAirport}</p>
+                <p className='departureDate'>{item.departureDate}</p>
 
-            <CDBCarouselInner>
-              <CDBCarouselItem active itemId='1'>
-                <CDBView className="row">
 
-                  <div className="col-md-4 mb-3">
-                    <div className="card">
-                      <img className="img-fluid" alt="100%x280" src='https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.pngkey.com%2Fpng%2Fdetail%2F209-2095976_jetblue-customer-service-number-jet-blue-logo-png.png&f=1&nofb=1' />
-                      <div className="card-body">
-                        <h4 className="card-title">Airline</h4>
-                        <p className="card-text">Details about your flight</p>
 
-                      </div>
+                </div>)}
+            </Carousel>
+          </Container>
+        </div>
 
-                    </div>
-                  </div>
-                  <div className="col-md-4 mb-3">
-                    <div className="card">
-                      <img className="img-fluid" alt="100%x280" src='https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2F1000logos.net%2Fwp-content%2Fuploads%2F2017%2F06%2FLogo-United-Airlines.png&f=1&nofb=1' />
-                      <div className="card-body">
-                        <h4 className="card-title">Airline</h4>
-                        <p className="card-text">Details about your flight</p>
-
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-md-4 mb-3">
-                    <div className="card">
-                      <img className="img-fluid" alt="100%x280" src='https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia.glassdoor.com%2Fsqll%2F5144%2Ffrontier-airlines-squarelogo-1572626786969.png&f=1&nofb=1' />
-                      <div className="card-body">
-                        <h4 className="card-title">Airline</h4>
-                        <p className="card-text">Details about your flight</p>
-
-                      </div>
-                    </div>
-                  </div>
-
-                </CDBView>
-              </CDBCarouselItem>
-              <CDBCarouselItem itemId='2'>
-                <CDBView className="row">
-
-                  <div className="col-md-4 mb-3">
-                    <div className="card">
-                      <img className="img-fluid" alt="100%x280" src='https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2F1000logos.net%2Fwp-content%2Fuploads%2F2017%2F06%2FLogo-United-Airlines.png&f=1&nofb=1' />
-                      <div className="card-body">
-                        <h4 className="card-title">Airline</h4>
-                        <p className="card-text">Details about your flight</p>
-
-                      </div>
-
-                    </div>
-                  </div>
-                  <div className="col-md-4 mb-3">
-                    <div className="card">
-                      <img className="img-fluid" alt="100%x280" src='https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.pngkey.com%2Fpng%2Fdetail%2F209-2095976_jetblue-customer-service-number-jet-blue-logo-png.png&f=1&nofb=1' />
-                      <div className="card-body">
-                        <h4 className="card-title">Airline</h4>
-                        <p className="card-text">Details about your flight</p>
-
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-md-4 mb-3">
-                    <div className="card">
-                      <img className="img-fluid" alt="100%x280" src='https://gray-wbay-prod.cdn.arcpublishing.com/resizer/xrAAJzYoIx8tBfymcRErU6zCO5k=/1200x675/smart/filters:quality(85)/cloudfront-us-east-1.images.arcpublishing.com/gray/HC2ZSIX4PJH7RA6LWQEPSCY4BM.png' />
-                      <div className="card-body">
-                        <h4 className="card-title">Airline</h4>
-                        <p className="card-text">Details about your flight</p>
-
-                      </div>
-                    </div>
-                  </div>
-
-                </CDBView>
-              </CDBCarouselItem>
-              <CDBCarouselItem itemId='3'>
-                <CDBView className="row">
-
-                  <div className="col-md-4 mb-3">
-                    <div className="card">
-                      <img className="img-fluid" alt="100%x280" src='https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.pngkey.com%2Fpng%2Fdetail%2F209-2095976_jetblue-customer-service-number-jet-blue-logo-png.png&f=1&nofb=1' />
-                      <div className="card-body">
-                        <h4 className="card-title">Airline</h4>
-                        <p className="card-text">Details about your flight</p>
-
-                      </div>
-
-                    </div>
-                  </div>
-                  <div className="col-md-4 mb-3">
-                    <div className="card">
-                      <img className="img-fluid" alt="100%x280" src='https://assets.simpleviewinc.com/simpleview/image/fetch/c_limit,q_80,w_1200/https://assets.simpleviewinc.com/simpleview/image/upload/crm/rhodeisland/Southwest-Logo-2-copy0-a85cdfda5056a36_a85ce0f5-5056-a36a-09f07837ff9a8a0f.jpg' />
-                      <div className="card-body">
-                        <h4 className="card-title">Airline</h4>
-                        <p className="card-text">Details about your flight</p>
-
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-md-4 mb-3">
-                    <div className="card">
-                      <img className="img-fluid" alt="100%x280" src='https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia.glassdoor.com%2Fsqll%2F5144%2Ffrontier-airlines-squarelogo-1572626786969.png&f=1&nofb=1' />
-                      <div className="card-body">
-                        <h4 className="card-title">Airline</h4>
-                        <p className="card-text">Details about your flight</p>
-                      </div>
-                    </div>
-                  </div>
-                </CDBView>
-              </CDBCarouselItem>
-            </CDBCarouselInner>
-          </CDBCarousel>
-        </CDBContainer>
-      </div>
     </Container>
     </Styles>
   )
+
 }
 
 export default MyFlights;

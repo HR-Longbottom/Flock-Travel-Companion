@@ -34,7 +34,8 @@ module.exports = {
   },
 
   findGroups: (params, callback) => {
-    dbMain.Groups.find((err, res) => {
+    console.log('PARAMS', params)
+    dbMain.Groups.find({members: params.uid}, (err, res) => {
       if (err) {
         callback(err);
       } else {
@@ -54,7 +55,7 @@ module.exports = {
   },
 
   readPersonalFlights: (params, callback) => {
-    dbMain.Flights.find(params.uid, (err, res) => {
+    dbMain.Flights.find({uid: params.uid}, (err, res) => {
       if(err) {
         callback(err);
       } else {

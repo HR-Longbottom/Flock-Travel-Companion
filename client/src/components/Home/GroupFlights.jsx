@@ -5,8 +5,10 @@ import styled from "styled-components";
 import AddAGroup from "./AddAGroup.jsx";
 import { propTypes } from "react-bootstrap/esm/Image";
 import axios from "axios";
+import config from "./config.js";
 
 const Styles = styled.div`
+
   .myGroupsContainer {
     position: relative;
     float: none;
@@ -28,6 +30,13 @@ const Styles = styled.div`
     text-align: center;
     background-color: #0097A7;
     color: #fff;
+    border-radius: 25px;
+  }
+  .image {
+    border-top-left-radius: 25px;
+    top: -37px;
+    position: relative;
+    border-top-right-radius: 25px;
   }
 
   .card {
@@ -39,10 +48,18 @@ const Styles = styled.div`
     min-width: 25%;
     margin-top: 10%;
     width: 190px;
+    border-radius: 25px;
+    background: rgb(34,193,195);
+    background: linear-gradient(0deg, rgba(34,193,195,1) 34%, rgba(101,227,200,1) 89%);
+   font-family: 'Yeseva One', cursive;
   }
   .myGroupsHeader {
     position: relative;
-    width: 100%;
+    display: inline;
+    width: fit-content;
+    /* left: 45%; */
+    margin: 0;
+    top: 5px;
   }
 `;
 const breakPoints = [
@@ -51,6 +68,7 @@ const breakPoints = [
   { width: 768, itemsToShow: 3 },
   { width: 1200, itemsToShow: 4 }
 ];
+
 
 const MyGroups = (props) => {
   const [groups, setGroups] = useState([]);
@@ -61,13 +79,12 @@ const MyGroups = (props) => {
 
   const findGroups = () => {
     return axios
-      .get('/findGroups')
+      .get('/findGroups', {params: {uid: props.currentUser.uid}})
       .then(response => {
         return response.data
       })
       .catch(err => { console.log(err) })
   }
-
 
   return (
     <Styles>
@@ -79,7 +96,7 @@ const MyGroups = (props) => {
           </div>
           <Container className="myGroupsContainer col-12">
             <Carousel breakPoints={breakPoints}>
-              {groups.map(item => <div className="card" key={item._id}>{item.name}</div>)}
+              {groups.map(item => <div className="card" key={item._id}><img className='image' src='https://source.unsplash.com/190x150/?vacation'/>{item.name}</div>)}
             </Carousel>
           </Container>
         </div>
