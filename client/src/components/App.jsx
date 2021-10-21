@@ -12,6 +12,7 @@ import firebase from "../../../firebase-config.js";
 import { onAuthStateChanged, getAuth } from "firebase/auth";
 import axios from "axios";
 import GroupLandingPage from './Group/GroupLandingPage';
+import LocationModal from "./Home/LocationModal.jsx";
 
 
 class App extends React.Component {
@@ -19,7 +20,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       isLoggedIn: null,
-      currentUser: null
+      currentUser: {email: null, displayName: null, uid: null, location: null}
     };
     this.postUser = this.postUser.bind(this);
     this.checkUser = this.checkUser.bind(this);
@@ -51,15 +52,19 @@ class App extends React.Component {
   }
 
   checkUser(user) {
+    console.log('USER', user)
     axios
       .get("/checkUser", { params: { uid: user.uid } })
       .then((response) => {
-        console.log(response.data, "user data");
+
         if (response.data.length === 0) {
           this.postUser(user);
+          this.setState({currentUser: {email: user.email, displayName: user.displayName, uid: user.uid, location: undefined}})
           console.log("welcome, First Time User!");
         } else {
-          this.setState({currentUser: {email: user.email, displayName: user.displayName, uid: user.uid}})
+          var userOne = response.data[0];
+          console.log(response.data.location)
+          this.setState({currentUser: {email: userOne.email, displayName: userOne.name, uid: userOne.uid, location: userOne.location}})
           console.log("Welcome Back!");
         }
       })
@@ -67,6 +72,7 @@ class App extends React.Component {
   }
 
   render() {
+   // console.log('CURERNT USER STATE', this.state.currentUser)
     return (
       <Router>
         <Route
@@ -86,9 +92,14 @@ class App extends React.Component {
           exact
           path="/home"
           render={(state) =>
-            this.state.isLoggedIn ? (
-              <Home {...state} currentUser={this.state.currentUser}/>
-            ) : (
+            (this.state.isLoggedIn && (this.state.currentUser.location === null|| this.state.currentUser.location === undefined)) ? (
+              <div>
+            <LocationModal currentUser={this.state.currentUser}/>
+            <Home {...state} currentUser={this.state.currentUser}/>
+            </div>
+            ) : (this.state.isLoggedIn) ?
+            (<Home {...state} currentUser={this.state.currentUser}/>)
+            : (
               <Redirect
                 to={{ pathname: "/", state: { from: state.location } }}
               />

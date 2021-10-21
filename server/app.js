@@ -9,6 +9,7 @@ const dbChat = require("../database/dbChat/connection.js");
 let app = express();
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(expressStaticGzip(path.join(__dirname, "../client/dist")));
 app.use(express.static(path.join(__dirname, "../client/dist")));
 app.get("/flightoffers", controller.getFlightOffers);
@@ -25,6 +26,8 @@ app.put("/postGroupBulletin", controller.postGroupBulletin);
 app.put('/deleteGroupBulletin', controller.deleteGroupBulletin);
 app.put('/deleteGroup', controller.deleteGroup);
 
+app.put('/updateUserLoc', controller.updateUserLoc);
+app.get('/findGroups', controller.findGroups);
 
 app.get("/checkUser", controller.checkUser);
 

@@ -2,7 +2,7 @@ node_modules
 tls
 .env
 Dockerfile
-bundle.js
+client/dist/bundle.js
 .gz
 cert.pem
 key.pem

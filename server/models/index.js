@@ -34,8 +34,9 @@ module.exports = {
     })
   },
 
-  findGroup: (params, callback) => {
-    dbMain.Groups.find({ admin: params }, (err, res) => {
+  findGroups: (params, callback) => {
+    console.log('PARAMS', params)
+    dbMain.Groups.find({members: params.uid}, (err, res) => {
       if (err) {
         callback(err);
       } else {
@@ -45,12 +46,24 @@ module.exports = {
   },
 
 
-  updateUserLoc: (params) => {
-    // dbMain.Users.findAndModify({query: {uid: params.uid}, update: {}})
+  updateUserLoc: (params, callback) => {
+    dbMain.Users.updateOne({uid: params.uid}, {location: params.location}, (err, res) => {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, res);
+      }})
   },
 
   readPersonalFlights: (params, callback) => {
-    db.Flights.find({ uid: params.uid });
+    dbMain.Flights.find({uid: params.uid}, (err, res) => {
+      if(err) {
+        callback(err);
+      } else {
+        console.log('MODELS FLIGHT RESPONSE', res)
+        callback(null, res);
+      }
+    });
   },
 
   /*
