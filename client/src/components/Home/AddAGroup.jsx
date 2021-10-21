@@ -1,12 +1,14 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { Button, Modal, Form } from 'react-bootstrap';
+import { Redirect } from 'react-router';
 
 const AddAGroup = (props) => {
   const [show, setShow] = useState(false);
   const [name, setName] = useState('');
+  const [redirect, setRedirect] = useState(false);
   const handleClose = () => {
-    handleSubmit(name)
+    handleSubmit(name);
     setShow(false);
   }
   const handleShow = () => setShow(true);
@@ -14,7 +16,10 @@ const AddAGroup = (props) => {
   const handleChange = (e) => setName(e.target.value)
   const handleSubmit = (name) => {
     axios.post('/createGroup', { groupName: name, uid: props.currentUser.uid } )
-    .then((response) => console.log("successfully added group", response))
+    .then((response) => {
+      console.log("successfully added group", response)
+      setRedirect(true)
+    })
     .catch((err) => console.log("failed", err));
   }
 
@@ -40,6 +45,7 @@ const AddAGroup = (props) => {
           <Button variant="primary" onClick={handleClose} style={{backgroundColor: 'rgb(54 192 208)'}}>
             Save It!
           </Button>
+          {redirect === true ? <Redirect to={`/plans?${props.currentUser.uid}&${name}`}/> : <></>}
         </Modal.Footer>
       </Modal>
     </div>

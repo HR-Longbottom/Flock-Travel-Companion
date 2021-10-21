@@ -40,7 +40,6 @@ function LocationModal(props) {
     handleSubmit(airport)
     setShow(false);
   } // post the location selected to the db
-  const handleShow = () => setShow(true);
   const handleChange = (e) => setCityName(e.target.value);
   const handleSelect = (e) => {
     airports.forEach(ap => {
@@ -60,17 +59,12 @@ function LocationModal(props) {
 
   const handleSubmit = (airport) => {
     axios.put('/updateUserLoc', { "uid": props.currentUser.uid, "location": airport } )
-    .then((response) => console.log("successfully added group", response))
+    .then((response) => console.log("successfully added location", response))
     .catch((err) => console.log("failed", err));
   }
   //{name: airportM.name, cityCode: airportM.address.cityCode, cityName: airportM.address.cityName, iataCode: airportM.iataCode}
-
   return (
     <div className="container">
-      <Button variant="primary" onClick={handleShow}>
-        Update Preferred Airport
-      </Button>
-
       <Modal size="lg" show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Click to Update your Airport of Choice</Modal.Title>
