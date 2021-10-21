@@ -32,14 +32,26 @@ module.exports = {
 
   //for home page
   readPersonalFlights: (req, res) => {
-    model.retrievePersonalFlights(req.body, (error, data) => {
+    console.log('personal flights body:' , req.query)
+    model.readPersonalFlights(req.query, (error, data) => {
       if (error) {
         res.send(error);
       } else {
-        res.json(data.data);
+        res.send(data);
       }
     });
   },
+
+  findGroups: (req, res) => {
+    model.findGroups(req.body, (error, data) => {
+      if (error) {
+        res.send(error);
+      } else {
+        res.send(data)
+       }
+    });
+  },
+
 
   updateUserLoc: (req, res) => {
     model.updateUserLoc(req.body, (err, response) => {
@@ -83,7 +95,7 @@ module.exports = {
       if (err) {
         res.send(err);
       } else {
-        res.send("flight successfuly added to itinerary!");
+        res.send("flight successfully added to itinerary!");
       }
     });
   },

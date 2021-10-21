@@ -33,8 +33,8 @@ module.exports = {
     })
   },
 
-  findGroup: (params, callback) => {
-    dbMain.Groups.find({ admin: params }, (err, res) => {
+  findGroups: (params, callback) => {
+    dbMain.Groups.find((err, res) => {
       if (err) {
         callback(err);
       } else {
@@ -54,7 +54,14 @@ module.exports = {
   },
 
   readPersonalFlights: (params, callback) => {
-    db.Flights.find({ uid: params.uid });
+    dbMain.Flights.find(params.uid, (err, res) => {
+      if(err) {
+        callback(err);
+      } else {
+        console.log('MODELS FLIGHT RESPONSE', res)
+        callback(null, res);
+      }
+    });
   },
 
   /*

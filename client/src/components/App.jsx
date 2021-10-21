@@ -52,12 +52,14 @@ class App extends React.Component {
   }
 
   checkUser(user) {
+    console.log('USER', user)
     axios
       .get("/checkUser", { params: { uid: user.uid } })
       .then((response) => {
-        console.log(response.data, "user data");
+
         if (response.data.length === 0) {
           this.postUser(user);
+          this.setState({currentUser: {email: user.email, displayName: user.displayName, uid: user.uid, location: undefined}})
           console.log("welcome, First Time User!");
         } else {
           var userOne = response.data[0];
@@ -70,7 +72,7 @@ class App extends React.Component {
   }
 
   render() {
-    console.log('CURERNT USER STATE', this.state.currentUser)
+   // console.log('CURERNT USER STATE', this.state.currentUser)
     return (
       <Router>
         <Route
@@ -90,7 +92,7 @@ class App extends React.Component {
           exact
           path="/home"
           render={(state) =>
-            (this.state.isLoggedIn && this.state.currentUser.location === null) ? (
+            (this.state.isLoggedIn && (this.state.currentUser.location === null|| this.state.currentUser.location === undefined)) ? (
               <div>
             <LocationModal currentUser={this.state.currentUser}/>
             <Home {...state} currentUser={this.state.currentUser}/>

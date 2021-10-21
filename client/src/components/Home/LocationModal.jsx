@@ -37,10 +37,15 @@ function LocationModal(props) {
   const [airport, setAirport] = useState(null);
 
   const handleClose = () => {
-    handleSubmit(airport)
     setShow(false);
-  } // post the location selected to the db
-  const handleChange = (e) => setCityName(e.target.value);
+  }
+  const handleSave = () => {
+    handleSubmit(airport);
+    setShow(false);
+  }
+  const handleChange = (e) => {
+    setCityName(e.target.value);
+  }
   const handleSelect = (e) => {
     airports.forEach(ap => {
       if (ap.name === e.target.value) {
@@ -63,11 +68,12 @@ function LocationModal(props) {
     .catch((err) => console.log("failed", err));
   }
   //{name: airportM.name, cityCode: airportM.address.cityCode, cityName: airportM.address.cityName, iataCode: airportM.iataCode}
+  console.log('User Props: ', props.currentUser)
   return (
     <div className="container">
-      <Modal size="lg" show={show} onHide={handleClose}>
+      <Modal size="lg" show={show} onHide={handleClose} backdrop="static">
         <Modal.Header closeButton>
-          <Modal.Title>Click to Update your Airport of Choice</Modal.Title>
+          <Modal.Title>Save your Airport of Choice</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form.Group>
@@ -89,8 +95,11 @@ function LocationModal(props) {
           : <> </>}
         </Modal.Body>
         <Modal.Footer>
+        <Button variant="primary" onClick={handleClose} style={{backgroundColor: 'rgb(54 192 208)'}}>
+            Close
+          </Button>
           {airport === null ? <></> :
-          <Button variant="primary" onClick={handleClose} style={{ backgroundColor: 'rgb(54 192 208)' }}>
+          <Button variant="primary" onClick={handleSave} style={{ backgroundColor: 'rgb(54 192 208)' }}>
             Save It!
           </Button>
           }
@@ -110,14 +119,3 @@ export default LocationModal;
 
 
 
-
-
-
-
-
-
-
-
-
-
-// https://www.ccra.com/airport-codes/

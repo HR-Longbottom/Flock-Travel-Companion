@@ -74,8 +74,8 @@ const Head = (props) => {
   };
 
   const handleShow = () => setShow(!show);
-  console.log('User props', props.currentUser)
-  // <LocationModal currentUser={props.currentUser} />
+
+
   return (
     <Styles>
       <Jumbotron className="head">
