@@ -17,8 +17,8 @@ function FlightResult(props) {
 
     var flights = [];
     flights.push({
-      uid: '123123',//props.uid,
-      groupName: 'test',//props.groupName,
+      uid: props.uid,
+      groupName: props.groupName,
       departureTime: props.flight.itineraries[0].segments[0].departure.at.slice(11, 16),
       departureDate: props.flight.itineraries[0].segments[0].departure.at.slice(0, 10),
       carrier: props.meta.carriers[props.flight.itineraries[0].segments[0].carrierCode],
@@ -28,8 +28,8 @@ function FlightResult(props) {
       arrivalAirport: props.flight.itineraries[0].segments[0].arrival.iataCode
     });
     flights.push({
-      uid: '123123',//props.uid,
-      groupName: 'test',//props.groupName,
+      uid: props.uid,
+      groupName: props.groupName,
       departureTime: props.flight.itineraries[1].segments[0].departure.at.slice(11, 16),
       departureDate: props.flight.itineraries[1].segments[0].departure.at.slice(0, 10),
       carrier: props.meta.carriers[props.flight.itineraries[1].segments[0].carrierCode],
@@ -40,8 +40,8 @@ function FlightResult(props) {
     });
     if (nonstopOutbound === false) {
       flights.push({
-        uid: '123123',//props.uid,
-        groupName: 'test',//props.groupName,
+        uid: props.uid,
+        groupName: props.groupName,
         departureTime: props.flight.itineraries[0].segments[1].departure.at.slice(11, 16),
         departureDate: props.flight.itineraries[0].segments[1].departure.at.slice(0, 10),
         carrier: props.meta.carriers[props.flight.itineraries[0].segments[1].carrierCode],
@@ -53,8 +53,8 @@ function FlightResult(props) {
     }
     if (nonstopReturn === false) {
       flights.push({
-        uid: '123123',//props.uid,
-        groupName: 'test', // props.groupName,
+        uid: props.uid,
+        groupName: props.groupName,
         departureTime: props.flight.itineraries[1].segments[1].departure.at.slice(11, 16),
         departureDate: props.flight.itineraries[1].segments[1].departure.at.slice(0, 10),
         carrier: props.meta.carriers[props.flight.itineraries[1].segments[1].carrierCode],
@@ -65,7 +65,7 @@ function FlightResult(props) {
       });
     }
     console.log(flights);
-    axios.post('/createFlight', {uid: '123123', groupName: 'test', flights: flights})
+    axios.post('/createFlight', {uid: props.uid, groupName: props.groupName, flights: flights})
     .then(data => {
       props.setModalShow(false);
     })

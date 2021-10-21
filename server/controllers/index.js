@@ -2,11 +2,13 @@ var model = require("../models");
 
 module.exports = {
   getFlightOffers: (req, res) => {
+    console.log(req.query);
     model
       .getFlightOffers(req.query)
       .then((data) => {
         console.log('successful')
-        res.json(data.data);
+        console.log(data.data);
+        res.send(data.data);
       })
       .catch((err) => {
         console.log('this is error', err)
@@ -90,8 +92,8 @@ module.exports = {
   },
 
   deleteGroup: (req, res) => {
-    console.log(req.query);
-    model.deleteGroup(req.query, (err,data) => {
+
+    model.deleteGroup(req.body, (err,data) => {
       if (err) {
         res.send(err);
       } else {
@@ -102,25 +104,26 @@ module.exports = {
 
   // for creating an itinerary
   createFlight: (req, res) => {
-    model.createFlight(req.body, (err, res) => {
+    model.createFlight(req.body, (err, data) => {
       if (err) {
-        res.status(400).send(err);
+        res.send(err);
       } else {
-        res.status(200).send("flight successfuly added to itinerary!");
+        console.log(data);
+        res.send("flight successfuly added to itinerary!");
       }
     });
   },
 
   // for group page
   readGroupFlights: (req, res) => {
-    model.retrieveGroupFlights(req.body),
+    model.readGroupFlights(req.query,
       (error, data) => {
         if (error) {
           res.send(error);
         } else {
           res.json(data);
         }
-      };
+      });
   },
 
   /*

@@ -8,12 +8,12 @@ module.exports = {
     if (params.returnDate) {
       return axios.get(
         `https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=${params.originLocationCode}&destinationLocationCode=${params.destinationLocationCode}&departureDate=${params.departureDate}&returnDate=${params.returnDate}&adults=1&max=100&currencyCode=USD`,
-        headers
+        {headers:{'Authorization':'Bearer 4ABm77eGjmFoSZ0eKnQxvTAUGLtV'}}
       );
     } else {
       return axios.get(
         `https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=${params.originLocationCode}&destinationLocationCode=${params.destinationLocationCode}&departureDate=${params.departureDate}&adults=1&max=100&currencyCode=USD`,
-        headers
+        {headers:{'Authorization':'Bearer 4ABm77eGjmFoSZ0eKnQxvTAUGLtV'}}
       );
     }
   },
@@ -63,16 +63,14 @@ module.exports = {
       if (err) {
         callback(err);
       } else {
-        console.log(data);
-        callback(null,data);
-        // dbMain.Groups.updateOne({ name: params.name },
-        //   { $push: { members: data[0].uid } } , (err, data) => {
-        //     if (err) {
-        //       callback(err);
-        //     } else {
-        //       callback(null, data);
-        //     }
-        //   })
+        dbMain.Groups.updateOne({ name: params.groupName },
+          { $push: { members: data[0].uid } } , (err, data) => {
+            if (err) {
+              callback(err);
+            } else {
+              callback(null, data);
+            }
+          })
       }
     })
   }
@@ -126,35 +124,42 @@ module.exports = {
   // create flight if person does not have flight in the group otherwise just update flight info
   createFlight: (params, callback) => {
     // if flight exists for this person, deletes all flights related to the group and uid and insert new flights
-    dbMain.Flights.find({uid: params.flights[0].uid, groupName: params.groupName}, (err, data) => {
-      if (data.length === 0) {
-        dbMain.Flights.insertMany(params.flights, (err, data) => {
-          if (err) {
-            callback(err);
-          } else {
-            callback(null, data);
-          }
-        })
+    dbMain.Flights.find({uid: params.uid, groupName: params.groupName}, (err, data) => {
+      if (err) {
+        callback(err, data)
       } else {
-        dbMain.Flights.deleteMany({uid: params.flights[0].uid, groupName:params.groupName}, (err, data) => {
-          if (err) {
-            callback(err);
-          } else {
-            dbMain.Flights.insertMany(params.flights, (err, data) => {
-              if (err) {
-                callback(err);
-              } else {
-                callback(null, data);
-              }
-            })
-          }
-        })
+        if (data.length === 0) {
+          // something wrong with this, only inserting one at a time
+          dbMain.Flights.insertMany(params.flights, (err, data) => {
+            if (err) {
+              callback(err);
+            } else {
+              callback(null, data);
+            }
+          })
+        } else {
+          dbMain.Flights.deleteMany({uid: params.uid, groupName:params.groupName}, (err, data) => {
+            if (err) {
+              callback(err);
+            } else {
+              console.log(params.flights);
+              dbMain.Flights.insertMany(params.flights, (err, data) => {
+                if (err) {
+                  callback(err);
+                } else {
+                  callback(null, data);
+                }
+              })
+            }
+          })
+        }
+
       }
     })
   },
 
   readGroupFlights: (params, callback) => {
-    db.Flights.find({ groupName: params.name }, (err, docs) => {
+    dbMain.Flights.find({ groupName: params.groupName }, (err, docs) => {
       if (err) {
         callback(err);
       } else {

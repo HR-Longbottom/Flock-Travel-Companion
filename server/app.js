@@ -23,7 +23,7 @@ app.post("/createGroup", controller.createGroup);
 app.put("/inviteGroupMember", controller.inviteGroupMember);
 app.put("/postGroupBulletin", controller.postGroupBulletin);
 app.put('/deleteGroupBulletin', controller.deleteGroupBulletin);
-app.delete('/deleteGroup', controller.deleteGroup);
+app.put('/deleteGroup', controller.deleteGroup);
 
 
 app.get("/checkUser", controller.checkUser);

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import FlightResult from "./FlightResult";
 import axios from 'axios';
+import PersonalItineraryFlight from "./PersonalItineraryFlight";
 
 function PersonalItinerary(props) {
   var today = new Date();
@@ -34,7 +35,7 @@ function PersonalItinerary(props) {
 
       axios.get("/flightoffers", {params: params})
       .then(data => {
-        console.log(data)
+        console.log(data.data.data)
         setFlightResults(data.data.data);
         setFlightResultsMeta(data.data.dictionaries);
         setModalShow(true);
@@ -82,8 +83,7 @@ function PersonalItinerary(props) {
               </div>
               <div className="modal-body">
                 <div className="flightResults">
-                {/* <FlightResult flight={flightResults[14]} meta={flightResultsMeta} setModalShow={setModalShow} /> */}
-                  {flightResults.map(flightResult => {return <FlightResult flight={flightResult} meta={flightResultsMeta} setModalShow={setModalShow} />})}
+                  {flightResults.map(flightResult => {return <FlightResult flight={flightResult} meta={flightResultsMeta} setModalShow={setModalShow} uid={props.uid} groupName={props.groupName} />})}
                 </div>
               </div>
               <div className="modal-footer">
@@ -106,24 +106,10 @@ function PersonalItinerary(props) {
       <div className="personal-it-container d-flex flex-column">
         <div className="personalItinerary d-flex flex-row">
           <div className="personal-it-left">
-            <div className="nav flex-column">
-              <div className="personal-plan d-flex flex-row">
-                <div className="departure-info flex-column">
-                  <div className="time">{props.itinerary.departureTime}</div>
-                  <div className="airport">
-                    {props.itinerary.departureAirport}
-                  </div>
-                </div>
-                <div>{"--------------------------------->"}</div>
-                <div className="arrival-info flex-column">
-                  <div className="time">{props.itinerary.arrivalTime}</div>
-                  <div className="airport">
-                    {props.itinerary.arrivalAirport}
-                  </div>
-                </div>
-              </div>
-              {/* CHANGE THIS INTO FORM */}
-            </div>
+            {props.itineraries.length === 0 ?
+            <div>Please Select a Flight</div>
+            :
+            props.itineraries.map(flight => <PersonalItineraryFlight flight={flight} />)}
           </div>
           <div className="personal-it-right">
             <div className="nav flex-column">
