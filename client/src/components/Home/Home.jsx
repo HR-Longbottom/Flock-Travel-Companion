@@ -40,7 +40,7 @@ const Home = (props) => {
         <Head currentUser={props.currentUser}/>
         <Sidebar />
         <div className='myFlights'>
-        <MyFlights />
+        <MyFlights currentUser={props.currentUser} />
         </div>
         <div className='groupFlights' >
         <GroupFlights currentUser={props.currentUser}/>

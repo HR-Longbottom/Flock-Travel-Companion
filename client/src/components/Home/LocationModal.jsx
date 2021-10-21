@@ -68,6 +68,7 @@ function LocationModal(props) {
     .catch((err) => console.log("failed", err));
   }
   //{name: airportM.name, cityCode: airportM.address.cityCode, cityName: airportM.address.cityName, iataCode: airportM.iataCode}
+  console.log('User Props: ', props.currentUser)
   return (
     <div className="container">
       <Modal size="lg" show={show} onHide={handleClose} backdrop="static">
@@ -118,14 +119,3 @@ export default LocationModal;
 
 
 
-
-
-
-
-
-
-
-
-
-
-// https://www.ccra.com/airport-codes/

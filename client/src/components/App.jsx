@@ -56,7 +56,7 @@ class App extends React.Component {
     axios
       .get("/checkUser", { params: { uid: user.uid } })
       .then((response) => {
-        console.log(response.data, "user data");
+
         if (response.data.length === 0) {
           this.postUser(user);
           this.setState({currentUser: {email: user.email, displayName: user.displayName, uid: user.uid, location: undefined}})
@@ -72,7 +72,7 @@ class App extends React.Component {
   }
 
   render() {
-    console.log('CURERNT USER STATE', this.state.currentUser)
+   // console.log('CURERNT USER STATE', this.state.currentUser)
     return (
       <Router>
         <Route

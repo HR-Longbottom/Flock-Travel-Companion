@@ -1,8 +1,8 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { CDBCarousel, CDBCarouselItem, CDBCarouselInner, CDBView, CDBContainer } from "cdbreact";
 import { Container } from "react-bootstrap";
 import styled from "styled-components";
-
+import axios from "axios";
 const Styles = styled.div`
   .myFlightsContainer {
     position: relative;
@@ -54,7 +54,22 @@ const Styles = styled.div`
   }
 `;
 
-const MyFlights = () => {
+const MyFlights = (props) => {
+  const [flights, setFlights] = useState([]);
+
+  useEffect(() => {
+    findFlights().then(flights => setFlights(flights));
+  }, []);
+
+  const findFlights = () => {
+    return axios
+      .get('/readPersonalFlights', {params: {uid: props.currentUser.uid}})
+      .then(response => {
+        console.log(response.data)
+      })
+      .catch(err => { console.log(err) })
+  }
+
   return (
     <Styles>
     <Container className='mainFlightsContainer'>

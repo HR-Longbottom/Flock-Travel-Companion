@@ -51,7 +51,7 @@ const AddAGroup = (props) => {
           <Button variant="primary" onClick={handleSave} style={{backgroundColor: 'rgb(54 192 208)'}}>
           Save It!
           </Button>
-          {redirect === true ? <Redirect to={`/plans?uid=${props.currentUser.uid}&name=${name}`}/> : <></>}
+          {redirect === true ? <Redirect to={`/plans?uid=${props.currentUser.uid}&groupName=${name}`}/> : <></>}
         </Modal.Footer>
       </Modal>
     </div>

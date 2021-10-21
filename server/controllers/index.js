@@ -32,20 +32,21 @@ module.exports = {
 
   //for home page
   readPersonalFlights: (req, res) => {
-    model.retrievePersonalFlights(req.body, (error, data) => {
+    console.log('personal flights body:' , req.query)
+    model.readPersonalFlights(req.query, (error, data) => {
       if (error) {
         res.send(error);
       } else {
-        res.json(data.data);
+        res.send(data);
       }
     });
   },
+
   findGroups: (req, res) => {
     model.findGroups(req.body, (error, data) => {
       if (error) {
         res.send(error);
       } else {
-        console.log('Find Groups REQ', data)
         res.send(data)
        }
     });

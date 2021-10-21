@@ -34,12 +34,10 @@ module.exports = {
   },
 
   findGroups: (params, callback) => {
-    console.log('yelllooooo')
     dbMain.Groups.find((err, res) => {
       if (err) {
         callback(err);
       } else {
-        console.log('MODELLLLLLS', res)
         callback(null, res);
       }
     });
@@ -56,7 +54,14 @@ module.exports = {
   },
 
   readPersonalFlights: (params, callback) => {
-    db.Flights.find({ uid: params.uid });
+    dbMain.Flights.find(params.uid, (err, res) => {
+      if(err) {
+        callback(err);
+      } else {
+        console.log('MODELS FLIGHT RESPONSE', res)
+        callback(null, res);
+      }
+    });
   },
 
   /*
