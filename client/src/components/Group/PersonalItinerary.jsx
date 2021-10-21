@@ -17,9 +17,7 @@ function PersonalItinerary(props) {
   const [returnDate, setReturnDate] = useState(
     tomorrow.toISOString().slice(0, 10)
     );
-    const [groupFlights, setGroupFlights] = useState([]);
     const [flightResultsMeta, setFlightResultsMeta] = useState({});
-    const [personalFlight, setPersonalFlight] = useState({});
 
 
 
@@ -83,7 +81,7 @@ function PersonalItinerary(props) {
               </div>
               <div className="modal-body">
                 <div className="flightResults">
-                  {flightResults.map(flightResult => {return <FlightResult flight={flightResult} meta={flightResultsMeta} setModalShow={setModalShow} uid={props.uid} groupName={props.groupName} />})}
+                  {flightResults.map(flightResult => {return <FlightResult flight={flightResult} meta={flightResultsMeta} setModalShow={setModalShow} uid={props.uid} groupName={props.groupName} setPersonal={props.setPersonal}/>})}
                 </div>
               </div>
               <div className="modal-footer">
@@ -135,9 +133,9 @@ function PersonalItinerary(props) {
           <div className='flight-search-form'>
             <form>
               <label>From: </label>
-              <input type="text" name="originLocation" value={originLocation} onChange={(event)=> {setOriginLocation(event.target.value.toUpperCase())}}></input>
+              <input type="text" name="originLocation" value={originLocation} placeholder='Airport Code Only' onChange={(event)=> {setOriginLocation(event.target.value.toUpperCase())}}></input>
               <label>To: </label>
-              <input type="text" name="destinationLocation" value={destinationLocation} onChange={(event) => {setDestinationLocation(event.target.value.toUpperCase())}}></input>
+              <input type="text" name="destinationLocation" value={destinationLocation} placeholder='Airport Code Only' onChange={(event) => {setDestinationLocation(event.target.value.toUpperCase())}}></input>
               <label>Departing on: </label>
               <input
                 type="date"

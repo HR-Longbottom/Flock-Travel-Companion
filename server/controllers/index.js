@@ -53,7 +53,7 @@ module.exports = {
     console.log(req.body);
     model.inviteGroupMember(req.body, (err, data) => {
       if (err) {
-        res.send(err);
+        res.status(400).send(err);
       } else {
         res.send('Successfully added members');
       }

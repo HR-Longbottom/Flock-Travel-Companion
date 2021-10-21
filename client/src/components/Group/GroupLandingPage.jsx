@@ -17,12 +17,14 @@ function GroupLandingPage(props) {
   const [personal, setPersonal] = useState([]);
   const [groupItineraries, setGroupItineraries] = useState({});
   const [membersNames, setMembersNames] = useState({});
+  const [admin, setAdmin] = useState('');
 
   useEffect(() => {
     axios.get('/readGroupDetails', {params: {name: groupName}})
     .then(data => {
       setGroupBulletin(data.data.bulletin);
       setGroupMembers(data.data.members);
+      setAdmin(data.data.admin);
       var members = data.data.members;
       return members
     })
@@ -74,6 +76,12 @@ function GroupLandingPage(props) {
     var email = prompt('Please enter the email of the person you want to add');
     if (email.length !== 0) {
       axios.put('/inviteGroupMember', {email: email, groupName: groupName})
+      .then(data => {
+        alert('User Added')
+      })
+      .catch(err => {
+        alert('User does not exist')
+      })
     }
 
   }
@@ -87,22 +95,27 @@ function GroupLandingPage(props) {
   return (
     <div className="d-flex flex-column groupPage">
       <div className="header d-flex flex-row">
+          {
+            admin===uid ?
         <div className='adminButtons'>
         <button type="button" className="btn btn-primary deleteGroup" onClick={() => {onDeleteClick()}}>
           Delete Group
         </button>
         <button type="button" className="btn btn-primary" onClick={() => {onAddMemberClick()}}>Add Member</button>
         </div>
-        <h4>Group Page</h4>
+        :
+        <div></div>
+          }
+        <h4>{groupName}</h4>
       </div>
       <div className='page-body d-flex flex-row'>
         <div className='chatBody d-flex'>
           Hello Import from Landing page
           </div>
         <div className="groupBody d-flex flex-column">
-          <PersonalItinerary itineraries={personal} uid={uid} groupName={groupName} />
+          <PersonalItinerary itineraries={personal} uid={uid} groupName={groupName} setPersonal={setPersonal}/>
           <GroupItinerariesList groupItineraries={groupItineraries} membersNames={membersNames} currentUser={uid}/>
-          <GroupBulletin bulletins={groupBulletin} setGroupBulletin={setGroupBulletin}/>
+          <GroupBulletin bulletins={groupBulletin} setGroupBulletin={setGroupBulletin} groupName={groupName}/>
         </div>
       </div>
     </div>

@@ -7,7 +7,7 @@ function GroupBulletin(props) {
   function onBulletinAdd(bullet) {
     if (bullet.length !== 0) {
       console.log(bullet)
-      axios.put('/postGroupBulletin', {name: 'blues room', bullet: bullet})
+      axios.put('/postGroupBulletin', {name: props.groupName, bullet: bullet})
       .then(data => {
         props.setGroupBulletin([...props.bulletins, bullet])
       })
@@ -16,9 +16,9 @@ function GroupBulletin(props) {
   function onBulletDelete(idx) {
     var newBulletin = props.bulletins.slice()
     newBulletin.splice(idx, 1)
-    axios.put('/deleteGroupBulletin', {name:'blues room', bulletin: newBulletin})
+    axios.put('/deleteGroupBulletin', {name:props.groupName, bulletin: newBulletin})
     .then((data) => {
-      console.log(data);
+      props.setGroupBulletin(newBulletin);
     })
     .catch(err => {
       console.log(err);

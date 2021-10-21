@@ -67,6 +67,7 @@ function FlightResult(props) {
     console.log(flights);
     axios.post('/createFlight', {uid: props.uid, groupName: props.groupName, flights: flights})
     .then(data => {
+      props.setPersonal(flights);
       props.setModalShow(false);
     })
     .catch(err => {

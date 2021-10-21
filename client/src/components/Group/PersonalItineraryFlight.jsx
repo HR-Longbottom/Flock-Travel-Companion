@@ -12,6 +12,7 @@ function PersonalItineraryFlight(props) {
           {props.flight.departureAirport}
         </div>
         <div className="time">{props.flight.departureTime}</div>
+      <div className="date">{props.flight.departureDate}</div>
       </div>
       <div>{"--------------------------------->"}</div>
       <div className="arrival-info flex-column">
@@ -19,6 +20,7 @@ function PersonalItineraryFlight(props) {
           {props.flight.arrivalAirport}
         </div>
         <div className="time">{props.flight.arrivalTime}</div>
+      <div className="date">{props.flight.arrivalDate}</div>
       </div>
     </div>
   </div>

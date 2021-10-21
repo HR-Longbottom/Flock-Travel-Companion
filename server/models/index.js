@@ -8,12 +8,12 @@ module.exports = {
     if (params.returnDate) {
       return axios.get(
         `https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=${params.originLocationCode}&destinationLocationCode=${params.destinationLocationCode}&departureDate=${params.departureDate}&returnDate=${params.returnDate}&adults=1&max=100&currencyCode=USD`,
-        {headers:{'Authorization':'Bearer 4ABm77eGjmFoSZ0eKnQxvTAUGLtV'}}
+        {headers:{'Authorization':'Bearer juO3qEheG2wQ4UX4LiVAyAz6k4lR'}}
       );
     } else {
       return axios.get(
         `https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=${params.originLocationCode}&destinationLocationCode=${params.destinationLocationCode}&departureDate=${params.departureDate}&adults=1&max=100&currencyCode=USD`,
-        {headers:{'Authorization':'Bearer 4ABm77eGjmFoSZ0eKnQxvTAUGLtV'}}
+        {headers:{'Authorization':'Bearer juO3qEheG2wQ4UX4LiVAyAz6k4lR'}}
       );
     }
   },
@@ -63,15 +63,19 @@ module.exports = {
       if (err) {
         callback(err);
       } else {
-        dbMain.Groups.updateOne({ name: params.groupName },
-          { $push: { members: data[0].uid } } , (err, data) => {
-            if (err) {
-              callback(err);
-            } else {
-              callback(null, data);
-            }
-          })
-      }
+        if (data.length === 0) {
+          callback('User does not exist');
+        } else {
+          dbMain.Groups.updateOne({ name: params.groupName },
+            { $push: { members: data[0].uid } } , (err, data) => {
+              if (err) {
+                callback(err);
+              } else {
+                callback(null, data);
+              }
+            })
+          }
+        }
     })
   }
   ,
