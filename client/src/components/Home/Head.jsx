@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Jumbotron, Container } from "react-bootstrap";
+import React, { useState, useEffect} from "react";
+import { Jumbotron, Container, Button } from "react-bootstrap";
 import { useHistory, Redirect, withRouter } from "react-router-dom";
 
 import signOut from "../Login/firebase-SignOut.js";
@@ -57,9 +57,15 @@ const Styles = styled.div`
     background-color: rgb(54 192 208);
     color: black;
   }
+  .updateAirportBtn {
+    position: relative;
+    top: -290px;
+    left: 34%;
+  }
 `;
 
-const Head = () => {
+const Head = (props) => {
+  const [show, setShow] = useState(false);
   const history = useHistory();
   console.log('HEAD-LINE44: ', history)
   const handleOnSubmit = () => {
@@ -67,23 +73,29 @@ const Head = () => {
     history.push("/");
   };
 
+  const handleShow = () => setShow(!show);
+  console.log('User props', props.currentUser)
+  // <LocationModal currentUser={props.currentUser} />
   return (
-      <Styles>
-        <Jumbotron className="head">
-          <div className="headWrap"></div>
-          <img className="logo" src={FlockIO} />
-          <Container className="head-text">
-            <div className='welcomeAndP'>
+    <Styles>
+      <Jumbotron className="head">
+        <div className="headWrap"></div>
+        <img className="logo" src={FlockIO} />
+        <Container className="head-text">
+          {show ? <LocationModal currentUser={props.currentUser} /> : <></>}
+          <div className='welcomeAndP'>
             <h1>Welcome</h1>
             <p>Where the Flock plan their trips</p>
-            </div>
-            <button className="signOutBtn" onClick={() => signOut()}>
-              Sign Out
-            </button>
-            <LocationModal/>
-          </Container>
-        </Jumbotron>
-      </Styles>
+          </div>
+          <button className="signOutBtn" onClick={() => signOut()}>
+            Sign Out
+          </button>
+          <Button className="updateAirportBtn" variant="primary" onClick={handleShow}>
+            Update Preferred Airport
+          </Button>
+        </Container>
+      </Jumbotron>
+    </Styles>
   );
 };
 

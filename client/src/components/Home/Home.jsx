@@ -37,7 +37,7 @@ const Home = (props) => {
     <Styles>
     <Link exact to='/home'> </Link>
       <div className="Home" >
-        <Head/>
+        <Head currentUser={props.currentUser}/>
         <Sidebar />
         <div className='myFlights'>
         <MyFlights />

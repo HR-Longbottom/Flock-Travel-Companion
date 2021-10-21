@@ -14,7 +14,7 @@ const userSchema = mongoose.Schema({
   email: { type: String, index: { unique: true }, require: true },
   uid: String,
   name: String,
-  location: String,
+  location: Object
 });
 
 const groupSchema = mongoose.Schema({
