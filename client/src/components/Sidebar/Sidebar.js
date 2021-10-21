@@ -37,7 +37,7 @@ console.log('GROUPS', groups)
     <div
       style={{ display: 'flex', height: '900px'}}
     >
-      <CDBSidebar textColor="#fff" backgroundColor="#0097A7">
+      <CDBSidebar textColor="#fff" backgroundColor="#99B898">
         <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
           {/* Links to home */}
           <a

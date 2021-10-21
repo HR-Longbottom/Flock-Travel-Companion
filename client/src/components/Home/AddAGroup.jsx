@@ -10,6 +10,8 @@ const Styles = styled.div`
   display: inline;
   left: 40%;
   top: -28px;
+  background-color: #9370DB;
+  border-color: black;
 }
 .container {
   margin-bottom: -2%;
