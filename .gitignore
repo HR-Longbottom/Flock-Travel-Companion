@@ -7,3 +7,4 @@ bundle.js
 cert.pem
 key.pem
 client/src/components/Home/config.js
+config.js

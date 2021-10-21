@@ -19,6 +19,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       isLoggedIn: null,
+      currentUser: null
     };
     this.postUser = this.postUser.bind(this);
     this.checkUser = this.checkUser.bind(this);
@@ -58,6 +59,7 @@ class App extends React.Component {
           this.postUser(user);
           console.log("welcome, First Time User!");
         } else {
+          this.setState({currentUser: {email: user.email, displayName: user.displayName, uid: user.uid}})
           console.log("Welcome Back!");
         }
       })
@@ -85,7 +87,7 @@ class App extends React.Component {
           path="/home"
           render={(state) =>
             this.state.isLoggedIn ? (
-              <Home {...state} />
+              <Home {...state} currentUser={this.state.currentUser}/>
             ) : (
               <Redirect
                 to={{ pathname: "/", state: { from: state.location } }}

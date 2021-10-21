@@ -21,14 +21,11 @@ module.exports = {
   */
 
   createGroup: (req, res) => {
-    var name = req.body.name;
-    var members = req.body.members;
-    var bulletin = req.body.bulletin;
     model.createGroup(req.body, (err, data) => {
       if (err) {
         res.send(err);
       } else {
-        res.send("successfully added group info");
+        res.send("successfully created group");
       }
     });
   },
@@ -51,6 +48,7 @@ module.exports = {
   */
 
   inviteGroupMember: (req, res) => {
+    console.log(req.body);
     model.inviteGroupMember(req.body, (err, data) => {
       if (err) {
         res.send(err);
@@ -61,13 +59,24 @@ module.exports = {
   },
 
   readGroupDetails: (req, res) => {
-    model.readGroupDetails(req.body, (err, data) => {
+    model.readGroupDetails(req.query, (err, data) => {
       if (err) {
         res.send(err);
       } else {
-        res.json(data.data);
+        res.json(data);
       }
     });
+  },
+
+  deleteGroupBulletin: (req, res) => {
+    console.log(req.body);
+    model.deleteGroupBulletin(req.body, (err, data) => {
+      if (err){
+        res.send(err)
+      } else {
+        res.json(data)
+      }
+    })
   },
 
   postGroupBulletin: (req, res) => {
@@ -75,18 +84,29 @@ module.exports = {
       if (err) {
         res.send(err);
       } else {
-        res.json(data.data);
+        res.json(data);
       }
     });
+  },
+
+  deleteGroup: (req, res) => {
+    console.log(req.query);
+    model.deleteGroup(req.query, (err,data) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.json(data);
+      }
+    })
   },
 
   // for creating an itinerary
   createFlight: (req, res) => {
     model.createFlight(req.body, (err, res) => {
       if (err) {
-        res.send(err);
+        res.status(400).send(err);
       } else {
-        res.send("flight successfuly added to itinerary!");
+        res.status(200).send("flight successfuly added to itinerary!");
       }
     });
   },

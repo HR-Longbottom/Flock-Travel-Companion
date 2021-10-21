@@ -21,6 +21,10 @@ app.get("/readPersonalFlights", controller.readPersonalFlights);
 app.get("/readGroupFlights", controller.readGroupFlights);
 app.post("/createGroup", controller.createGroup);
 app.put("/inviteGroupMember", controller.inviteGroupMember);
+app.put("/postGroupBulletin", controller.postGroupBulletin);
+app.put('/deleteGroupBulletin', controller.deleteGroupBulletin);
+app.delete('/deleteGroup', controller.deleteGroup);
+
 
 app.get("/checkUser", controller.checkUser);
 

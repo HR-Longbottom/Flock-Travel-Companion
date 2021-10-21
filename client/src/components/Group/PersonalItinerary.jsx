@@ -15,14 +15,10 @@ function PersonalItinerary(props) {
   );
   const [returnDate, setReturnDate] = useState(
     tomorrow.toISOString().slice(0, 10)
-  );
-  const [bulletin, setBulletin] = useState([]);
-  const [groupFlights, setGroupFlights] = useState([]);
-  const [flightResultsMeta, setFlightResultsMeta] = useState({});
-
-  function onBulletinAdd() {
-
-  };
+    );
+    const [groupFlights, setGroupFlights] = useState([]);
+    const [flightResultsMeta, setFlightResultsMeta] = useState({});
+    const [personalFlight, setPersonalFlight] = useState({});
 
 
 
@@ -30,11 +26,11 @@ function PersonalItinerary(props) {
     if (originLocation.length === 3 && destinationLocation.length === 3 && checkDates(departureDate, returnDate)) {
       console.log('onSearchClick')
       var params = {
-          originLocationCode: originLocation,
-          destinationLocationCode: destinationLocation,
-          departureDate: departureDate,
-          returnDate: returnDate
-        }
+        originLocationCode: originLocation,
+        destinationLocationCode: destinationLocation,
+        departureDate: departureDate,
+        returnDate: returnDate
+      }
 
       axios.get("/flightoffers", {params: params})
       .then(data => {
@@ -48,6 +44,7 @@ function PersonalItinerary(props) {
       alert('Please provide valid inputs')
     }
   }
+
 
   function checkDates(departureDate, returnDate) {
     console.log('in checkdates')

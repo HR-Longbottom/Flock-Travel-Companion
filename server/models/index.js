@@ -8,12 +8,12 @@ module.exports = {
     if (params.returnDate) {
       return axios.get(
         `https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=${params.originLocationCode}&destinationLocationCode=${params.destinationLocationCode}&departureDate=${params.departureDate}&returnDate=${params.returnDate}&adults=1&max=100&currencyCode=USD`,
-        {headers: {'Authorization': 'Bearer EMtrPb1vzgt2iovZAqhtQ5wvzi9I'}}
+        headers}
       );
     } else {
       return axios.get(
         `https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=${params.originLocationCode}&destinationLocationCode=${params.destinationLocationCode}&departureDate=${params.departureDate}&adults=1&max=100&currencyCode=USD`,
-        {headers: {'Authorization': 'Bearer EMtrPb1vzgt2iovZAqhtQ5wvzi9I'}}
+        headers}
       );
     }
   },
@@ -23,15 +23,29 @@ module.exports = {
   Home Page
   =================================================
   */
-
   createGroup: (params, callback) => {
-    dbMain.Groups.create(params, (err, data) => {
+    dbMain.Groups.create({name: params.groupName, members: [params.uid], admin: params.uid}, (err, res) => {
       if (err) {
         callback(err);
       } else {
-        callback(null, data);
+        callback(null, res);
+      }
+    })
+  },
+
+  findGroup: (params, callback) => {
+    dbMain.Groups.find({ admin: params }, (err, res) => {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, res);
       }
     });
+  },
+
+
+  updateUserLoc: (params) => {
+    // dbMain.Users.findAndModify({query: {uid: params.uid}, update: {}})
   },
 
   readPersonalFlights: (params, callback) => {
@@ -51,8 +65,8 @@ module.exports = {
       } else {
         console.log(data);
         callback(null,data);
-        // dbMain.Groups.update({ name: params.name },
-        //   { $push: { members: data.id } } , (err, data) => {
+        // dbMain.Groups.updateOne({ name: params.name },
+        //   { $push: { members: data[0].uid } } , (err, data) => {
         //     if (err) {
         //       callback(err);
         //     } else {
@@ -69,6 +83,16 @@ module.exports = {
       if (err) {
         callback(err);
       } else {
+        callback(null, data[0]);
+      }
+    });
+  },
+
+  deleteGroupBulletin: (params, callback) => {
+    dbMain.Groups.updateOne({name:params.name}, {bulletin: params.bulletin}, (err, data) => {
+      if (err) {
+        callback(err);
+      } else {
         callback(null, data);
       }
     });
@@ -76,9 +100,9 @@ module.exports = {
 
   // post group bulletin given group name
   postGroupBulletin: (params, callback) => {
-    dbMain.Groups.update(
+    dbMain.Groups.updateOne(
       { name: params.name },
-      { $push: { bulletin: params.bulletin } },
+      { $push: { bulletin: params.bullet } },
       (err, data) => {
         if (err) {
           callback(err);
@@ -89,36 +113,44 @@ module.exports = {
     );
   },
 
-  // create flight if person does not have flight in the group otherwise just update flight info
-  createFlight: (params, callback) => {
-    var filter = { uid: params.uid };
-    var update = params;
-    dbMain.Flights.findOne(filter, (err, result) => {
+  deleteGroup: (params, callback) => {
+    dbMain.Groups.deleteOne(params, (err, data) => {
       if (err) {
-        console.log(err);
         callback(err);
       } else {
-        if (result.length !== 0) {
-          dbMain.Flights.updateOne(filter, update, (err, result) => {
-            if (err) {
-              callback(err);
-            } else {
-              console.log(" updated");
-              callback(null, result);
-            }
-          });
-        } else {
-          dbMain.Flights.create(update, (err, result) => {
-            if (err) {
-              callback(err);
-            } else {
-              console.log("new created");
-              callback(null, result);
-            }
-          });
-        }
+        callback(null, data);
       }
-    });
+    })
+  },
+
+  // create flight if person does not have flight in the group otherwise just update flight info
+  createFlight: (params, callback) => {
+    // if flight exists for this person, deletes all flights related to the group and uid and insert new flights
+    dbMain.Flights.find({uid: params.flights[0].uid, groupName: params.groupName}, (err, data) => {
+      if (data.length === 0) {
+        dbMain.Flights.insertMany(params.flights, (err, data) => {
+          if (err) {
+            callback(err);
+          } else {
+            callback(null, data);
+          }
+        })
+      } else {
+        dbMain.Flights.deleteMany({uid: params.flights[0].uid, groupName:params.groupName}, (err, data) => {
+          if (err) {
+            callback(err);
+          } else {
+            dbMain.Flights.insertMany(params.flights, (err, data) => {
+              if (err) {
+                callback(err);
+              } else {
+                callback(null, data);
+              }
+            })
+          }
+        })
+      }
+    })
   },
 
   readGroupFlights: (params, callback) => {
@@ -159,9 +191,7 @@ module.exports = {
     });
   },
 
-  updateUserLoc: (params) => {
-    //...
-  },
+
 
   /*
   =================================================
