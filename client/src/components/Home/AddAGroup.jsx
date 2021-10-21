@@ -2,6 +2,21 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { Button, Modal, Form } from 'react-bootstrap';
 import { Redirect } from 'react-router';
+import styled from 'styled-components';
+
+const Styles = styled.div`
+.addAGroup {
+  position: relative;
+  display: inline;
+  left: 40%;
+  top: -28px;
+  background-color: #9370DB;
+  border-color: black;
+}
+.container {
+  margin-bottom: -2%;
+}
+`
 
 const AddAGroup = (props) => {
   const [show, setShow] = useState(false);
@@ -27,8 +42,10 @@ const AddAGroup = (props) => {
   }
 
   return (
-    <div className="container">
-      <Button variant="primary" onClick={handleShow}>
+    <Styles>
+
+     <div className="container">
+      <Button variant="primary" className='addAGroup' onClick={handleShow}>
         Add A Group
       </Button>
 
@@ -55,6 +72,7 @@ const AddAGroup = (props) => {
         </Modal.Footer>
       </Modal>
     </div>
+    </Styles>
   )
 }
 

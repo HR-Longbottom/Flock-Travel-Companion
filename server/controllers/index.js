@@ -43,7 +43,7 @@ module.exports = {
   },
 
   findGroups: (req, res) => {
-    model.findGroups(req.body, (error, data) => {
+    model.findGroups(req.query, (error, data) => {
       if (error) {
         res.send(error);
       } else {
