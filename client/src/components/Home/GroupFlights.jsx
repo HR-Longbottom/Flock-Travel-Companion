@@ -79,7 +79,7 @@ const MyGroups = (props) => {
           </div>
           <Container className="myGroupsContainer col-12">
             <Carousel breakPoints={breakPoints}>
-              {groups.map(item => <div className="card" key={groups._id}>{item.name}</div>)}
+              {groups.map(item => <div className="card" key={item._id}>{item.name}</div>)}
             </Carousel>
           </Container>
         </div>

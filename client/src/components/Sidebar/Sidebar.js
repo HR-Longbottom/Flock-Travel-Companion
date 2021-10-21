@@ -65,8 +65,8 @@ const Sidebar = () => {
                 </CDBSidebarMenuItem>
                 <div className="groupMembers">
               {groups.map(group => (
-              <NavLink exact to={`/plans?${group.admin}&${group.name}`} activeClassName="activeClicked">
-                <CDBSidebarMenuItem  icon='ellipsis-h' style={{fontSize: '15px', padding: '5px' }}> {group.name}
+              <NavLink exact to={`/plans?uid=${group.admin}&name=${group.name}`} activeClassName="activeClicked">
+                <CDBSidebarMenuItem  key={group._id} icon='ellipsis-h' style={{fontSize: '15px', padding: '5px' }}> {group.name}
               </CDBSidebarMenuItem>
             </NavLink>
               ))}
