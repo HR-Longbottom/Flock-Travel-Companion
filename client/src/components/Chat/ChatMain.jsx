@@ -15,9 +15,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
 
 import ChatHeads from "./ChatHeads.jsx";
-import Chatbox from './Chatbox.jsx';
+import Chatbox from "./Chatbox.jsx";
 
 import "./ChatMain.css";
+import FlockIO from "../../../assets/FlockIO.png";
 
 const messaging = getMessaging(app);
 
@@ -26,7 +27,7 @@ function getChatToken(setTokenFound) {
     .then((currentToken) => {
       if (currentToken) {
         setTokenFound(true);
-        console.log('Current Token: ', currentToken)
+        // console.log("Current Token: ", currentToken);
       } else {
         console.log(
           "No registration token available. Request permission to generate one."
@@ -37,10 +38,12 @@ function getChatToken(setTokenFound) {
     .catch((err) => {
       console.log("An error occurred while retrieving token. ", err);
     });
-    navigator.serviceWorker.addEventListener("message", (message) => console.log(message));
-};
+  // navigator.serviceWorker.addEventListener("message", (message) =>
+  //   console.log(message)
+  // );
+}
 
-// onBackgroundMessage(messaging, (payload) => {
+// onMessage(messaging, (payload) => {
 //   console.log('[firebase-messaging-sw.js] Received background message ', payload);
 //   // Customize notification here
 //   const notificationTitle = 'Background Message Title';
@@ -71,14 +74,29 @@ function App() {
   const [receiver, setReceiver] = useState(null);
 
   getChatToken(setTokenFound);
-  console.log(isTokenFound);
 
+  function useInterval(cb, count) {
+    const savedCb = useRef();
+    useEffect(() => {
+      savedCb.current = cb;
+    }, [cb])
+
+    useEffect(() => {
+      function ticker() {
+        savedCb.current();
+      }
+      if (count !== null) {
+        let id = setInterval(ticker, count);
+        return () => clearInterval(id);
+      }
+    }, [count])
+  }
 
   function getChatHeads() {
     return axios
       .get("/viewAllGroups")
-      .then((groupDetails) => {
-        return groupDetails.data;
+      .then((allGroups) => {
+        return allGroups.data;
       })
       .catch((err) => {
         throw err;
@@ -86,16 +104,32 @@ function App() {
   }
 
   function getChats() {
-    axios
-      .get("/messageData")
-      .then((messages) => {
-        setMsgValue(messages.data);
-        console.log('DATA: ', messages.data)
-      })
-      .catch((err) => {
-        throw err;
-      });
+    // if (input !== null) {
+      // setReceiver(input);
+      axios
+        .get("/messageData")
+        .then((messages) => {
+          let msgs = [];
+          if (receiver) {
+          messages.data.forEach((x) => {
+            if (x.group === receiver._id) {
+              msgs.push(x);
+            }
+          });
+          setMsgValue(msgs);
+          }
+        })
+        .catch((err) => {
+          throw err;
+        });
+    // }
   }
+
+  // useEffect(() => {
+    useInterval(() => {
+      getChats()
+    }, 1000)
+  // }, [receiver])
 
   useEffect(() => {
     getChats();
@@ -105,17 +139,16 @@ function App() {
         heads
           .map((groupObj) => groupObj)
           .filter((groupObj) => {
-            return !groupObj.members.includes(user);
+            return !groupObj.members.includes(user); // inverted until members are reflected accurately
           })
       );
     })();
-  }, []);
+  }, [receiver]);
 
   const sendMessage = (e) => {
     e.preventDefault();
     let date = new Date();
     const { uid } = user;
-    // console.log("UID", user.displayName);
     axios
       .post("/messageData", {
         name: user.displayName,
@@ -124,7 +157,7 @@ function App() {
         createdAt: `${date.toLocaleDateString()}, ${date
           .toLocaleTimeString()
           .replace(/:\d\d /, " ")}`,
-        group: conversationId,
+        group: receiver._id,
       })
       .then(() => {
         getChats();
@@ -137,36 +170,53 @@ function App() {
     ref.current.scrollIntoView({ behavior: "smooth" });
   };
 
+  // useEffect(() => {
+  //   if (messageEl) {
+  //     messageEl.current.addEventListener('DOMNodeInserted', event => {
+  //       const { currentTarget: target } = event;
+  //       target.scroll({ top: target.scrollHeight, behavior: 'smooth' });
+  //     });
+  //   }
+  // }, [])
+
   return (
     <>
+    <div id="chatApp" className='d-flex flex-column'>
+      <div className='app-logo-header'>
     <Link to="/home">
-    <div className="chatToHome">Home</div>
-    </Link>
+        <div className="chatToHome"><img className="logoChat" src={FlockIO} /></div>
+      </Link>
+      </div>
       <div className="chat-screen d-flex flex-row">
         {personalGroups && (
           <div className="chat-head">
             <ChatHeads
-            yourGroups={personalGroups}
-            setReceiver={setReceiver}
-            user
+              yourGroups={personalGroups}
+              setReceiver={setReceiver}
+              getChats={getChats}
+              user
             />
           </div>
         )}
         <div className="chatWrapper">
-          <Chatbox
-          receiver={receiver}
-          user={user}
-          conversationId={conversationId}
-          setConversationId={setConversationId}
-          />
           <div className="chatHeader">
             {/* <FontAwesomeIcon icon={faCircle} id="active" /> */}
-            Test User
+            <Chatbox
+              receiver={receiver}
+              user={user}
+              conversationId={conversationId}
+              setConversationId={setConversationId}
+            />
           </div>
           <main className="chatMain">
             {msgValue &&
               msgValue.map((msg) => (
-                <Message key={msg._id} message={msg} auth={auth} type="message" />
+                <Message
+                  key={msg._id}
+                  message={msg}
+                  auth={auth}
+                  type="message"
+                />
               ))}
             <span ref={ref}></span>
           </main>
@@ -183,20 +233,20 @@ function App() {
           </form>
         </div>
       </div>
+      </div>
     </>
   );
-
 }
 
 function Message(props) {
-  console.log('PROPS', props);
-  // const { text, uid } = props.msgValue;
-  const messageClass = props.uid === props.auth.uid ? "sent" : "received";
+  const messageClass =
+    props.auth.currentUser.uid === props.message.uid ? "sent" : "received";
   return (
     <>
-      <div className={`message`}>
+      <div className={messageClass}>
         <p className="userTexts">
-          {props.message.text} <br /> {props.message.createdAt}
+          {`${props.message.name}: ${props.message.text}`} <br />{" "}
+          {props.message.createdAt}
         </p>
       </div>
     </>

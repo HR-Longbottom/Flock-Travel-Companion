@@ -5,8 +5,8 @@ import { googleProvider } from "./authMethod.js";
 import socialMediaAuth from "./firebase-SignIn.js";
 import { getAuth } from "firebase/auth";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGoogle } from "@fortawesome/free-brands-svg-icons";
+import Google from "../../../assets/google.png";
+import FlockIO from "../../../assets/FlockIO.png";
 
 function App() {
   const signInClick = async (provider) => {
@@ -15,15 +15,22 @@ function App() {
 
   return (
     <>
-      <div className="wrapper">
-        <div className="signIn">
-          <button
-            className="signInBtn"
+      <div id="loginApp">
+        <img className="logoHome" src={FlockIO} />
+        <div className="wrapper">
+          <div
+            className="g-sign-in-button"
             onClick={() => signInClick(googleProvider)}
           >
-            {/* <FontAwesomeIcon icon={faGoogle} id="google" /> */}
-            Sign in with Google
-          </button>
+            <div className="content-wrapper">
+              <div className="logo-wrapper">
+                <img src={Google} alt="google-logo"></img>
+              </div>
+              <span className="text-container">
+                <span>Sign in with Google</span>
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </>

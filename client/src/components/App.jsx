@@ -69,10 +69,12 @@ class App extends React.Component {
           path="/"
           render={(state) =>
             !this.state.isLoggedIn ? (
-              <LoginMain {...state} />
+              // <LoginMain {...state} />
+              <LoginMain />
             ) : (
               <Redirect
-                to={{ pathname: "/home", state: { from: state.location } }}
+                // to={{ pathname: "/home", state: { from: state.location } }}
+                to="/home"
               />
             )
           }
@@ -82,16 +84,19 @@ class App extends React.Component {
           path="/home"
           render={(state) =>
             this.state.isLoggedIn ? (
-              <Home {...state} />
+              // <Home {...state} />
+              <Home />
             ) : (
               <Redirect
-                to={{ pathname: "/", state: { from: state.location } }}
+                // to={{ pathname: "/", state: { from: state.location } }}
+                to="/"
               />
             )
           }
+          type="private"
         />
         <Switch>
-          <Route exact path="/messages">
+          <Route exact path="/messages" type="private">
             <ChatMain />
           </Route>
           <Route exact path="/plans">

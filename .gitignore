@@ -4,6 +4,7 @@ ssl
 .env
 Dockerfile
 bundle.js
+bundle.js.map
 .gz
 cert.pem
 key.pem
