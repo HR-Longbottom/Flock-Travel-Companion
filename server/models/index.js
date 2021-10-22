@@ -1,6 +1,7 @@
 var axios = require("axios");
 const dbChat = require("./../../database/dbChat/messaging.js");
 const dbMain = require("./../../database/dbMain/index.js");
+const headers = require('./../../config.js').headers;
 
 module.exports = {
   // contact the api to get flight offers with parameters of origin location code, destination location code, departure date, and optional return date
@@ -23,19 +24,46 @@ module.exports = {
   Home Page
   =================================================
   */
-
   createGroup: (params, callback) => {
-    dbMain.Groups.create(params, (err, data) => {
+    dbMain.Groups.create({name: params.groupName, members: [params.uid], admin: params.uid, destination:''}, (err, res) => {
       if (err) {
         callback(err);
       } else {
-        callback(null, data);
+        callback(null, res);
+      }
+    })
+  },
+
+  findGroups: (params, callback) => {
+    console.log('PARAMS', params)
+    dbMain.Groups.find({members: params.uid}, (err, res) => {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, res);
       }
     });
   },
 
+
+  updateUserLoc: (params, callback) => {
+    dbMain.Users.updateOne({uid: params.uid}, {location: params.location}, (err, res) => {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, res);
+      }})
+  },
+
   readPersonalFlights: (params, callback) => {
-    db.Flights.find({ uid: params.uid });
+    dbMain.Flights.find({uid: params.uid}, (err, res) => {
+      if(err) {
+        callback(err);
+      } else {
+        console.log('MODELS FLIGHT RESPONSE', res)
+        callback(null, res);
+      }
+    });
   },
 
   /*
@@ -44,9 +72,51 @@ module.exports = {
   =================================================
   */
 
+  setGroupDestination: (params, callback) => {
+    dbMain.Groups.updateOne({name: params.name}, {destination: params.destination}, (err, data) => {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, data);
+      }
+    })
+  },
+
+  inviteGroupMember: (params, callback) => {
+    dbMain.Users.find({email: params.email} , (err, data) => {
+      if (err) {
+        callback(err);
+      } else {
+        if (data.length === 0) {
+          callback('User does not exist');
+        } else {
+          dbMain.Groups.updateOne({ name: params.groupName },
+            { $push: { members: data[0].uid } } , (err, data) => {
+              if (err) {
+                callback(err);
+              } else {
+                callback(null, data);
+              }
+            })
+          }
+        }
+    })
+  },
+
+
   // get details of group based on group name
   readGroupDetails: (params, callback) => {
     dbMain.Groups.find({ name: params.name }, (err, data) => {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, data[0]);
+      }
+    });
+  },
+
+  deleteGroupBulletin: (params, callback) => {
+    dbMain.Groups.updateOne({name:params.name}, {bulletin: params.bulletin}, (err, data) => {
       if (err) {
         callback(err);
       } else {
@@ -57,9 +127,9 @@ module.exports = {
 
   // post group bulletin given group name
   postGroupBulletin: (params, callback) => {
-    dbMain.Groups.update(
+    dbMain.Groups.updateOne(
       { name: params.name },
-      { $push: { bulletin: params.bulletin } },
+      { $push: { bulletin: params.bullet } },
       (err, data) => {
         if (err) {
           callback(err);
@@ -70,40 +140,55 @@ module.exports = {
     );
   },
 
-  // create flight if person does not have flight in the group otherwise just update flight info
-  createFlight: (params, callback) => {
-    var filter = { uid: params.uid };
-    var update = params;
-    dbMain.Flights.findOne(filter, (err, result) => {
+  deleteGroup: (params, callback) => {
+    dbMain.Groups.deleteOne(params, (err, data) => {
       if (err) {
-        console.log(err);
         callback(err);
       } else {
-        if (result.length !== 0) {
-          dbMain.Flights.updateOne(filter, update, (err, result) => {
-            if (err) {
-              callback(err);
-            } else {
-              console.log(" updated");
-              callback(null, result);
-            }
-          });
-        } else {
-          dbMain.Flights.create(update, (err, result) => {
-            if (err) {
-              callback(err);
-            } else {
-              console.log("new created");
-              callback(null, result);
-            }
-          });
-        }
+        callback(null, data);
       }
-    });
+    })
+  },
+
+  // create flight if person does not have flight in the group otherwise just update flight info
+  createFlight: (params, callback) => {
+    // if flight exists for this person, deletes all flights related to the group and uid and insert new flights
+    dbMain.Flights.find({uid: params.uid, groupName: params.groupName}, (err, data) => {
+      if (err) {
+        callback(err, data)
+      } else {
+        if (data.length === 0) {
+          // something wrong with this, only inserting one at a time
+          dbMain.Flights.insertMany(params.flights, (err, data) => {
+            if (err) {
+              callback(err);
+            } else {
+              callback(null, data);
+            }
+          })
+        } else {
+          dbMain.Flights.deleteMany({uid: params.uid, groupName:params.groupName}, (err, data) => {
+            if (err) {
+              callback(err);
+            } else {
+              console.log(params.flights);
+              dbMain.Flights.insertMany(params.flights, (err, data) => {
+                if (err) {
+                  callback(err);
+                } else {
+                  callback(null, data);
+                }
+              })
+            }
+          })
+        }
+
+      }
+    })
   },
 
   readGroupFlights: (params, callback) => {
-    db.Flights.find({ groupName: params.name }, (err, docs) => {
+    dbMain.Flights.find({ groupName: params.groupName }, (err, docs) => {
       if (err) {
         callback(err);
       } else {
@@ -140,9 +225,7 @@ module.exports = {
     });
   },
 
-  updateUserLoc: (params) => {
-    //...
-  },
+
 
   /*
   =================================================

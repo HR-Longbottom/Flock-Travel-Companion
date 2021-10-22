@@ -60,13 +60,14 @@ function App() {
           {/* <FontAwesomeIcon icon={faCircle} id="active" /> */}
           Test User
         </div>
-        <main>
-          {messages &&
-            messages.map((msg) => <Message key={msg._id} message={msg} />)}
-          <span ref={ref}></span>
+        <main className="chatMain">
+          {msgValue &&
+            msgValue.map((msg) => <Message key={msg._id} message={msg} auth={auth}/>)}
+          <span  ref={ref}></span>
         </main>
-        <form onSubmit={sendMessage}>
+        <form className="chatForm" onSubmit={sendMessage}>
           <input
+            className="chatInput"
             value={formValue}
             onChange={(e) => setFormValue(e.target.value)}
             placeholder="Say Hello!"
@@ -81,12 +82,13 @@ function App() {
 }
 
 function Message(props) {
-  const { text, uid } = props.message;
-  const messageClass = uid === auth.currentUser.uid ? "sent" : "received";
+  console.log(props)
+  // const { text, uid } = props.msgValue;
+  const messageClass = props.uid === props.auth.uid ? "sent" : "received";
   return (
     <>
-      <div className={`message ${messageClass}`}>
-        <p>{text}</p>
+      <div className={message}>
+        <p className="userTexts">{props.message.text} <br /> {props.message.createdAt}</p>
       </div>
     </>
   );

@@ -2,12 +2,15 @@ var model = require("../models");
 
 module.exports = {
   getFlightOffers: (req, res) => {
+    console.log(req.query);
     model
-      .getFlightOffers(req.body)
+      .getFlightOffers(req.query)
       .then((data) => {
-        res.json(data.data);
+        console.log('successful')
+        res.send(data.data);
       })
       .catch((err) => {
+        console.log('this is error', err)
         res.send(err);
       });
   },
@@ -19,25 +22,44 @@ module.exports = {
   */
 
   createGroup: (req, res) => {
-    var name = req.body.name;
-    var members = req.body.members;
-    var bulletin = req.body.bulletin;
     model.createGroup(req.body, (err, data) => {
       if (err) {
         res.send(err);
       } else {
-        res.send("successfully added group info");
+        res.send("successfully created group");
       }
     });
   },
 
   //for home page
   readPersonalFlights: (req, res) => {
-    model.retrievePersonalFlights(req.body, (error, data) => {
+    console.log('personal flights body:' , req.query)
+    model.readPersonalFlights(req.query, (error, data) => {
       if (error) {
         res.send(error);
       } else {
-        res.json(data.data);
+        res.send(data);
+      }
+    });
+  },
+
+  findGroups: (req, res) => {
+    model.findGroups(req.query, (error, data) => {
+      if (error) {
+        res.send(error);
+      } else {
+        res.send(data)
+       }
+    });
+  },
+
+
+  updateUserLoc: (req, res) => {
+    model.updateUserLoc(req.body, (err, response) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.status(200).send("successfully updated user location");
       }
     });
   },
@@ -48,14 +70,48 @@ module.exports = {
   =================================================
   */
 
+
+  setGroupDestination: (req, res) => {
+    console.log(req.body);
+    model.setGroupDestination(req.body, (err,data) => {
+      if (err) {
+        res.status(400).send(err);
+      } else {
+        res.send('Destination Set')
+      }
+    })
+  },
+
+  inviteGroupMember: (req, res) => {
+    console.log(req.body);
+    model.inviteGroupMember(req.body, (err, data) => {
+      if (err) {
+        res.status(400).send(err);
+      } else {
+        res.send(data);
+      }
+    })
+  },
+
   readGroupDetails: (req, res) => {
-    model.readGroupDetails(req.body, (err, data) => {
+    model.readGroupDetails(req.query, (err, data) => {
       if (err) {
         res.send(err);
       } else {
-        res.json(data.data);
+        res.json(data);
       }
     });
+  },
+
+  deleteGroupBulletin: (req, res) => {
+    console.log(req.body);
+    model.deleteGroupBulletin(req.body, (err, data) => {
+      if (err){
+        res.send(err)
+      } else {
+        res.json(data)
+      }
+    })
   },
 
   postGroupBulletin: (req, res) => {
@@ -63,17 +119,29 @@ module.exports = {
       if (err) {
         res.send(err);
       } else {
-        res.json(data.data);
+        res.json(data);
       }
     });
   },
 
-  // for creating an itinerary
-  createFlight: (req, res) => {
-    model.createFlight(req.body, (err, res) => {
+  deleteGroup: (req, res) => {
+
+    model.deleteGroup(req.body, (err,data) => {
       if (err) {
         res.send(err);
       } else {
+        res.json(data);
+      }
+    })
+  },
+
+  // for creating an itinerary
+  createFlight: (req, res) => {
+    model.createFlight(req.body, (err, data) => {
+      if (err) {
+        res.send(err);
+      } else {
+        console.log(data);
         res.send("flight successfuly added to itinerary!");
       }
     });
@@ -81,14 +149,14 @@ module.exports = {
 
   // for group page
   readGroupFlights: (req, res) => {
-    model.retrieveGroupFlights(req.body),
+    model.readGroupFlights(req.query,
       (error, data) => {
         if (error) {
           res.send(error);
         } else {
           res.json(data);
         }
-      };
+      });
   },
 
   /*
@@ -116,15 +184,7 @@ module.exports = {
     });
   },
 
-  updateUserLoc: (req, res) => {
-    model.updateUserLoc(req.body, (err, res) => {
-      if (err) {
-        res.send(err);
-      } else {
-        res.send("successfully updated user email");
-      }
-    });
-  },
+
 
   /*
   =================================================

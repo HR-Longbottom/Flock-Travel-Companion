@@ -1,9 +1,17 @@
 .signOutBtn {
   border-radius: 5px;
-  border: 1px solid rgba(0, 0, 0, 0.9);
-  margin-top: 20%;
+  position: relative;
+  top: -350px;
+  left: 58%;
+  border: 1px solid rgb(0 0 0 / 90%);
+  /* margin-top: 20%; */
   margin-left: 10px;
   width: 15%;
   height: 30%;
-  background-color: #f8f8ff5b;
+  background-color: #99B898;
+  color: rgb(255 255 255);
+}
+.col-12 {
+  border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
 }
