@@ -2,73 +2,120 @@ import React, { useState, useEffect } from "react";
 import PersonalItinerary from "./PersonalItinerary";
 import GroupItinerariesList from "./GroupItinerariesList";
 import GroupBulletin from "./GroupBulletin";
+import axios from 'axios';
 
 function GroupLandingPage(props) {
   // props takes in group
   // const [stateName, howYouSetState] = useState(defaultValue)
-  const [personal, setPersonal] = useState({
-    flight: "UYGDGUUDG213",
-    departureAirport: "IAH",
-    arrivalAirport: "JFK",
-    departureTime: "10:30am",
-    arrivalTime: "12:30pm",
-    date: "10/18/2021",
-  });
-  const [groupItineraries, setGroupItineraries] = useState([
-    {
-      person: "Chris",
-      flight: "UYGDGUUDG213",
-      departureAirport: "IAH",
-      arrivalAirport: "JFK",
-      departureTime: "10:30am",
-      arrivalTime: "12:30pm",
-      date: "10/18/2021",
-    },
-    {
-      person: "John",
-      flight: "UYGDGUUDG213",
-      departureAirport: "IAH",
-      arrivalAirport: "JFK",
-      departureTime: "10:30am",
-      arrivalTime: "12:30pm",
-      date: "10/18/2021",
-    },
-    {
-      person: "James",
-      flight: "UYGDGUUDG213",
-      departureAirport: "IAH",
-      arrivalAirport: "JFK",
-      departureTime: "10:30am",
-      arrivalTime: "12:30pm",
-      date: "10/18/2021",
-    },
-    {
-      person: "James",
-      flight: "UYGDGUUDG213",
-      departureAirport: "IAH",
-      arrivalAirport: "JFK",
-      departureTime: "10:30am",
-      arrivalTime: "12:30pm",
-      date: "10/18/2021",
+  var user = new URLSearchParams(window.location.search).get('uid');
+  var name = new URLSearchParams(window.location.search).get('groupName');
+
+  const [uid, setUid] = useState(user)
+  const [groupName, setGroupName] = useState(name);
+  const [groupBulletin, setGroupBulletin] = useState([]);
+  const [groupMembers, setGroupMembers] = useState([]);
+  const [personal, setPersonal] = useState([]);
+  const [groupItineraries, setGroupItineraries] = useState({});
+  const [membersNames, setMembersNames] = useState({});
+  const [admin, setAdmin] = useState('');
+
+  useEffect(() => {
+    axios.get('/readGroupDetails', {params: {name: groupName}})
+    .then(data => {
+      setGroupBulletin(data.data.bulletin);
+      setGroupMembers(data.data.members);
+      setAdmin(data.data.admin);
+      var members = data.data.members;
+      return members
+    })
+    .then((members) => {
+      var groupMembersNames = {};
+      for (var i = 0; i < members.length; i++) {
+        if (members[i] !== uid) {
+        axios.get('/checkUser', {params: {uid: members[i]}})
+        .then(data => {
+          console.log('return data', data)
+          groupMembersNames[data.data[0].uid] = data.data[0].name;
+        }).then(() => {
+          if (Object.keys(groupMembersNames).length === members.length - 1) {
+            console.log('groupMembersNames', groupMembersNames);
+            setMembersNames(groupMembersNames)
+          }
+        })
+      }
+      }
+    })
+    .catch(err => {
+      console.log(err);
+    })
+
+    axios.get('/readGroupFlights', {params: {groupName: groupName}})
+    .then(result => {
+      var data = result.data;
+      var groupFlights = {};
+      var personalFlights = [];
+      for (var i = 0; i < data.length; i++) {
+        // loops thru to see if uid is the same as the flightdata id
+        if (data[i].uid === uid) {
+          personalFlights.push(data[i]);
+        } else {
+          if (groupFlights[data[i].uid] === undefined) {
+            groupFlights[data[i].uid] = [data[i]]
+          } else {
+            groupFlights[data[i].uid].push(data[i])
+          }
+        }
+      }
+      setPersonal(personalFlights);
+      setGroupItineraries(groupFlights);
+    })
+
+  }, [])
+
+  function onAddMemberClick() {
+    var email = prompt('Please enter the email of the person you want to add');
+    if (email.length !== 0) {
+      axios.put('/inviteGroupMember', {email: email, groupName: groupName})
+      .then(data => {
+        alert('User Added')
+      })
+      .catch(err => {
+        alert('User does not exist')
+      })
     }
-  ]);
+
+  }
+  function onDeleteClick() {
+    axios.put('/deleteGroup', {name: groupName})
+    .then(data => {
+      window.location.href='/home'
+    })
+  }
 
   return (
     <div className="d-flex flex-column groupPage">
       <div className="header d-flex flex-row">
-        <button type="button" className="btn btn-primary deleteGroup">
+          {
+            admin===uid ?
+        <div className='adminButtons'>
+        <button type="button" className="btn btn-primary deleteGroup" onClick={() => {onDeleteClick()}}>
           Delete Group
         </button>
-        <h4>Group Page</h4>
+        <button type="button" className="btn btn-primary" onClick={() => {onAddMemberClick()}}>Add Member</button>
+        </div>
+        :
+        <div></div>
+          }
+        <h4>{groupName}</h4>
       </div>
       <div className='page-body d-flex flex-row'>
         <div className='chatBody d-flex'>
           Hello Import from Landing page
           </div>
         <div className="groupBody d-flex flex-column">
-          <PersonalItinerary itinerary={personal} />
-          <GroupItinerariesList groupItineraries={groupItineraries} />
-          <GroupBulletin bulletins={['Go to Paris','Go to Louvre','Eat steak']}/>
+          <PersonalItinerary itineraries={personal} uid={uid} groupName={groupName} setPersonal={setPersonal}/>
+          <GroupItinerariesList groupItineraries={groupItineraries} membersNames={membersNames} currentUser={uid}/>
+          <GroupBulletin bulletins={groupBulletin} setGroupBulletin={setGroupBulletin} groupName={groupName}/>
         </div>
       </div>
     </div>

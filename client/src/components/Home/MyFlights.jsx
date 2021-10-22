@@ -76,8 +76,6 @@ const MyFlights = (props) => {
       })
       .catch(err => { console.log(err) })
     }
-    console.log('Users Flights: ', flights)
-
   return (
     <Styles>
     < Container className='mainFlightsContainer'>
@@ -92,9 +90,6 @@ const MyFlights = (props) => {
                 <h4 className='groupNameText'>{item.groupName} </h4>
                 <p className='airportsText'>{item.departureAirport} <i className="fas fa-arrow-circle-right"></i> {item.arrivalAirport}</p>
                 <p className='departureDate'>{item.departureDate}</p>
-
-
-
                 </div>)}
             </Carousel>
           </Container>

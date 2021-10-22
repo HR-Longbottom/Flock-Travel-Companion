@@ -33,8 +33,10 @@ const Styles = styled.div`
   text-align: center;
 }`
 const Home = (props) => {
-  return (
-    <Styles>
+  if (props.currentUser.email !== null) {
+
+    return (
+      <Styles>
     <Link exact to='/home'> </Link>
       <div className="Home" >
         <Head currentUser={props.currentUser}/>
@@ -49,5 +51,8 @@ const Home = (props) => {
 
     </Styles>
   );
+    } else {
+      return (<div></div>)
+    }
 }
 export default Home;
