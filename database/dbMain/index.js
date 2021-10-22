@@ -3,9 +3,11 @@ const mongoose = require("mongoose");
 const flightSchema = mongoose.Schema({
   uid: { type: String, require: true },
   groupName: { type: String, require: true },
-  departureTime: Number,
-  callsign: String,
-  arrivalTime: Number,
+  departureTime: String,
+  departureDate: String,
+  carrier: String,
+  arrivalTime: String,
+  arrivalDate: String,
   departureAirport: String,
   arrivalAirport: String,
 });

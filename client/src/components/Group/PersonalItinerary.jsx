@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import FlightResult from "./FlightResult";
 import axios from 'axios';
+import PersonalItineraryFlight from "./PersonalItineraryFlight";
 
 function PersonalItinerary(props) {
   var today = new Date();
@@ -15,13 +16,8 @@ function PersonalItinerary(props) {
   );
   const [returnDate, setReturnDate] = useState(
     tomorrow.toISOString().slice(0, 10)
-  );
-  const [bulletin, setBulletin] = useState([]);
-  const [groupFlights, setGroupFlights] = useState([]);
-
-  function onBulletinAdd() {
-
-  };
+    );
+    const [flightResultsMeta, setFlightResultsMeta] = useState({});
 
 
 
@@ -29,16 +25,17 @@ function PersonalItinerary(props) {
     if (originLocation.length === 3 && destinationLocation.length === 3 && checkDates(departureDate, returnDate)) {
       console.log('onSearchClick')
       var params = {
-          originLocationCode: originLocation,
-          destinationLocationCode: destinationLocation,
-          departureDate: departureDate,
-          returnDate: returnDate
-        }
+        originLocationCode: originLocation,
+        destinationLocationCode: destinationLocation,
+        departureDate: departureDate,
+        returnDate: returnDate
+      }
 
       axios.get("/flightoffers", {params: params})
       .then(data => {
-        console.log(data)
-        setFlightResults(data.data.data)
+        console.log(data.data.data)
+        setFlightResults(data.data.data);
+        setFlightResultsMeta(data.data.dictionaries);
         setModalShow(true);
       });
 
@@ -46,6 +43,7 @@ function PersonalItinerary(props) {
       alert('Please provide valid inputs')
     }
   }
+
 
   function checkDates(departureDate, returnDate) {
     console.log('in checkdates')
@@ -83,7 +81,7 @@ function PersonalItinerary(props) {
               </div>
               <div className="modal-body">
                 <div className="flightResults">
-                  {/* {flightResults.map(flightResult => {return <FlightResult flight={flightResult} setModalShow={setModalShow} />})} */}
+                  {flightResults.map(flightResult => {return <FlightResult flight={flightResult} meta={flightResultsMeta} setModalShow={setModalShow} uid={props.uid} groupName={props.groupName} setPersonal={props.setPersonal}/>})}
                 </div>
               </div>
               <div className="modal-footer">
@@ -106,24 +104,10 @@ function PersonalItinerary(props) {
       <div className="personal-it-container d-flex flex-column">
         <div className="personalItinerary d-flex flex-row">
           <div className="personal-it-left">
-            <div className="nav flex-column">
-              <div className="personal-plan d-flex flex-row">
-                <div className="departure-info flex-column">
-                  <div className="time">{props.itinerary.departureTime}</div>
-                  <div className="airport">
-                    {props.itinerary.departureAirport}
-                  </div>
-                </div>
-                <div>{"--------------------------------->"}</div>
-                <div className="arrival-info flex-column">
-                  <div className="time">{props.itinerary.arrivalTime}</div>
-                  <div className="airport">
-                    {props.itinerary.arrivalAirport}
-                  </div>
-                </div>
-              </div>
-              {/* CHANGE THIS INTO FORM */}
-            </div>
+            {props.itineraries.length === 0 ?
+            <div>Please Select a Flight</div>
+            :
+            props.itineraries.map((flight, idx) => <PersonalItineraryFlight flight={flight} key={idx}/>)}
           </div>
           <div className="personal-it-right">
             <div className="nav flex-column">
@@ -149,9 +133,9 @@ function PersonalItinerary(props) {
           <div className='flight-search-form'>
             <form>
               <label>From: </label>
-              <input type="text" name="originLocation" value={originLocation} onChange={(event)=> {setOriginLocation(event.target.value.toUpperCase())}}></input>
+              <input type="text" name="originLocation" value={originLocation} placeholder='Airport Code Only' onChange={(event)=> {setOriginLocation(event.target.value.toUpperCase())}}></input>
               <label>To: </label>
-              <input type="text" name="destinationLocation" value={destinationLocation} onChange={(event) => {setDestinationLocation(event.target.value.toUpperCase())}}></input>
+              <input type="text" name="destinationLocation" value={destinationLocation} placeholder='Airport Code Only' onChange={(event) => {setDestinationLocation(event.target.value.toUpperCase())}}></input>
               <label>Departing on: </label>
               <input
                 type="date"

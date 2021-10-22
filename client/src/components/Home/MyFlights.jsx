@@ -77,7 +77,7 @@ const MyFlights = (props) => {
       .catch(err => { console.log(err) })
     }
     console.log('Users Flights: ', flights)
-
+    console.log(props);
   return (
     <Styles>
     < Container className='mainFlightsContainer'>
