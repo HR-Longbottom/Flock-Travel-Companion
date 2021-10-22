@@ -7,6 +7,7 @@ import axios from 'axios';
 import Sidebar from "../Sidebar/Sidebar";
 import styled from "styled-components";
 import FlockIO from "../../../assets/FlockIO.png";
+import './Group.css';
 
 
 const Styles = styled.div`
@@ -142,12 +143,14 @@ function GroupLandingPage(props) {
   }
 
   return (
+    <div id='Group'>
+
     <Styles>
     <div className="d-flex flex-column groupPage">
       <div className="header d-flex flex-row">
           {
             admin===uid ?
-        <div className='adminButtons'>
+            <div className='adminButtons'>
         <button type="button" className="btn btn-primary deleteGroup" onClick={() => {onDeleteClick()}}>
           Delete Group
         </button>
@@ -159,7 +162,7 @@ function GroupLandingPage(props) {
         </div>
         :
         <div></div>
-          }
+      }
           <img className="logo" src={FlockIO} />
         <h4 className='groupNameHeader'>{groupName}</h4>
       </div>
@@ -173,6 +176,7 @@ function GroupLandingPage(props) {
       </div>
     </div>
     </Styles>
+      </div>
   );
 }
 
