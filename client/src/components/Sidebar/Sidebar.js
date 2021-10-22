@@ -8,12 +8,20 @@ import styled from 'styled-components';
 
 const Styles= styled.div`
 .groupPlans {
-  max-height: 600px;
+  max-height: 400px;
   overflow-y: scroll;
   overflow-style: move;
 }
 .groupPlans::-webkit-scrollbar{
-  display: none;
+  width: 10px;
+}
+
+.groupPlans::-webkit-scrollbar-thumb {
+  border-radius: 25px;
+  box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+  background-color: #99B898;
+  border: 1px solid #000;
+  height: 10px;
 }
 `
 
@@ -32,7 +40,7 @@ const Sidebar = (props) => {
       })
       .catch(err => { console.log(err) })
   }
-console.log('GROUPS', groups)
+
   return (
     <Styles>
     <div
