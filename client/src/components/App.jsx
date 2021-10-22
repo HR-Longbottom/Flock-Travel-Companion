@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import {
   BrowserRouter as Router,
   Route,
@@ -10,17 +11,12 @@ import ChatMain from "./Chat/ChatMain.jsx";
 import Home from "./Home/Home.jsx";
 import firebase from "../../../firebase-config.js";
 import { onAuthStateChanged, getAuth } from "firebase/auth";
-import axios from "axios";
-import GroupLandingPage from './Group/GroupLandingPage';
-import LocationModal from "./Home/LocationModal.jsx";
-
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       isLoggedIn: null,
-      currentUser: {email: null, displayName: null, uid: null, location: null}
     };
     this.postUser = this.postUser.bind(this);
     this.checkUser = this.checkUser.bind(this);
@@ -52,19 +48,13 @@ class App extends React.Component {
   }
 
   checkUser(user) {
-    console.log('USER', user)
     axios
       .get("/checkUser", { params: { uid: user.uid } })
       .then((response) => {
-
         if (response.data.length === 0) {
           this.postUser(user);
-          this.setState({currentUser: {email: user.email, displayName: user.displayName, uid: user.uid, location: undefined}})
-          console.log("welcome, First Time User!");
+          console.log("Welcome, First Time User!");
         } else {
-          var userOne = response.data[0];
-          console.log(response.data.location)
-          this.setState({currentUser: {email: userOne.email, displayName: userOne.name, uid: userOne.uid, location: userOne.location}})
           console.log("Welcome Back!");
         }
       })
@@ -72,7 +62,6 @@ class App extends React.Component {
   }
 
   render() {
-   // console.log('CURERNT USER STATE', this.state.currentUser)
     return (
       <Router>
         <Route
@@ -80,10 +69,12 @@ class App extends React.Component {
           path="/"
           render={(state) =>
             !this.state.isLoggedIn ? (
-              <LoginMain {...state} />
+              // <LoginMain {...state} />
+              <LoginMain />
             ) : (
               <Redirect
-                to={{ pathname: "/home", state: { from: state.location } }}
+                // to={{ pathname: "/home", state: { from: state.location } }}
+                to="/home"
               />
             )
           }
@@ -92,26 +83,24 @@ class App extends React.Component {
           exact
           path="/home"
           render={(state) =>
-            (this.state.isLoggedIn && (this.state.currentUser.location === null|| this.state.currentUser.location === undefined)) ? (
-              <div>
-            <LocationModal currentUser={this.state.currentUser}/>
-            <Home {...state} currentUser={this.state.currentUser}/>
-            </div>
-            ) : (this.state.isLoggedIn) ?
-            (<Home {...state} currentUser={this.state.currentUser}/>)
-            : (
+            this.state.isLoggedIn ? (
+              // <Home {...state} />
+              <Home />
+            ) : (
               <Redirect
-                to={{ pathname: "/", state: { from: state.location } }}
+                // to={{ pathname: "/", state: { from: state.location } }}
+                to="/"
               />
             )
           }
+          type="private"
         />
         <Switch>
-          <Route exact path="/messages">
+          <Route exact path="/messages" type="private">
             <ChatMain />
           </Route>
           <Route exact path="/plans">
-            <GroupLandingPage currentUser={this.state.currentUser} />
+            <div>Group Page</div>
           </Route>
         </Switch>
       </Router>

@@ -5,15 +5,24 @@ import axios from 'axios';
 import { faUnderline } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
 
-// const getLatLong = () => {
-//   return axios.get(
-//     `https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=AIzaSyBdBNlZh_YUpLSIPV-AmVjZX0zkUmxfgeg`)
-// };
 
-// console.log(getLatLong());
 const Styles= styled.div`
+.groupPlans {
+  max-height: 400px;
+  overflow-y: scroll;
+  overflow-style: move;
+}
+.groupPlans::-webkit-scrollbar{
+  width: 10px;
+}
 
-
+.groupPlans::-webkit-scrollbar-thumb {
+  border-radius: 25px;
+  box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+  background-color: #99B898;
+  border: 1px solid #000;
+  height: 10px;
+}
 `
 
 const Sidebar = (props) => {
@@ -31,7 +40,7 @@ const Sidebar = (props) => {
       })
       .catch(err => { console.log(err) })
   }
-console.log('GROUPS', groups)
+
   return (
     <Styles>
     <div
@@ -63,10 +72,10 @@ console.log('GROUPS', groups)
               <CDBSidebarMenuItem icon="user" style={{padding: '5px', textDecoration: 'underline' }}>
                 Groups
                 </CDBSidebarMenuItem>
-                <div className="groupMembers">
-              {groups.map(group => (
-              <NavLink exact to={`/plans?uid=${props.currentUser.uid}&groupName=${group.name}`} activeClassName="activeClicked">
-                <CDBSidebarMenuItem  key={group._id} icon='ellipsis-h' style={{fontSize: '15px', padding: '5px' }}> {group.name}
+                <div className="groupPlans">
+              {groups.map((group, idx) => (
+              <NavLink exact to={`/plans?uid=${props.currentUser.uid}&groupName=${group.name}`} activeClassName="activeClicked"  key={idx}>
+                <CDBSidebarMenuItem icon='ellipsis-h' style={{fontSize: '15px', padding: '5px', color: "#fff", backgroundColor: "#99B898" }}> {group.name}
               </CDBSidebarMenuItem>
             </NavLink>
               ))}

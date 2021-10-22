@@ -71,6 +71,16 @@ module.exports = {
   Group Page
   =================================================
   */
+  // list of all groups
+  viewAllGroups: (callback) => {
+    dbMain.Groups.find({}, (err, data) => {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, data);
+      }
+    });
+  },
 
   setGroupDestination: (params, callback) => {
     dbMain.Groups.updateOne({name: params.name}, {destination: params.destination}, (err, data) => {

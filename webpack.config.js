@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const { SourceMapDevToolPlugin } = require("webpack");
 const CompressionPlugin = require('compression-webpack-plugin');
 const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
@@ -13,8 +14,9 @@ module.exports = (env, argv) => {
     mode,
     entry: path.join(SRC_DIR, 'index.js'),
     output: {
-      path: DIST_DIR,
-        filename: "bundle.js",
+      path: path.resolve(__dirname, 'client/dist'),
+      filename: "bundle.js",
+      publicPath: '/'
     },
     plugins: [
       new webpack.DefinePlugin({
@@ -32,6 +34,9 @@ module.exports = (env, argv) => {
       new webpack.ProvidePlugin({
         process: 'process/browser',
       }),
+      new SourceMapDevToolPlugin({
+        filename: "[file].map"
+      }),
     ],
     module: {
       rules: [
@@ -39,6 +44,11 @@ module.exports = (env, argv) => {
           test: /\.(js|jsx)$/,
           use: 'babel-loader',
           exclude: /node_modules/,
+        },
+        {
+          test: /\.js$/,
+          enforce: 'pre',
+          use: ['source-map-loader'],
         },
         {
           test: /\.css$/,
@@ -61,7 +71,13 @@ module.exports = (env, argv) => {
         },
       ],
     },
+    devServer: {
+      historyApiFallback: true,
+    },
     resolve: {
+      alias: {
+        react: path.resolve('node_modules/react'),
+      },
       extensions: ['.js', '.jsx'],
       fallback: {
         "os": false,

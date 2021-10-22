@@ -10,7 +10,7 @@ const Styles = styled.div`
   display: inline;
   left: 40%;
   top: -28px;
-  background-color: #9370DB;
+  background-color: rgb(167 144 207);
   border-color: black;
 }
 .container {

@@ -76,8 +76,7 @@ const MyFlights = (props) => {
       })
       .catch(err => { console.log(err) })
     }
-    console.log('Users Flights: ', flights)
-    console.log(props);
+    console.log(flights)
   return (
     <Styles>
     < Container className='mainFlightsContainer'>
@@ -87,14 +86,11 @@ const MyFlights = (props) => {
         </div>
           <Container className="myFlightsContainer col-12">
             <Carousel breakPoints={breakPoints}>
-              {flights.map(item => <div className="card" key={item._id}>
+              {flights.map((item, idx) => <div className="card" key={idx}>
                 <h3 className='carrierText'> {item.carrier} </h3>
                 <h4 className='groupNameText'>{item.groupName} </h4>
                 <p className='airportsText'>{item.departureAirport} <i className="fas fa-arrow-circle-right"></i> {item.arrivalAirport}</p>
                 <p className='departureDate'>{item.departureDate}</p>
-
-
-
                 </div>)}
             </Carousel>
           </Container>

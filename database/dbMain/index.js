@@ -1,13 +1,12 @@
 const mongoose = require("mongoose");
+const dbMain = require("./connection.js");
 
 const flightSchema = mongoose.Schema({
   uid: { type: String, require: true },
   groupName: { type: String, require: true },
-  departureTime: String,
-  departureDate: String,
-  carrier: String,
-  arrivalTime: String,
-  arrivalDate: String,
+  departureTime: Number,
+  callsign: String,
+  arrivalTime: Number,
   departureAirport: String,
   arrivalAirport: String,
 });
@@ -16,7 +15,7 @@ const userSchema = mongoose.Schema({
   email: { type: String, index: { unique: true }, require: true },
   uid: String,
   name: String,
-  location: Object
+  location: String,
 });
 
 const groupSchema = mongoose.Schema({
@@ -24,11 +23,10 @@ const groupSchema = mongoose.Schema({
   members: [{ type: String }],
   bulletin: [{ type: String }],
   admin: String,
-  destination: String
 });
 
-const Flights = mongoose.model("Flights", flightSchema);
-const Users = mongoose.model("Users", userSchema);
-const Groups = mongoose.model("Groups", groupSchema);
+const Flights = dbMain.model("Flights", flightSchema);
+const Users = dbMain.model("Users", userSchema);
+const Groups = dbMain.model("Groups", groupSchema);
 
 module.exports = { Flights, Users, Groups };

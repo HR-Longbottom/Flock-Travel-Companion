@@ -37,7 +37,7 @@ const Home = (props) => {
 
     return (
       <Styles>
-    <Link exact to='/home'> </Link>
+    <Link to='/home'> </Link>
       <div className="Home" >
         <Head currentUser={props.currentUser}/>
         <Sidebar currentUser={props.currentUser}  />

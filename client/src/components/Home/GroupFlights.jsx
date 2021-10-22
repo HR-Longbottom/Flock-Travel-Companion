@@ -95,10 +95,12 @@ const MyGroups = (props) => {
           </div>
           <Container className="myGroupsContainer col-12">
             <Carousel breakPoints={breakPoints}>
-              {groups.map(item =>
-              <NavLink exact to={`/plans?uid=${props.currentUser.uid}&groupName=${item.name}`} activeClassName="activeClicked">
-              <div className="card" key={item._id}><img className='image' src='https://source.unsplash.com/190x150/?vacation'/>{item.name}</div>
-              </NavLink>)}
+              {groups.map((item, idx) =>
+                <NavLink exact to={`/plans?uid=${props.currentUser.uid}&groupName=${item.name}`} activeClassName="activeClicked"  key={idx}>
+                <div className="card">
+                <img className='image' src='https://source.unsplash.com/190x150/?vacation'/>{item.name}
+                </div>
+                </NavLink>)}
             </Carousel>
           </Container>
         </div>
@@ -108,128 +110,3 @@ const MyGroups = (props) => {
 }
 
 export default MyGroups;
-
-
-
-{/* <CDBCarousel
-            activeItem={1}
-            length={3}
-            showControls={true}
-            showIndicators={true}
-            className="z-depth-1"
-            slide
-            multiItem={true}
-          >
-
-            <CDBCarouselInner>
-              <CDBCarouselItem active itemId='1'>
-                <CDBView className="row">
-
-                  <div className="col-md-4 mb-3">
-                    <div className="card">
-
-                      <div className="card-body">
-                        <h4 className="card-title">group[0].name</h4>
-                        <p className="card-text">Destination</p>
-
-                      </div>
-
-                    </div>
-                  </div>
-                  <div className="col-md-4 mb-3">
-                    <div className="card">
-
-                      <div className="card-body">
-                        <h4 className="card-title">group[1].name</h4>
-                        <p className="card-text">Details about your flight</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-md-4 mb-3">
-                    <div className="card">
-
-                      <div className="card-body">
-                        <h4 className="card-title">Group Name</h4>
-                        <p className="card-text">Details about your flight</p>
-
-                      </div>
-                    </div>
-                  </div>
-
-                </CDBView>
-              </CDBCarouselItem>
-              <CDBCarouselItem itemId='2'>
-                <CDBView className="row">
-
-                  <div className="col-md-4 mb-3">
-                    <div className="card">
-
-                      <div className="card-body">
-                        <h4 className="card-title">Group Name</h4>
-                        <p className="card-text">Details about your flight</p>
-
-                      </div>
-
-                    </div>
-                  </div>
-                  <div className="col-md-4 mb-3">
-                    <div className="card">
-
-                      <div className="card-body">
-                        <h4 className="card-title">Group Name</h4>
-                        <p className="card-text">Details about your flight</p>
-
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-md-4 mb-3">
-                    <div className="card">
-
-                      <div className="card-body">
-                        <h4 className="card-title">Group Name</h4>
-                        <p className="card-text">Details about your flight</p>
-
-                      </div>
-                    </div>
-                  </div>
-
-
-                </CDBView>
-              </CDBCarouselItem>
-              <CDBCarouselItem itemId='3'>
-                <CDBView className="row">
-
-                  <div className="col-md-4 mb-3">
-                    <div className="card">
-
-                      <div className="card-body">
-                        <h4 className="card-title">Group Name</h4>
-                        <p className="card-text">Details about your flight</p>
-
-                      </div>
-
-                    </div>
-                  </div>
-                  <div className="col-md-4 mb-3">
-                    <div className="card">
-
-                      <div className="card-body">
-                        <h4 className="card-title">Group Name</h4>
-                        <p className="card-text">Details about your flight</p>
-
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-md-4 mb-3">
-                    <div className="card">
-
-                      <div className="card-body">
-                        <h4 className="card-title">Group Name</h4>
-                        <p className="card-text">Details about your flight</p>
-                      </div>
-                    </div>
-                  </div>
-                </CDBView>
-              </CDBCarouselItem>
-            </CDBCarouselInner>
-          </CDBCarousel> */}

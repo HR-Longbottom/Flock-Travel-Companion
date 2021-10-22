@@ -69,6 +69,15 @@ module.exports = {
   Group Page
   =================================================
   */
+  viewAllGroups: (req, res) => {
+    model.viewAllGroups((err, data) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.json(data);
+      }
+    });
+  },
 
 
   setGroupDestination: (req, res) => {
