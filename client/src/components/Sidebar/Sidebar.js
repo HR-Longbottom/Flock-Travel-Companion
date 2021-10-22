@@ -5,15 +5,16 @@ import axios from 'axios';
 import { faUnderline } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
 
-// const getLatLong = () => {
-//   return axios.get(
-//     `https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=AIzaSyBdBNlZh_YUpLSIPV-AmVjZX0zkUmxfgeg`)
-// };
 
-// console.log(getLatLong());
 const Styles= styled.div`
-
-
+.groupPlans {
+  max-height: 600px;
+  overflow-y: scroll;
+  overflow-style: move;
+}
+.groupPlans::-webkit-scrollbar{
+  display: none;
+}
 `
 
 const Sidebar = (props) => {
@@ -63,7 +64,7 @@ console.log('GROUPS', groups)
               <CDBSidebarMenuItem icon="user" style={{padding: '5px', textDecoration: 'underline' }}>
                 Groups
                 </CDBSidebarMenuItem>
-                <div className="groupMembers">
+                <div className="groupPlans">
               {groups.map(group => (
               <NavLink exact to={`/plans?uid=${props.currentUser.uid}&groupName=${group.name}`} activeClassName="activeClicked">
                 <CDBSidebarMenuItem  key={group._id} icon='ellipsis-h' style={{fontSize: '15px', padding: '5px' }}> {group.name}
