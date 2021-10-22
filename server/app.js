@@ -16,14 +16,24 @@ app.post("/messageData", controller.sendMessage);
 app.get("/messageData", controller.getMessages);
 app.post("/createUser", controller.createUser);
 app.post("/createFlight", controller.createFlight);
+app.get("/viewAllGroups", controller.viewAllGroups);
 app.get("/readGroupDetails", controller.readGroupDetails);
 app.get("/readPersonalFlights", controller.readPersonalFlights);
 app.get("/readGroupFlights", controller.readGroupFlights);
 app.post("/createGroup", controller.createGroup);
-
 app.get("/checkUser", controller.checkUser);
 
-app.get("/*", function (req, res) {
+app.get('./firebase-messaging-sw.js', (req, res) => {
+  res.sendFile(path.resolve(__dirname, "../client/dist/index.html"),
+  (err) => {
+    if (err) {
+      res.status(500).send(err)
+    }
+  })
+})
+
+app.get("./*", function (req, res) {
+
   res.sendFile(
     path.join(__dirname, "../client/dist/index.html"),
     function (err) {

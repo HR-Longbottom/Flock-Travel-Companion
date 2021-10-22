@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const dbMain = require("./connection.js");
 
 const flightSchema = mongoose.Schema({
   uid: { type: String, require: true },
@@ -21,11 +22,11 @@ const groupSchema = mongoose.Schema({
   name: { type: String, index: { unique: true }, require: true },
   members: [{ type: String }],
   bulletin: [{ type: String }],
-  admin: String
+  admin: String,
 });
 
-const Flights = mongoose.model("Flights", flightSchema);
-const Users = mongoose.model("Users", userSchema);
-const Groups = mongoose.model("Groups", groupSchema);
+const Flights = dbMain.model("Flights", flightSchema);
+const Users = dbMain.model("Users", userSchema);
+const Groups = dbMain.model("Groups", groupSchema);
 
 module.exports = { Flights, Users, Groups };

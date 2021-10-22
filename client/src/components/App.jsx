@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import {
   BrowserRouter as Router,
   Route,
@@ -10,7 +11,6 @@ import ChatMain from "./Chat/ChatMain.jsx";
 import Home from "./Home/Home.jsx";
 import firebase from "../../../firebase-config.js";
 import { onAuthStateChanged, getAuth } from "firebase/auth";
-import axios from "axios";
 
 class App extends React.Component {
   constructor(props) {
@@ -30,7 +30,6 @@ class App extends React.Component {
       if (authState.currentUser !== null) {
         this.setState({ isLoggedIn: true }, () => {
           this.checkUser(authState.currentUser);
-
           console.log("Logged In:", authState.currentUser);
         });
       } else {
@@ -45,19 +44,18 @@ class App extends React.Component {
     axios
       .post("/createUser", user)
       .then((response) => console.log("success"))
-      .catch((err) => console.log("app 32", err));
+      .catch((err) => console.log("failed", err));
   }
 
   checkUser(user) {
     axios
-      .get("/checkUser", {params: {uid: user.uid}} )
+      .get("/checkUser", { params: { uid: user.uid } })
       .then((response) => {
-        console.log(response.data, "user data")
         if (response.data.length === 0) {
-          this.postUser(user)
-          console.log('welcome, First Time User!')
+          this.postUser(user);
+          console.log("Welcome, First Time User!");
         } else {
-          console.log('Welcome Back!')
+          console.log("Welcome Back!");
         }
       })
       .catch((err) => console.log(false, err));
@@ -71,10 +69,12 @@ class App extends React.Component {
           path="/"
           render={(state) =>
             !this.state.isLoggedIn ? (
-              <LoginMain {...state} />
+              // <LoginMain {...state} />
+              <LoginMain />
             ) : (
               <Redirect
-                to={{ pathname: "/home", state: { from: state.location } }}
+                // to={{ pathname: "/home", state: { from: state.location } }}
+                to="/home"
               />
             )
           }
@@ -84,16 +84,19 @@ class App extends React.Component {
           path="/home"
           render={(state) =>
             this.state.isLoggedIn ? (
-              <Home {...state} />
+              // <Home {...state} />
+              <Home />
             ) : (
               <Redirect
-                to={{ pathname: "/", state: { from: state.location } }}
+                // to={{ pathname: "/", state: { from: state.location } }}
+                to="/"
               />
             )
           }
+          type="private"
         />
         <Switch>
-          <Route exact path="/messages">
+          <Route exact path="/messages" type="private">
             <ChatMain />
           </Route>
           <Route exact path="/plans">
