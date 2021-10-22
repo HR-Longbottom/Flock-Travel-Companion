@@ -65,7 +65,7 @@ console.log('GROUPS', groups)
                 </CDBSidebarMenuItem>
                 <div className="groupMembers">
               {groups.map(group => (
-              <NavLink exact to={`/plans?uid=${group.admin}&groupName=${group.name}`} activeClassName="activeClicked">
+              <NavLink exact to={`/plans?uid=${props.currentUser.uid}&groupName=${group.name}`} activeClassName="activeClicked">
                 <CDBSidebarMenuItem  key={group._id} icon='ellipsis-h' style={{fontSize: '15px', padding: '5px' }}> {group.name}
               </CDBSidebarMenuItem>
             </NavLink>

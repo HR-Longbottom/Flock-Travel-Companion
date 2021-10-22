@@ -25,6 +25,7 @@ app.put("/inviteGroupMember", controller.inviteGroupMember);
 app.put("/postGroupBulletin", controller.postGroupBulletin);
 app.put('/deleteGroupBulletin', controller.deleteGroupBulletin);
 app.put('/deleteGroup', controller.deleteGroup);
+app.put('/setGroupDestination', controller.setGroupDestination);
 
 app.put('/updateUserLoc', controller.updateUserLoc);
 app.get('/findGroups', controller.findGroups);

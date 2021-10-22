@@ -48,7 +48,6 @@ const Home = (props) => {
         <GroupFlights currentUser={props.currentUser}/>
         </div>
       </div>
-
     </Styles>
   );
     } else {

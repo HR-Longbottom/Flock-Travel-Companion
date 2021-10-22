@@ -25,7 +25,7 @@ module.exports = {
   =================================================
   */
   createGroup: (params, callback) => {
-    dbMain.Groups.create({name: params.groupName, members: [params.uid], admin: params.uid}, (err, res) => {
+    dbMain.Groups.create({name: params.groupName, members: [params.uid], admin: params.uid, destination:''}, (err, res) => {
       if (err) {
         callback(err);
       } else {
@@ -72,6 +72,16 @@ module.exports = {
   =================================================
   */
 
+  setGroupDestination: (params, callback) => {
+    dbMain.Groups.updateOne({name: params.name}, {destination: params.destination}, (err, data) => {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, data);
+      }
+    })
+  },
+
   inviteGroupMember: (params, callback) => {
     dbMain.Users.find({email: params.email} , (err, data) => {
       if (err) {
@@ -91,8 +101,9 @@ module.exports = {
           }
         }
     })
-  }
-  ,
+  },
+
+
   // get details of group based on group name
   readGroupDetails: (params, callback) => {
     dbMain.Groups.find({ name: params.name }, (err, data) => {

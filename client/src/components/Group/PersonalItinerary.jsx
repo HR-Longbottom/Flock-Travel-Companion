@@ -10,25 +10,41 @@ function PersonalItinerary(props) {
   const [modalShow, setModalShow] = useState(false);
   const [flightResults, setFlightResults] = useState([]);
   const [originLocation, setOriginLocation] = useState("");
-  const [destinationLocation, setDestinationLocation] = useState("");
+  const [destinationLocation, setDestinationLocation] = useState('');
   const [departureDate, setDepartureDate] = useState(
     today.toISOString().slice(0, 10)
   );
   const [returnDate, setReturnDate] = useState(
     tomorrow.toISOString().slice(0, 10)
     );
-    const [flightResultsMeta, setFlightResultsMeta] = useState({});
+  const [oneWay, setOneWay] = useState(false);
+  const [flightResultsMeta, setFlightResultsMeta] = useState({});
 
-
+  useEffect(()=>{
+    if (props.destination) {
+      setDestinationLocation(props.destination);
+    }
+    if (props.origin) {
+      setOriginLocation(props.origin);
+    }
+  }, [props])
 
   function onSearchClick() {
     if (originLocation.length === 3 && destinationLocation.length === 3 && checkDates(departureDate, returnDate)) {
       console.log('onSearchClick')
-      var params = {
-        originLocationCode: originLocation,
-        destinationLocationCode: destinationLocation,
-        departureDate: departureDate,
-        returnDate: returnDate
+      if (oneWay === false) {
+        var params = {
+          originLocationCode: originLocation,
+          destinationLocationCode: destinationLocation,
+          departureDate: departureDate,
+          returnDate: returnDate
+        }
+      } else {
+        var params = {
+          originLocationCode: originLocation,
+          destinationLocationCode: destinationLocation,
+          departureDate: departureDate
+        }
       }
 
       axios.get("/flightoffers", {params: params})
@@ -81,7 +97,7 @@ function PersonalItinerary(props) {
               </div>
               <div className="modal-body">
                 <div className="flightResults">
-                  {flightResults.map(flightResult => {return <FlightResult flight={flightResult} meta={flightResultsMeta} setModalShow={setModalShow} uid={props.uid} groupName={props.groupName} setPersonal={props.setPersonal}/>})}
+                  {flightResults.map((flightResult) => {return <FlightResult oneWay={oneWay} flight={flightResult} meta={flightResultsMeta} setModalShow={setModalShow} uid={props.uid} groupName={props.groupName} setPersonal={props.setPersonal}/>})}
                 </div>
               </div>
               <div className="modal-footer">
@@ -100,7 +116,7 @@ function PersonalItinerary(props) {
           </div>
         </div>
       )}
-      <h5>Your Itinerary</h5>
+      <h4>Your Itinerary</h4>
       <div className="personal-it-container d-flex flex-column">
         <div className="personalItinerary d-flex flex-row">
           <div className="personal-it-left">
@@ -135,13 +151,21 @@ function PersonalItinerary(props) {
               <label>From: </label>
               <input type="text" name="originLocation" value={originLocation} placeholder='Airport Code Only' onChange={(event)=> {setOriginLocation(event.target.value.toUpperCase())}}></input>
               <label>To: </label>
-              <input type="text" name="destinationLocation" value={destinationLocation} placeholder='Airport Code Only' onChange={(event) => {setDestinationLocation(event.target.value.toUpperCase())}}></input>
+              {
+                props.destination ?
+                <input type="text" name="destinationLocation" value={destinationLocation} placeholder={'Airport Code Only'}></input>
+                :
+                <input type="text" name="destinationLocation" value={destinationLocation} placeholder={'Airport Code Only'} onChange={(event) => {setDestinationLocation(event.target.value.toUpperCase())}}></input>
+              }
               <label>Departing on: </label>
               <input
                 type="date"
                 name="departureDate"
                 value={departureDate} onChange={(event)=>{setDepartureDate(event.target.value)}}
               ></input>
+              {
+                oneWay === false ?
+                <span>
               <label>Returning on: </label>
               <input
                 type="date"
@@ -149,6 +173,10 @@ function PersonalItinerary(props) {
                 value={returnDate}
                 onChange={(event)=>{setReturnDate(event.target.value)}}
                 ></input>
+              </span>
+              :
+                <span></span>
+              }
               <button
                 className="flight-search"
                 onClick={(event) => {
@@ -158,6 +186,10 @@ function PersonalItinerary(props) {
               >
                 Search Flight
               </button>
+              <label>One-Way:</label>
+              <input type='checkbox' name='oneWay' onChange={(event) => {
+
+                setOneWay(event.target.checked)}} />
             </form>
           </div>
       </div>
