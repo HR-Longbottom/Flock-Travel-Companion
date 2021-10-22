@@ -76,7 +76,7 @@ const Head = (props) => {
           {show ? <LocationModal currentUser={props.currentUser} /> : <></>}
           <div className='welcomeAndP'>
             <h1>Welcome</h1>
-            <p>Where the Flock plan their trips</p>
+            <p>Where Your Flock Plans A Great Migration</p>
           </div>
           <button className="signOutBtn" onClick={() => signOut()}>
             Sign Out
