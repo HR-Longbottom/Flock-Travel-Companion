@@ -1,7 +1,9 @@
+import axios from 'axios';
 import React, { useState } from 'react';
-import { Button, Modal, Form, Dropdown } from 'react-bootstrap';
-const axios = require('axios');
-import config from './config';
+import { Button, Modal, Form, Dropdown} from 'react-bootstrap';
+import { Redirect } from 'react-router';
+import styled from 'styled-components';
+import config from '../Home/config';
 
 const getAirportsByCitySearch = (city) => {
   // Open Cage API
@@ -30,11 +32,21 @@ const getAirportsByCitySearch = (city) => {
     })
 }
 
-function LocationModal(props) {
-  const [show, setShow] = useState(true);
+const Styles = styled.div`
+.updateDestinationBtn {
+  left: -9%;
+}
+`
+
+function SetADestination(props) {
+  const [show, setShow] = useState(false);
   const [cityName, setCityName] = useState('');
   const [airports, setAirports] = useState([]);
   const [airport, setAirport] = useState(null);
+
+  const handleShow = () => {
+    setShow(true);
+  }
 
   const handleClose = () => {
     setShow(false);
@@ -63,17 +75,23 @@ function LocationModal(props) {
   };
 
   const handleSubmit = (airport) => {
-    axios.put('/updateUserLoc', { "uid": props.currentUser.uid, "location": airport } )
-    .then((response) => console.log("successfully added location", response))
+    console.log(airport.iataCode)
+    props.setDestination(airport.iataCode);
+    axios.put('/setGroupDestination', { "name": props.Group, "destination": airport.iataCode } )
+    .then((response) => console.log("successfully added destination", response))
     .catch((err) => console.log("failed", err));
   }
   //{name: airportM.name, cityCode: airportM.address.cityCode, cityName: airportM.address.cityName, iataCode: airportM.iataCode}
-  console.log('User Preferred Airport: ', props.currentUser.location)
   return (
     <div className="container">
+<Styles>
+      <Button className="updateDestinationBtn" variant="primary" onClick={handleShow}>
+        Update Destination
+      </Button>
+
       <Modal size="lg" show={show} onHide={handleClose} backdrop="static">
         <Modal.Header closeButton>
-          <Modal.Title>Save your Airport of Choice</Modal.Title>
+          <Modal.Title>Set your Destination </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form.Group>
@@ -89,7 +107,7 @@ function LocationModal(props) {
               Nearby Airports:
             </Dropdown.Toggle>
             <Dropdown.Menu>
-              {airports.map(airportM => (<Dropdown.Item as="button" key={airportM.name} onClick={handleSelect} value={airportM.name} >{airportM.name}</Dropdown.Item>))}
+              {airports.map((airportM, idx) => (<Dropdown.Item as="button" key={airportM.idx} onClick={handleSelect} value={airportM.name} >{airportM.name}</Dropdown.Item>))}
             </Dropdown.Menu>
           </Dropdown>
           : <> </>}
@@ -105,17 +123,9 @@ function LocationModal(props) {
           }
         </Modal.Footer>
       </Modal>
+    </Styles>
     </div>
   );
 }
 
-export default LocationModal;
-
-
-
-
-
-
-
-
-
+export default SetADestination;

@@ -1,83 +1,152 @@
 import React, { useState, useEffect } from "react";
-import axios from 'axios';
+import axios from "axios";
 
 function FlightResult(props) {
-  var nonstopOutbound = true;
-  var nonstopReturn = true;
-  if (props.flight.itineraries[0].segments.length > 1) {
-    nonstopOutbound = false;
-  }
-  if (props.flight.itineraries[1].segments.length > 1) {
-    nonstopReturn = false;
-  }
+  const [nonstopOutbound, setNonstopOutbound] = useState(true);
+  const [nonstopReturn, setNonstopReturn] = useState(true);
+
+  useEffect(() => {
+    if (props.flight.itineraries[0].segments.length > 1) {
+      setNonstopOutbound(false);
+    }
+    if (props.oneWay === false) {
+      if (props.flight.itineraries[1].segments.length > 1) {
+        setNonstopReturn(false);
+      }
+    }
+  }, [props]);
 
   function addFlight(nonstopOutbound, nonstopReturn) {
-    console.log(props.flight.itineraries)
-    console.log('in add flight function')
+    console.log(props.flight.itineraries);
+    console.log("in add flight function");
 
     var flights = [];
     flights.push({
       uid: props.uid,
       groupName: props.groupName,
-      departureTime: props.flight.itineraries[0].segments[0].departure.at.slice(11, 16),
-      departureDate: props.flight.itineraries[0].segments[0].departure.at.slice(0, 10),
-      carrier: props.meta.carriers[props.flight.itineraries[0].segments[0].carrierCode],
-      arrivalTime: props.flight.itineraries[0].segments[0].arrival.at.slice(11,16),
-      arrivalDate: props.flight.itineraries[0].segments[0].arrival.at.slice(0,10),
-      departureAirport: props.flight.itineraries[0].segments[0].departure.iataCode,
-      arrivalAirport: props.flight.itineraries[0].segments[0].arrival.iataCode
+      departureTime: props.flight.itineraries[0].segments[0].departure.at.slice(
+        11,
+        16
+      ),
+      departureDate: props.flight.itineraries[0].segments[0].departure.at.slice(
+        0,
+        10
+      ),
+      carrier:
+        props.meta.carriers[
+          props.flight.itineraries[0].segments[0].carrierCode
+        ],
+      arrivalTime: props.flight.itineraries[0].segments[0].arrival.at.slice(
+        11,
+        16
+      ),
+      arrivalDate: props.flight.itineraries[0].segments[0].arrival.at.slice(
+        0,
+        10
+      ),
+      departureAirport:
+        props.flight.itineraries[0].segments[0].departure.iataCode,
+      arrivalAirport: props.flight.itineraries[0].segments[0].arrival.iataCode,
     });
-    flights.push({
-      uid: props.uid,
-      groupName: props.groupName,
-      departureTime: props.flight.itineraries[1].segments[0].departure.at.slice(11, 16),
-      departureDate: props.flight.itineraries[1].segments[0].departure.at.slice(0, 10),
-      carrier: props.meta.carriers[props.flight.itineraries[1].segments[0].carrierCode],
-      arrivalTime: props.flight.itineraries[1].segments[0].arrival.at.slice(11,16),
-      arrivalDate: props.flight.itineraries[1].segments[0].arrival.at.slice(0,10),
-      departureAirport: props.flight.itineraries[1].segments[0].departure.iataCode,
-      arrivalAirport: props.flight.itineraries[1].segments[0].arrival.iataCode
-    });
+    if (props.oneWay === false) {
+      flights.push({
+        uid: props.uid,
+        groupName: props.groupName,
+        departureTime:
+          props.flight.itineraries[1].segments[0].departure.at.slice(11, 16),
+        departureDate:
+          props.flight.itineraries[1].segments[0].departure.at.slice(0, 10),
+        carrier:
+          props.meta.carriers[
+            props.flight.itineraries[1].segments[0].carrierCode
+          ],
+        arrivalTime: props.flight.itineraries[1].segments[0].arrival.at.slice(
+          11,
+          16
+        ),
+        arrivalDate: props.flight.itineraries[1].segments[0].arrival.at.slice(
+          0,
+          10
+        ),
+        departureAirport:
+          props.flight.itineraries[1].segments[0].departure.iataCode,
+        arrivalAirport:
+          props.flight.itineraries[1].segments[0].arrival.iataCode,
+      });
+    }
     if (nonstopOutbound === false) {
       flights.push({
         uid: props.uid,
         groupName: props.groupName,
-        departureTime: props.flight.itineraries[0].segments[1].departure.at.slice(11, 16),
-        departureDate: props.flight.itineraries[0].segments[1].departure.at.slice(0, 10),
-        carrier: props.meta.carriers[props.flight.itineraries[0].segments[1].carrierCode],
-        arrivalTime: props.flight.itineraries[0].segments[1].arrival.at.slice(11,16),
-        arrivalDate: props.flight.itineraries[0].segments[1].arrival.at.slice(0,10),
-        departureAirport: props.flight.itineraries[0].segments[1].departure.iataCode,
-        arrivalAirport: props.flight.itineraries[0].segments[1].arrival.iataCode
+        departureTime:
+          props.flight.itineraries[0].segments[1].departure.at.slice(11, 16),
+        departureDate:
+          props.flight.itineraries[0].segments[1].departure.at.slice(0, 10),
+        carrier:
+          props.meta.carriers[
+            props.flight.itineraries[0].segments[1].carrierCode
+          ],
+        arrivalTime: props.flight.itineraries[0].segments[1].arrival.at.slice(
+          11,
+          16
+        ),
+        arrivalDate: props.flight.itineraries[0].segments[1].arrival.at.slice(
+          0,
+          10
+        ),
+        departureAirport:
+          props.flight.itineraries[0].segments[1].departure.iataCode,
+        arrivalAirport:
+          props.flight.itineraries[0].segments[1].arrival.iataCode,
       });
     }
     if (nonstopReturn === false) {
       flights.push({
         uid: props.uid,
         groupName: props.groupName,
-        departureTime: props.flight.itineraries[1].segments[1].departure.at.slice(11, 16),
-        departureDate: props.flight.itineraries[1].segments[1].departure.at.slice(0, 10),
-        carrier: props.meta.carriers[props.flight.itineraries[1].segments[1].carrierCode],
-        arrivalTime: props.flight.itineraries[1].segments[1].arrival.at.slice(11,16),
-        arrivalDate: props.flight.itineraries[1].segments[1].arrival.at.slice(0,10),
-        departureAirport: props.flight.itineraries[1].segments[1].departure.iataCode,
-        arrivalAirport: props.flight.itineraries[1].segments[1].arrival.iataCode
+        departureTime:
+          props.flight.itineraries[1].segments[1].departure.at.slice(11, 16),
+        departureDate:
+          props.flight.itineraries[1].segments[1].departure.at.slice(0, 10),
+        carrier:
+          props.meta.carriers[
+            props.flight.itineraries[1].segments[1].carrierCode
+          ],
+        arrivalTime: props.flight.itineraries[1].segments[1].arrival.at.slice(
+          11,
+          16
+        ),
+        arrivalDate: props.flight.itineraries[1].segments[1].arrival.at.slice(
+          0,
+          10
+        ),
+        departureAirport:
+          props.flight.itineraries[1].segments[1].departure.iataCode,
+        arrivalAirport:
+          props.flight.itineraries[1].segments[1].arrival.iataCode,
       });
     }
     console.log(flights);
-    axios.post('/createFlight', {uid: props.uid, groupName: props.groupName, flights: flights})
-    .then(data => {
-      props.setPersonal(flights);
-      props.setModalShow(false);
-    })
-    .catch(err => {
-      console.log(err);
-    })
+    axios
+      .post("/createFlight", {
+        uid: props.uid,
+        groupName: props.groupName,
+        flights: flights,
+      })
+      .then((data) => {
+        props.setPersonal(flights);
+        props.setModalShow(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   return (
     <div className="flightResult d-flex flex-row">
       <div className="flightInfo">
+        <div className='outbound'>
+
         <div className="flightDirection">Outbound Flight:</div>
         {nonstopOutbound ? (
           <div className="outboundFlight d-flex flex-row">
@@ -91,13 +160,13 @@ function FlightResult(props) {
                 {props.flight.itineraries[0].segments[0].departure.at.slice(
                   11,
                   16
-                )}
+                  )}
               </div>
               <div className="outboundDepartureDate">
                 {props.flight.itineraries[0].segments[0].departure.at.slice(
                   0,
                   10
-                )}
+                  )}
               </div>
             </div>
             <div className="outboundArrival">
@@ -109,13 +178,13 @@ function FlightResult(props) {
                 {props.flight.itineraries[0].segments[0].arrival.at.slice(
                   11,
                   16
-                )}{" "}
+                  )}{" "}
               </div>
               <div className="outboundArrivalDate">
                 {props.flight.itineraries[0].segments[0].arrival.at.slice(
                   0,
                   10
-                )}{" "}
+                  )}{" "}
               </div>
             </div>
           </div>
@@ -131,13 +200,13 @@ function FlightResult(props) {
                 {props.flight.itineraries[0].segments[0].departure.at.slice(
                   11,
                   16
-                )}
+                  )}
               </div>
               <div className="outboundDepartureDate">
                 {props.flight.itineraries[0].segments[0].departure.at.slice(
                   0,
                   10
-                )}
+                  )}
               </div>
             </div>
             <div className="connectionArrival">
@@ -149,13 +218,13 @@ function FlightResult(props) {
                 {props.flight.itineraries[0].segments[0].arrival.at.slice(
                   11,
                   16
-                )}{" "}
+                  )}{" "}
               </div>
               <div className="outboundArrivalDate">
                 {props.flight.itineraries[0].segments[0].arrival.at.slice(
                   0,
                   10
-                )}{" "}
+                  )}{" "}
               </div>
             </div>
 
@@ -169,13 +238,13 @@ function FlightResult(props) {
                 {props.flight.itineraries[0].segments[1].departure.at.slice(
                   11,
                   16
-                )}
+                  )}
               </div>
               <div className="outboundDepartureDate">
                 {props.flight.itineraries[0].segments[1].departure.at.slice(
                   0,
                   10
-                )}
+                  )}
               </div>
             </div>
             <div className="outboundArrival">
@@ -187,132 +256,139 @@ function FlightResult(props) {
                 {props.flight.itineraries[0].segments[1].arrival.at.slice(
                   11,
                   16
-                )}{" "}
+                  )}{" "}
               </div>
               <div className="outboundArrivalDate">
                 {props.flight.itineraries[0].segments[1].arrival.at.slice(
                   0,
                   10
-                )}{" "}
+                  )}{" "}
               </div>
             </div>
           </div>
         )}
-        <div className="flightDirection">Return Flight:</div>
-        {nonstopReturn ? (
-          <div className="returnFlight d-flex flex-row">
-            <div className="returnDeparture">
-              <div className="columnTitle">Origin</div>
-              <div className="returnDepartureLocation">
-                {props.flight.itineraries[1].segments[0].departure.iataCode}
-              </div>
-              <div className="returnDepartureTime">
-                {props.flight.itineraries[1].segments[0].departure.at.slice(
-                  11,
-                  16
-                )}
-              </div>
-              <div className="returnDepartureDate">
-                {props.flight.itineraries[1].segments[0].departure.at.slice(
-                  0,
-                  10
-                )}
-              </div>
-            </div>
-            <div className="returnArrival">
-              <div className="columnTitle">Destination</div>
-              <div className="returnArrivalLocation">
-                {props.flight.itineraries[1].segments[0].arrival.iataCode}
-              </div>
-              <div className="returnArrivalTime">
-                {props.flight.itineraries[1].segments[0].arrival.at.slice(
-                  11,
-                  16
-                )}
-              </div>
-              <div className="returnArrivalDate">
-                {props.flight.itineraries[1].segments[0].arrival.at.slice(
-                  0,
-                  10
-                )}
-              </div>
-            </div>
           </div>
+        {props.oneWay === true ? (
+          <div className="return"></div>
         ) : (
-          <div className="returnFlight d-flex flex-row">
-            <div className="returnDeparture">
-              <div className="columnTitle">Origin</div>
-              <div className="returnDepartureLocation">
-                {props.flight.itineraries[1].segments[0].departure.iataCode}
+          <div className='return'>
+            <div className="flightDirection">Return Flight:</div>
+            {nonstopReturn ? (
+              <div className="returnFlight d-flex flex-row">
+                <div className="returnDeparture">
+                  <div className="columnTitle">Origin</div>
+                  <div className="returnDepartureLocation">
+                    {props.flight.itineraries[1].segments[0].departure.iataCode}
+                  </div>
+                  <div className="returnDepartureTime">
+                    {props.flight.itineraries[1].segments[0].departure.at.slice(
+                      11,
+                      16
+                    )}
+                  </div>
+                  <div className="returnDepartureDate">
+                    {props.flight.itineraries[1].segments[0].departure.at.slice(
+                      0,
+                      10
+                    )}
+                  </div>
+                </div>
+                <div className="returnArrival">
+                  <div className="columnTitle">Destination</div>
+                  <div className="returnArrivalLocation">
+                    {props.flight.itineraries[1].segments[0].arrival.iataCode}
+                  </div>
+                  <div className="returnArrivalTime">
+                    {props.flight.itineraries[1].segments[0].arrival.at.slice(
+                      11,
+                      16
+                    )}
+                  </div>
+                  <div className="returnArrivalDate">
+                    {props.flight.itineraries[1].segments[0].arrival.at.slice(
+                      0,
+                      10
+                    )}
+                  </div>
+                </div>
               </div>
-              <div className="returnDepartureTime">
-                {props.flight.itineraries[1].segments[0].departure.at.slice(
-                  11,
-                  16
-                )}
-              </div>
-              <div className="returnDepartureDate">
-                {props.flight.itineraries[1].segments[0].departure.at.slice(
-                  0,
-                  10
-                )}
-              </div>
-            </div>
-            <div className="connectionArrival">
-              <div className="columnTitle">Connection</div>
-              <div className="returnArrivalLocation">
-                {props.flight.itineraries[1].segments[0].arrival.iataCode}
-              </div>
-              <div className="returnArrivalTime">
-                {props.flight.itineraries[1].segments[0].arrival.at.slice(
-                  11,
-                  16
-                )}
-              </div>
-              <div className="returnArrivalDate">
-                {props.flight.itineraries[1].segments[0].arrival.at.slice(
-                  0,
-                  10
-                )}
-              </div>
-            </div>
+            ) : (
+              <div className="returnFlight d-flex flex-row">
+                <div className="returnDeparture">
+                  <div className="columnTitle">Origin</div>
+                  <div className="returnDepartureLocation">
+                    {props.flight.itineraries[1].segments[0].departure.iataCode}
+                  </div>
+                  <div className="returnDepartureTime">
+                    {props.flight.itineraries[1].segments[0].departure.at.slice(
+                      11,
+                      16
+                    )}
+                  </div>
+                  <div className="returnDepartureDate">
+                    {props.flight.itineraries[1].segments[0].departure.at.slice(
+                      0,
+                      10
+                    )}
+                  </div>
+                </div>
+                <div className="connectionArrival">
+                  <div className="columnTitle">Connection</div>
+                  <div className="returnArrivalLocation">
+                    {props.flight.itineraries[1].segments[0].arrival.iataCode}
+                  </div>
+                  <div className="returnArrivalTime">
+                    {props.flight.itineraries[1].segments[0].arrival.at.slice(
+                      11,
+                      16
+                    )}
+                  </div>
+                  <div className="returnArrivalDate">
+                    {props.flight.itineraries[1].segments[0].arrival.at.slice(
+                      0,
+                      10
+                    )}
+                  </div>
+                </div>
 
-            <div className="connectionDeparture">
-              <div className="columnTitle">Connection</div>
-              <div className="returnDepartureLocation">
-                {props.flight.itineraries[1].segments[1].departure.iataCode}
+                <div className="connectionDeparture">
+                  <div className="columnTitle">Connection</div>
+                  <div className="returnDepartureLocation">
+                    {props.flight.itineraries[1].segments[1].departure.iataCode}
+                  </div>
+                  <div className="returnDepartureTime">
+                    {props.flight.itineraries[1].segments[1].departure.at.slice(
+                      11,
+                      16
+                    )}
+                  </div>
+                  <div className="returnDepartureDate">
+                    {props.flight.itineraries[1].segments[1].departure.at.slice(
+                      0,
+                      10
+                    )}
+                  </div>
+                </div>
+                <div className="returnArrival">
+                  <div className="columnTitle">Destination</div>
+                  <div className="returnArrivalLocation">
+                    {props.flight.itineraries[1].segments[1].arrival.iataCode}
+                  </div>
+                  <div className="returnArrivalTime">
+                    {props.flight.itineraries[1].segments[1].arrival.at.slice(
+                      11,
+                      16
+                    )}
+                  </div>
+                  <div className="returnArrivalDate">
+                    {props.flight.itineraries[1].segments[1].arrival.at.slice(
+                      0,
+                      10
+                    )}
+                  </div>
+                </div>
               </div>
-              <div className="returnDepartureTime">
-                {props.flight.itineraries[1].segments[1].departure.at.slice(
-                  11,
-                  16
-                )}
-              </div>
-              <div className="returnDepartureDate">
-                {props.flight.itineraries[1].segments[1].departure.at.slice(
-                  0,
-                  10
-                )}
-              </div>
-            </div>
-            <div className="returnArrival">
-              <div className="columnTitle">Destination</div>
-              <div className="returnArrivalLocation">
-                {props.flight.itineraries[1].segments[1].arrival.iataCode}
-              </div>
-              <div className="returnArrivalTime">
-                {props.flight.itineraries[1].segments[1].arrival.at.slice(
-                  11,
-                  16
-                )}
-              </div>
-              <div className="returnArrivalDate">
-                {props.flight.itineraries[1].segments[1].arrival.at.slice(
-                  0,
-                  10
-                )}
-              </div>
-            </div>
+            )}
           </div>
         )}
       </div>
@@ -321,8 +397,8 @@ function FlightResult(props) {
           className="addFlight"
           onClick={(event) => {
             event.preventDefault();
-            console.log('clicked on addflight')
-            addFlight(nonstopOutbound, nonstopReturn)
+            console.log("clicked on addflight");
+            addFlight(nonstopOutbound, nonstopReturn);
           }}
         >
           Add Flight

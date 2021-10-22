@@ -7,7 +7,6 @@ module.exports = {
       .getFlightOffers(req.query)
       .then((data) => {
         console.log('successful')
-        console.log(data.data);
         res.send(data.data);
       })
       .catch((err) => {
@@ -71,13 +70,25 @@ module.exports = {
   =================================================
   */
 
+
+  setGroupDestination: (req, res) => {
+    console.log(req.body);
+    model.setGroupDestination(req.body, (err,data) => {
+      if (err) {
+        res.status(400).send(err);
+      } else {
+        res.send('Destination Set')
+      }
+    })
+  },
+
   inviteGroupMember: (req, res) => {
     console.log(req.body);
     model.inviteGroupMember(req.body, (err, data) => {
       if (err) {
         res.status(400).send(err);
       } else {
-        res.send('Successfully added members');
+        res.send(data);
       }
     })
   },

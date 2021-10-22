@@ -111,7 +111,7 @@ class App extends React.Component {
             <ChatMain />
           </Route>
           <Route exact path="/plans">
-            <GroupLandingPage />
+            <GroupLandingPage currentUser={this.state.currentUser} />
           </Route>
         </Switch>
       </Router>

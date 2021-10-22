@@ -23,7 +23,8 @@ const groupSchema = mongoose.Schema({
   name: { type: String, index: { unique: true }, require: true },
   members: [{ type: String }],
   bulletin: [{ type: String }],
-  admin: String
+  admin: String,
+  destination: String
 });
 
 const Flights = mongoose.model("Flights", flightSchema);
