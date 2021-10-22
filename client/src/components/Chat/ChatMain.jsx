@@ -139,7 +139,7 @@ function App() {
         heads
           .map((groupObj) => groupObj)
           .filter((groupObj) => {
-            return !groupObj.members.includes(user); // inverted until members are reflected accurately
+            return groupObj.members.includes(user); // inverted until members are reflected accurately
           })
       );
     })();
