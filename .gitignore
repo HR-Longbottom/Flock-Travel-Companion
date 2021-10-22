@@ -1,10 +1,10 @@
 node_modules
 tls
+ssl
 .env
 Dockerfile
-client/dist/bundle.js
+bundle.js
+bundle.js.map
 .gz
 cert.pem
 key.pem
-client/src/components/Home/config.js
-config.js
