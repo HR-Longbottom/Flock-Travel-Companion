@@ -95,9 +95,9 @@ const MyGroups = (props) => {
           </div>
           <Container className="myGroupsContainer col-12">
             <Carousel breakPoints={breakPoints}>
-              {groups.map(item =>
-                <NavLink exact to={`/plans?uid=${props.currentUser.uid}&groupName=${item.name}`} activeClassName="activeClicked">
-                <div className="card" key={item._id}>
+              {groups.map((item, idx) =>
+                <NavLink exact to={`/plans?uid=${props.currentUser.uid}&groupName=${item.name}`} activeClassName="activeClicked"  key={idx}>
+                <div className="card">
                 <img className='image' src='https://source.unsplash.com/190x150/?vacation'/>{item.name}
                 </div>
                 </NavLink>)}
