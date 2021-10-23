@@ -11,12 +11,15 @@ import ChatMain from "./Chat/ChatMain.jsx";
 import Home from "./Home/Home.jsx";
 import firebase from "../../../firebase-config.js";
 import { onAuthStateChanged, getAuth } from "firebase/auth";
+import GroupLandingPage from './Group/GroupLandingPage';
+import LocationModal from "./Home/LocationModal.jsx";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       isLoggedIn: null,
+      currentUser: {email: null, displayName: null, uid: null, location: null}
     };
     this.postUser = this.postUser.bind(this);
     this.checkUser = this.checkUser.bind(this);
@@ -48,13 +51,19 @@ class App extends React.Component {
   }
 
   checkUser(user) {
+    console.log('USER', user)
     axios
       .get("/checkUser", { params: { uid: user.uid } })
       .then((response) => {
+
         if (response.data.length === 0) {
           this.postUser(user);
-          console.log("Welcome, First Time User!");
+          this.setState({currentUser: {email: user.email, displayName: user.displayName, uid: user.uid, location: undefined}})
+          console.log("welcome, First Time User!");
         } else {
+          var userOne = response.data[0];
+          console.log(response.data.location)
+          this.setState({currentUser: {email: userOne.email, displayName: userOne.name, uid: userOne.uid, location: userOne.location}})
           console.log("Welcome Back!");
         }
       })
@@ -85,7 +94,7 @@ class App extends React.Component {
           render={(state) =>
             this.state.isLoggedIn ? (
               // <Home {...state} />
-              <Home />
+              <Home {...state} currentUser={this.state.currentUser}/>
             ) : (
               <Redirect
                 // to={{ pathname: "/", state: { from: state.location } }}
@@ -100,7 +109,7 @@ class App extends React.Component {
             <ChatMain />
           </Route>
           <Route exact path="/plans">
-            <div>Group Page</div>
+          <GroupLandingPage currentUser={this.state.currentUser} />
           </Route>
         </Switch>
       </Router>

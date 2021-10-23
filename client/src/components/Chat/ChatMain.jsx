@@ -138,9 +138,9 @@ function App() {
       setPersonalGroups(
         heads
           .map((groupObj) => groupObj)
-          .filter((groupObj) => {
+          .filter((groupObj) =>{
             return groupObj.members.includes(user); // inverted until members are reflected accurately
-          })
+      })
       );
     })();
   }, [receiver]);
