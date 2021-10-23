@@ -29,6 +29,7 @@ The Chat Section works as a live chat, built with firebase-cloud messaging. User
 #### Initialize the webpack 
   - ### run npm run build-dev
 #### Retrive Tokens from Amadeus 
- -  ### ... 
+ -  ### Go to https://developers.amadeus.com/
+ -  
 #### Run the server locally 
  - ### run npm run start
