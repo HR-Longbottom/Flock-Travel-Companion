@@ -1,8 +1,8 @@
 ## Flock.IO
 
 ## Team 
-Michael Harfenist and Jonah Cost - Project Manager
-James Tsui and Eric Ma - Architecture Owner 
+Michael Harfenist and Jonah Cost - Project Manager <br></br>
+James Tsui and Eric Ma - Architecture Owner  <br></br>
 Christopher Hsu and Art Taphanand - UI Owner
 
 
