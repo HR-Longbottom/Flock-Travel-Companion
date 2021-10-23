@@ -17,3 +17,6 @@ Each group that is created now hosts a Group Page. The group page has an admin d
 ![Group-Page](https://github.com/HR-Longbottom/flock.io/blob/master/client/assets/Group%20Page%20Flock.png?raw=true)
 
 The Chat Section works as a live chat, built with firebase-cloud messaging. Users can go into their group chat, which consists of all members in a group. Users can easily transfer from group to group via the constant sidebar list of groups.   
+
+##### Chat Page 
+![Chats](https://github.com/HR-Longbottom/flock.io/blob/master/client/assets/chat%20Flock.png?raw=true)
