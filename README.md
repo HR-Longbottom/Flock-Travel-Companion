@@ -25,10 +25,10 @@ The Chat Section works as a live chat, built with firebase-cloud messaging. User
 
 ## How to use
 Install dependencies
-  - run npm install
+  ### run npm install
 Initialize the webpack 
-  - run npm run build-dev
+  ### run npm run build-dev
 Retrive Tokens from Amadeus 
-  - ... 
+  ### ... 
 Run the server locally 
-  - run npm run start
+  ### run npm run start
