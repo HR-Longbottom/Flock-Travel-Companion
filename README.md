@@ -30,6 +30,11 @@ The Chat Section works as a live chat, built with firebase-cloud messaging. User
   - ### run npm run build-dev
 #### Retrive Tokens from Amadeus 
  -  ### Sign up for an account at https://developers.amadeus.com/
+ -  ### Login to your account and create a new app under My Self-Service Workspace
+ -  ### Click into the newly created app to get the API key and API secret of the application
+ -  ### Create a post request to https://test.api.amadeus.com/v1/security/oauth2/token with the body of request be encoded as x-www-form-urlencoded
+ -  ### Add the parameters as the following image
+ ![Parameters](https://github.com/HR-Longbottom/flock.io/blob/master/client/assets/amadeus%20access%20token.PNG)
  -  
 #### Run the server locally 
  - ### run npm run start
