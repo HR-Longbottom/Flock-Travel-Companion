@@ -22,3 +22,13 @@ The Chat Section works as a live chat, built with firebase-cloud messaging. User
 
 ##### Chat Page 
 ![Chats](https://github.com/HR-Longbottom/flock.io/blob/master/client/assets/chat%20Actual%20flock.png?raw=true)
+
+## How to use
+Install dependencies
+  - run npm install
+Initialize the webpack 
+  - run npm run build-dev
+Retrive Tokens from Amadeus 
+  - ... 
+Run the server locally 
+  - run npm run start
