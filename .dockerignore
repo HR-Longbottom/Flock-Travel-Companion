@@ -4,6 +4,7 @@ npm-debug.log
 tls
 ssl
 bundle.js
+bundle.js.map
 .gz
 cert.pem
 key.pem
